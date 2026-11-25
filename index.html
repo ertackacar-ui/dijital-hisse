@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="dijital hisse">
 <title>dijital hisse — Canlı İzleme</title>
-<meta name="dh-surum" content="17">
+<meta name="dh-surum" content="18">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-512.png">
@@ -110,7 +110,7 @@
     .side .nv span,.side .nv em,.side .alt,.side .rule,.app:not(.acik) .logo .uzun{display:none} .nv{justify-content:center;padding:10px 0} .logo{justify-content:center;padding:4px 0}
     .app:not(.acik) .logo .kisa.l{display:var(--dl)} .app:not(.acik) .logo .kisa.d{display:var(--dd)}
     .app.acik .side{width:min(86vw,300px);box-shadow:0 0 40px rgba(0,0,0,.25);padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:12px}
-    .app.acik .side .nv span,.app.acik .side .nv em,.app.acik .side .alt,.app.acik .side .rule{display:inline} .app.acik .logo .uzun.l{display:var(--dl)} .app.acik .logo .uzun.d{display:var(--dd)} .app.acik .logo .kisa{display:none} .app.acik .nv{justify-content:flex-start;padding:9px 10px}
+    .app.acik .side .nv span,.app.acik .side .nv em,.app.acik .side .alt,.app.acik .side .rule{display:inline} .app.acik .logo .uzun.l{display:var(--dl)} .app.acik .logo .uzun.d{display:var(--dd)} .app.acik .logo .kisa{display:none!important} .app:not(.acik) .logo .uzun{display:none!important} .app.acik .nv{justify-content:flex-start;padding:9px 10px}
     .app.acik .side .rule{display:block}
     .perde{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:14;display:none} .app.acik .perde{display:block}
     .main{padding:14px 14px 40px 74px} h1{font-size:19px} .card .v{font-size:21px}
@@ -175,7 +175,8 @@ $("#temaBtn").onclick=()=>{const t=document.documentElement.getAttribute("data-t
 function gizleYaz(){const g=ls.get("dh-gizli")==="1";app.classList.toggle("gizli",g);$("#gizleBtn span").textContent=g?"Tutarları Göster":"Tutarları Gizle"}
 $("#gizleBtn").onclick=()=>{ls.set("dh-gizli",ls.get("dh-gizli")==="1"?"0":"1");gizleYaz()}; gizleYaz();
 const mobil=()=>matchMedia("(max-width:860px)").matches;
-if(ls.get("dh-dar")==="1")app.classList.add("dar");
+if(ls.get("dh-dar")==="1"&&!mobil())app.classList.add("dar");
+matchMedia("(max-width:860px)").addEventListener("change",e=>{if(e.matches){app.classList.remove("dar")}else{app.classList.remove("acik")}});
 $("#logoBtn").onclick=()=>{if(mobil())app.classList.toggle("acik");else{app.classList.toggle("dar");ls.set("dh-dar",app.classList.contains("dar")?"1":"0")}};
 $("#perde").onclick=()=>app.classList.remove("acik");
 document.querySelectorAll(".nv").forEach(b=>{const t=b.querySelector("span");if(t&&!b.title)b.title=t.textContent});
