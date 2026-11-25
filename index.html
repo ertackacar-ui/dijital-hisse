@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="dijital hisse">
 <title>dijital hisse — Canlı İzleme</title>
-<meta name="dh-surum" content="11">
+<meta name="dh-surum" content="12">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-512.png">
@@ -172,9 +172,9 @@ function cizHisse(){
   let h="";
   for(const L of [1,2,3]){
     const rows=D.hisseler.filter(x=>x.lig===L);
-    h+=`<div class="lig">${ligAd[L]}</div><div class="twrap"><table><thead><tr><th>Hisse</th><th>Kapanış</th><th>1G</th><th>🌙 Canlı</th>${D.gizli?"":"<th>K/Z</th>"}${D.gizli?"":'<th class="para">Değer</th>'}<th>EMA21</th><th>RSI</th><th>OBV</th><th>Dönüş</th></tr></thead><tbody>`+
+    h+=`<div class="lig">${ligAd[L]}</div><div class="twrap"><table><thead><tr><th>Hisse</th><th>${D.seans_acik?"Fiyat":"🌙 Canlı"}</th><th>Değişim</th><th>Kapanış · 1G</th>${D.gizli?"":"<th>K/Z</th>"}${D.gizli?"":'<th class="para">Değer</th>'}<th>EMA21</th><th>RSI</th><th>OBV</th><th>Dönüş</th></tr></thead><tbody>`+
       rows.map(x=>x.veri_yok?`<tr><td>${x.t}</td><td colspan="9" class="boş">Veri Yok</td></tr>`:
-      `<tr><td>${x.t}${x.kalkan?" 🛡":""}${x.muaf?" 🏰":""}</td><td class="mono">${f2(x.fiyat)}</td><td class="${cls(x.d1)}">${pc(x.d1)}</td><td class="mono">${x.canli!=null?f2(x.canli)+' <span class="'+cls(x.canli_degisim)+'" style="font-size:11px">'+pc(x.canli_degisim)+'</span>':"—"}</td>${D.gizli?"":`<td class="${cls(x.kz_pct)}">${x.kz_pct!=null?pc(x.kz_pct):"—"}</td>`}${D.gizli?"":`<td class="para mono">${x.deger!=null?usd(x.deger):"—"}</td>`}<td class="${x.ema21==="ÜST"?"up":"dn"}">${x.ema21}</td><td>${x.rsi}</td><td class="${x.obv_ust?"up":"dn"}">${x.obv_ust?"Giriş ↑":"Çıkış ↓"}</td><td>${x.puan}/4</td></tr>`).join("")+`</tbody></table></div>`;
+      `<tr><td>${x.t}${x.kalkan?" 🛡":""}${x.muaf?" 🏰":""}</td><td class="mono">${f2(x.canli!=null?x.canli:x.fiyat)}</td><td class="${cls(x.canli!=null?x.canli_degisim:x.d1)}">${pc(x.canli!=null?x.canli_degisim:x.d1)}</td><td class="mono" style="font-size:11px;opacity:.75">${f2(x.fiyat)} <span class="${cls(x.d1)}">${pc(x.d1)}</span></td>${D.gizli?"":`<td class="${cls(x.kz_pct)}">${x.kz_pct!=null?pc(x.kz_pct):"—"}</td>`}${D.gizli?"":`<td class="para mono">${x.deger!=null?usd(x.deger):"—"}</td>`}<td class="${x.ema21==="ÜST"?"up":"dn"}">${x.ema21}</td><td>${x.rsi}</td><td class="${x.obv_ust?"up":"dn"}">${x.obv_ust?"Giriş ↑":"Çıkış ↓"}</td><td>${x.puan}/4</td></tr>`).join("")+`</tbody></table></div>`;
   }
   $("#v-hisse").innerHTML=h+`<div class="boş">🛡 kalkan icra edildi · 🏰 kale muafiyeti · 🌙 Canlı = seans öncesi/sonrası son işlem (göstergeler kesin günlük bardan) · OBV = kurumsal para yönü · Dönüş = 4 şartlı teyit puanı</div>`;
   $("#nHisse").textContent=D.hisseler.length;
