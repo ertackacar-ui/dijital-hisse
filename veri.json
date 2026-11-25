@@ -1,5 +1,5 @@
 {
- "guncelleme": "2026-11-25T06:44:34.332258+00:00",
+ "guncelleme": "2026-11-25T06:52:02.042493+00:00",
  "seans_acik": false,
  "seans_etiketi": "Kapalı",
  "kesin_kapanis": "2026-11-24",
@@ -9,7 +9,7 @@
   "rejim": "TAM KİLİT"
  },
  "tnx": 4.9,
- "dxy": 104.06,
+ "dxy": 104.07,
  "para_akisi": {
   "rejim": "RİSK-KAPALI / TAHVİL-DOLAR BASKISI",
   "taraf": "DEFANSİF",
@@ -1154,9 +1154,9 @@
       "kaynak": "Simply Wall St."
      }
     ],
-    "hedef": 2100.7056,
+    "hedef": 2101.3953,
     "tavsiye": "strong_buy",
-    "potansiyel": 57.2
+    "potansiyel": 57.3
    },
    "AVGO": {
     "basliklar": [
