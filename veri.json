@@ -1,15 +1,15 @@
 {
- "guncelleme": "2026-11-25T08:13:09.028904+00:00",
+ "guncelleme": "2026-11-25T08:31:44.276931+00:00",
  "seans_acik": false,
  "seans_etiketi": "Kapalı",
  "kesin_kapanis": "2026-11-24",
  "vix": {
-  "deger": 26.36,
-  "metin": "VIX 26.36 → TAM KİLİT (alım yok)",
+  "deger": 28.16,
+  "metin": "VIX 28.16 → TAM KİLİT (alım yok)",
   "rejim": "TAM KİLİT"
  },
  "tnx": 4.9,
- "dxy": 104.05,
+ "dxy": 104.03,
  "para_akisi": {
   "rejim": "RİSK-KAPALI / TAHVİL-DOLAR BASKISI",
   "taraf": "DEFANSİF",
@@ -1050,6 +1050,12 @@
    "AMD": {
     "basliklar": [
      {
+      "z": "2026-11-25T08:26:02+00:00",
+      "etiket": "🔴 OLUMSUZ / RİSK",
+      "baslik": "1 Reason to Buy AMD Stock Before 2027",
+      "kaynak": "Motley Fool"
+     },
+     {
       "z": "2026-11-25T04:04:33+00:00",
       "etiket": "🔴 OLUMSUZ / RİSK",
       "baslik": "Dow Jones Futures Fall; Trump Says 'Not Too Late' For U.S. To Take Nvidia Stake",
@@ -1072,12 +1078,6 @@
       "etiket": "⚪ BİLGİ/NÖTR",
       "baslik": "A scandal like the one haunting Nvidia just reached AMD, its biggest rival",
       "kaynak": "TheStreet"
-     },
-     {
-      "z": "2026-11-24T22:39:38+00:00",
-      "etiket": "🔴 OLUMSUZ / RİSK",
-      "baslik": "Stock Market Today, Nov. 24: AMD Plunges 9% as 337 Million-Share Resale Filing Adds to AI Sell-Off",
-      "kaynak": "Motley Fool"
      }
     ],
     "hedef": 656.2122,
@@ -1154,9 +1154,9 @@
       "kaynak": "Yahoo Finance"
      }
     ],
-    "hedef": 2100.4758,
+    "hedef": 2101.1653,
     "tavsiye": "strong_buy",
-    "potansiyel": 57.2
+    "potansiyel": 57.3
    },
    "AVGO": {
     "basliklar": [
