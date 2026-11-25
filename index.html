@@ -146,17 +146,22 @@ function dkOnce(iso){const m=Math.round((Date.now()-new Date(iso))/60000);return
 
 function cizOzet(){
   const T=D.toplam, pa=D.para_akisi, eski=(Date.now()-new Date(D.guncelleme))>2*3600e3;
+  const g=t=>D.hisseler.find(h=>h.t===t)||{}, voo=g("VOO"), qqq=g("QQQ");
+  const ustEma=D.hisseler.filter(h=>h.ema21==="ÜST").length, donus=D.hisseler.filter(h=>h.puan>=3).length;
+  const canliSatir=h=>h.canli!=null?`${h.t} ${f2(h.canli)} <span class="${cls(h.canli_degisim)}">(${pc(h.canli_degisim)} 🌙)</span>`:`${h.t} ${f2(h.fiyat)}`;
+  const hero=T?`<div class="card hero"><div class="k">Toplam Hisse Portföyü</div><div class="v">${pc(T.tum.kz_pct)}</div><div class="s">${D.gizli?"":`<span class="para">${T.tum.deger!=null?usd(T.tum.deger)+" · K/Z "+usd(T.tum.kz):""}</span> `}1. Lig ${pc(T.lig1.kz_pct)} · 2. Lig ${pc(T.lig2.kz_pct)}</div></div>`
+    :`<div class="card hero"><div class="k">Piyasa Nabzı · ${D.seans_etiketi||""}</div><div class="v" style="font-size:19px">${canliSatir(qqq)} · ${canliSatir(voo)}</div><div class="s">Kapanış QQQ ${f2(qqq.fiyat)} (${pc(qqq.d1)}) · VOO ${f2(voo.fiyat)} (${pc(voo.d1)}) · EMA21 üstü ${ustEma}/${D.hisseler.length} · Dönüş 3+/4: ${donus}</div></div>`;
   const yakin=D.hisseler.filter(h=>h.pusu_mesafe!=null).sort((a,b)=>Math.abs(a.pusu_mesafe)-Math.abs(b.pusu_mesafe)).slice(0,4);
   const mayin=D.bilanco.filter(b=>b.mayin);
   const kk=karar();
   $("#v-ozet").innerHTML=yonKarti(kk)+`
   <div class="grid">
-    <div class="card hero"><div class="k">Toplam Hisse Portföyü</div><div class="v">${pc(T.tum.kz_pct)}</div><div class="s">${D.gizli?"":`<span class="para">${T.tum.deger!=null?usd(T.tum.deger)+" · K/Z "+usd(T.tum.kz):""}</span> `}1. Lig ${pc(T.lig1.kz_pct)} · 2. Lig ${pc(T.lig2.kz_pct)}</div></div>
+    ${hero}
     <div class="card"><div class="k">VIX Rejim Kilidi</div><div class="v ${D.vix.rejim==="AÇIK"?"up":D.vix.rejim==="TAM KİLİT"?"dn":""}">${D.vix.deger??"—"}</div><div class="s">${D.vix.rejim} · 10Y ${D.tnx??"—"}% · DXY ${D.dxy??"—"}</div></div>
     <div class="card"><div class="k">Piyasa ve Sektör Para Akışı</div><div class="v" style="font-size:17px;font-family:var(--sans)">${pa.taraf} tarafta</div><div class="s">${pa.rejim}<br>${pa.sektorler.slice(0,3).map(s=>s.etf+" "+pc(s.rs)).join(" · ")}</div></div>
-    <div class="card"><div class="k">Son Güncelleme</div><div class="v" style="font-size:17px;font-family:var(--sans)">${dkOnce(D.guncelleme)}${eski?' <span class="chip warn">Veri Eski</span>':""}</div><div class="s">${new Date(D.guncelleme).toLocaleString("tr-TR")} · ${D.seans_acik?"Seans Açık (canlı)":"Seans Kapalı · kesin "+D.kesin_kapanis}</div></div>
+    <div class="card"><div class="k">Son Güncelleme</div><div class="v" style="font-size:17px;font-family:var(--sans)">${dkOnce(D.guncelleme)}${eski?' <span class="chip warn">Veri Eski</span>':""}</div><div class="s">${new Date(D.guncelleme).toLocaleString("tr-TR")} · ${D.seans_etiketi||(D.seans_acik?"Seans Açık":"Seans Kapalı")} · kesin kapanış ${D.kesin_kapanis}</div></div>
   </div>
-  <h2>Pusuya En Yakın</h2><div class="list">${yakin.map(h=>`<div class="row"><span class="t">${h.t}</span><span class="d">Pusu ${h.pusu_yakin} · fiyat ${f2(h.fiyat)} · Dönüş ${h.puan}/4 · RSI ${h.rsi}</span><span class="r ${h.pusu_mesafe<0?"dn":""}">${pc(h.pusu_mesafe)}</span></div>`).join("")}</div>
+  <h2>Pusuya En Yakın</h2><div class="list">${yakin.map(h=>`<div class="row"><span class="t">${h.t}</span><span class="d">Pusu ${h.pusu_yakin} · kapanış ${f2(h.fiyat)}${h.canli!=null?" · 🌙 "+f2(h.canli):""} · Dönüş ${h.puan}/4 · RSI ${h.rsi}</span><span class="r ${h.pusu_mesafe<0?"dn":""}">${pc(h.pusu_mesafe)}</span></div>`).join("")}</div>
   <h2>Bilanço Mayınları (14 Gün)</h2><div class="list">${mayin.length?mayin.map(b=>`<div class="row"><span class="t">${b.t}</span><span class="d">${b.tarih}</span><span class="chip bad">💣 ${b.kalan} gün</span></div>`).join(""):'<div class="boş">Önümüzdeki 14 günde bilanço yok.</div>'}</div>`;
   yonBagla($("#v-ozet"));
 }
@@ -165,17 +170,17 @@ function cizHisse(){
   let h="";
   for(const L of [1,2,3]){
     const rows=D.hisseler.filter(x=>x.lig===L);
-    h+=`<div class="lig">${ligAd[L]}</div><div class="twrap"><table><thead><tr><th>Hisse</th><th>Fiyat</th><th>1G</th><th>K/Z</th>${D.gizli?"":'<th class="para">Değer</th>'}<th>EMA21</th><th>RSI</th><th>OBV</th><th>Dönüş</th></tr></thead><tbody>`+
-      rows.map(x=>x.veri_yok?`<tr><td>${x.t}</td><td colspan="8" class="boş">Veri Yok</td></tr>`:
-      `<tr><td>${x.t}${x.kalkan?" 🛡":""}${x.muaf?" 🏰":""}</td><td class="mono">${f2(x.fiyat)}</td><td class="${cls(x.d1)}">${pc(x.d1)}</td><td class="${cls(x.kz_pct)}">${x.kz_pct!=null?pc(x.kz_pct):"—"}</td>${D.gizli?"":`<td class="para mono">${x.deger!=null?usd(x.deger):"—"}</td>`}<td class="${x.ema21==="ÜST"?"up":"dn"}">${x.ema21}</td><td>${x.rsi}</td><td class="${x.obv_ust?"up":"dn"}">${x.obv_ust?"Giriş ↑":"Çıkış ↓"}</td><td>${x.puan}/4</td></tr>`).join("")+`</tbody></table></div>`;
+    h+=`<div class="lig">${ligAd[L]}</div><div class="twrap"><table><thead><tr><th>Hisse</th><th>Kapanış</th><th>1G</th><th>🌙 Canlı</th>${D.gizli?"":"<th>K/Z</th>"}${D.gizli?"":'<th class="para">Değer</th>'}<th>EMA21</th><th>RSI</th><th>OBV</th><th>Dönüş</th></tr></thead><tbody>`+
+      rows.map(x=>x.veri_yok?`<tr><td>${x.t}</td><td colspan="9" class="boş">Veri Yok</td></tr>`:
+      `<tr><td>${x.t}${x.kalkan?" 🛡":""}${x.muaf?" 🏰":""}</td><td class="mono">${f2(x.fiyat)}</td><td class="${cls(x.d1)}">${pc(x.d1)}</td><td class="mono">${x.canli!=null?f2(x.canli)+' <span class="'+cls(x.canli_degisim)+'" style="font-size:11px">'+pc(x.canli_degisim)+'</span>':"—"}</td>${D.gizli?"":`<td class="${cls(x.kz_pct)}">${x.kz_pct!=null?pc(x.kz_pct):"—"}</td>`}${D.gizli?"":`<td class="para mono">${x.deger!=null?usd(x.deger):"—"}</td>`}<td class="${x.ema21==="ÜST"?"up":"dn"}">${x.ema21}</td><td>${x.rsi}</td><td class="${x.obv_ust?"up":"dn"}">${x.obv_ust?"Giriş ↑":"Çıkış ↓"}</td><td>${x.puan}/4</td></tr>`).join("")+`</tbody></table></div>`;
   }
-  $("#v-hisse").innerHTML=h+`<div class="boş">🛡 kalkan icra edildi · 🏰 kale muafiyeti · OBV = kurumsal para yönü · Dönüş = 4 şartlı teyit puanı</div>`;
+  $("#v-hisse").innerHTML=h+`<div class="boş">🛡 kalkan icra edildi · 🏰 kale muafiyeti · 🌙 Canlı = seans öncesi/sonrası son işlem (göstergeler kesin günlük bardan) · OBV = kurumsal para yönü · Dönüş = 4 şartlı teyit puanı</div>`;
   $("#nHisse").textContent=D.hisseler.length;
 }
 function cizPusu(){
   const p=D.hisseler.filter(h=>h.pusu_mesafe!=null).sort((a,b)=>Math.abs(a.pusu_mesafe)-Math.abs(b.pusu_mesafe));
   const k=D.hisseler.filter(h=>h.kartopu_mesafe!=null).sort((a,b)=>a.kartopu_mesafe-b.kartopu_mesafe);
-  const satir=(h,lvl,m,alt)=>`<div class="row"><span class="t">${h.t}</span><span class="d">${alt} ${lvl} · fiyat ${f2(h.fiyat)} · Dönüş ${h.puan}/4 · RSI ${h.rsi} · OBV ${h.obv_ust?"↑":"↓"}</span><span class="r ${m<0?"dn":""}">${pc(m)}</span><span class="bar"><i style="width:${Math.max(4,Math.min(100,100-Math.abs(m)*4))}%"></i></span></div>`;
+  const satir=(h,lvl,m,alt)=>`<div class="row"><span class="t">${h.t}</span><span class="d">${alt} ${lvl} · kapanış ${f2(h.fiyat)}${h.canli!=null?" · 🌙 "+f2(h.canli)+" ("+pc(alt==="Pusu"?(h.canli/lvl-1)*100:(lvl/h.canli-1)*100)+")":""} · Dönüş ${h.puan}/4 · RSI ${h.rsi} · OBV ${h.obv_ust?"↑":"↓"}</span><span class="r ${m<0?"dn":""}">${pc(m)}</span><span class="bar"><i style="width:${Math.max(4,Math.min(100,100-Math.abs(m)*4))}%"></i></span></div>`;
   $("#v-pusu").innerHTML=`<h2>🎯 Alt Pusu Yakınlığı</h2><div class="list">${p.map(h=>satir(h,h.pusu_yakin,h.pusu_mesafe,"Pusu")).join("")}</div>
   <h2>❄️ Kartopu Üst Hedefe Kalan</h2><div class="list">${k.map(h=>satir(h,h.kartopu,h.kartopu_mesafe,"Hedef")).join("")}</div>
   <div class="boş">Eksi mesafe = seviyenin altında. VIX ${D.vix.rejim} iken pusu alımı ${D.vix.rejim==="AÇIK"?"serbest":D.vix.rejim==="TAM KİLİT"?"kapalı":"yalnız 1. Lig"}.</div>`;
