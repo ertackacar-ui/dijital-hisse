@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="dijital hisse">
 <title>dijital hisse — Canlı İzleme</title>
-<meta name="dh-surum" content="10">
+<meta name="dh-surum" content="11">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-512.png">
@@ -116,6 +116,7 @@
   <div class="perde" id="perde"></div>
   <main class="main">
     <div class="top"><div><h1 id="baslik">Genel Bakış</h1><div class="sub" id="altBaslik">Veri bekleniyor…</div></div><div style="display:flex;gap:8px;align-items:center"><span id="ustChip"></span><button class="btn" id="yenileBtn" title="Veriyi yeniden çek">⟳ Yenile</button></div></div>
+    <div class="chip send" id="yenileHaber" hidden style="margin:-6px 0 10px"></div>
     <section class="view on" id="v-ozet"><div class="boş" id="yukleniyor">⏳ Veri yükleniyor… (10 saniyeyi geçerse bağlantı zayıf demektir; ⟳ Yenile'ye basın)</div></section>
     <section class="view" id="v-hisse"></section>
     <section class="view" id="v-pusu"></section>
@@ -251,22 +252,24 @@ cizAjan(); setInterval(cizAjan,60000);
 function ciz(){
   $("#gizleBtn").hidden=!!D.gizli;
   document.querySelectorAll(".para").forEach(e=>{if(D.gizli)e.remove()});
-  $("#altBaslik").textContent=`${D.hisseler.length} hisse · ${D.seans_acik?"Seans Açık":"Seans Kapalı"} · ${dkOnce(D.guncelleme)}`;
+  $("#altBaslik").textContent=`${D.hisseler.length} hisse · ${D.seans_acik?"Seans Açık":"Seans Kapalı"} · veri ${new Date(D.guncelleme).toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})} (${dkOnce(D.guncelleme)})`;
   $("#ustChip").innerHTML=vixChip(D.vix);
   cizOzet();cizHisse();cizPusu();cizBilanco();cizHaber();
 }
 let yukleniyor=false;
-async function yukle(){
+function haber(m){const h=$("#yenileHaber");h.textContent=m;h.hidden=false;clearTimeout(haber.t);haber.t=setTimeout(()=>h.hidden=true,4000)}
+async function yukle(elle){
   if(yukleniyor)return; yukleniyor=true; const b=$("#yenileBtn"); b.disabled=true; b.textContent="⟳ Yenileniyor…";
   const ac=new AbortController(), zaman=setTimeout(()=>ac.abort(),10000); // 10 sn'de vazgeç, ekranı boş bırakma
   try{const r=await fetch("veri.json?t="+Date.now(),{cache:"no-store",signal:ac.signal});if(!r.ok)throw new Error("HTTP "+r.status);
-    const d=await r.json(); if(!d||!Array.isArray(d.hisseler)||!d.hisseler.length)throw new Error("boş veri"); D=d; ciz()}
+    const d=await r.json(); if(!d||!Array.isArray(d.hisseler)||!d.hisseler.length)throw new Error("boş veri");
+    const yeni=!D||d.guncelleme!==D.guncelleme; D=d; ciz(); if(elle)haber(yeni?"✓ Yeni veri geldi":"✓ Sunucuda daha yeni veri yok; ekran güncel")}
   catch(e){const neden=e.name==="AbortError"?"zaman aşımı (bağlantı yavaş)":e.message;
     if(D){$("#altBaslik").textContent=`Yenilenemedi: ${neden} · ekranda ${dkOnce(D.guncelleme)} verisi var`}
     else{$("#altBaslik").textContent="veri.json okunamadı: "+neden;$("#v-ozet").innerHTML=`<div class="boş">⚠️ Veri alınamadı (${neden}). İnternet bağlantısını kontrol edip ⟳ Yenile'ye basın.</div>`}}
   finally{clearTimeout(zaman); yukleniyor=false; b.disabled=false; b.textContent="⟳ Yenile"}
 }
-$("#yenileBtn").onclick=yukle;
+$("#yenileBtn").onclick=()=>yukle(true);
 goster(ls.get("dh-view")||"ozet"); yukle(); setInterval(yukle,60000);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)yukle()}); // telefonda uygulamaya dönünce hemen yenile
 if("serviceWorker" in navigator){
