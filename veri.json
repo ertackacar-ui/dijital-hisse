@@ -1,11 +1,11 @@
 {
- "guncelleme": "2026-11-25T08:38:45.236914+00:00",
+ "guncelleme": "2026-11-25T08:44:45.658212+00:00",
  "seans_acik": false,
  "seans_etiketi": "Kapalı",
  "kesin_kapanis": "2026-11-24",
  "vix": {
-  "deger": 28.31,
-  "metin": "VIX 28.31 → TAM KİLİT (alım yok)",
+  "deger": 28.29,
+  "metin": "VIX 28.29 → TAM KİLİT (alım yok)",
   "rejim": "TAM KİLİT"
  },
  "tnx": 4.9,
@@ -1154,7 +1154,7 @@
       "kaynak": "Yahoo Finance"
      }
     ],
-    "hedef": 2101.1653,
+    "hedef": 2101.8552,
     "tavsiye": "strong_buy",
     "potansiyel": 57.3
    },
