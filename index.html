@@ -8,17 +8,20 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="dijital hisse">
 <title>dijital hisse — Canlı İzleme</title>
-<meta name="dh-surum" content="20">
+<meta name="dh-surum" content="21">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Quicksand:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Code:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{--bg:#fff4db;--surface:#ffffff;--line:#ece2c8;--fg:#111d2e;--muted:#5d6880;--send:#4b5be6;--send-fg:#fff;--send-soft:#e8eaff;
     --good:#17694a;--good-soft:#dcf3e8;--bad:#b0307e;--bad-soft:#fbe3f2;--warn:#8a5a00;--warn-soft:#fbf0d6;--idle-soft:#f7efdc;
     --grad:linear-gradient(90deg,#5b72ff,#a66ce6 55%,#ff66c4);--cream:#111d2e;--dl:inline;--dd:none;
-    --sans:"Google Sans","Google Sans Flex","Product Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--logo:"Quicksand",var(--sans);--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+    --sans:"Google Sans","Google Sans Flex","Product Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--logo:var(--sans);--mono:var(--sans);--kod:"Google Sans Code","Google Sans",ui-monospace,Menlo,monospace}
+  /* Butun yazilar Google Sans; sayilar ayni fontta esit genislikli rakamlarla hizalanir, komut kutulari Google Sans Code */
+  body{font-variant-numeric:tabular-nums} .mono,td,th,.card .v,.row .t,.row .r,.chip,.cekmece h3,.cekmece .kv b,.cekmece .rota,.ag .ad,.ag .num{font-variant-numeric:tabular-nums}
+  code{font-family:var(--kod)!important}
   [data-theme="dark"]{--bg:#0f1c2e;--surface:#16253b;--line:#2a3b57;--fg:#fbf6ee;--muted:#9fb0c8;--send:#8794ff;--send-fg:#0f1c2e;--send-soft:#1f2c55;
     --good:#3fbf8f;--good-soft:#173a30;--bad:#ff8fc0;--bad-soft:#40203a;--warn:#e9b866;--warn-soft:#3a2f18;--idle-soft:#1d2c44;--cream:#fbf6ee;--dl:none;--dd:inline;color-scheme:dark}
   *{box-sizing:border-box} [hidden]{display:none!important}
@@ -172,7 +175,7 @@ const cls=n=>n==null?"":(n>0?"up":n<0?"dn":"");
 const usd=n=>n==null?"—":"$"+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
 const BASLIK={ozet:"Genel Bakış",hisse:"Hisseler",pusu:"Pusu ve Kartopu",bilanco:"Bilanço Takvimi",haber:"Haber ve Analist",ajan:"Ajanlar",midas:"Midas Portföy Aynası"};
 // Veri kaynagi: internette (github.io) her zaman gizli veri.json; yerel sunucuda lot/K-Z + Midas aynali veri_tam.json (yoksa veri.json)
-const YEREL=!/github\.io$/.test(location.hostname), KAYNAK=YEREL?"veri_tam.json":"veri.json";
+const YEREL=!/github\.io$/.test(location.hostname)&&!/[?&]gizli=1/.test(location.search), KAYNAK=YEREL?"veri_tam.json":"veri.json";
 
 // Tema, gizleme, menü
 document.documentElement.setAttribute("data-theme",ls.get("dh-tema")||"dark");
@@ -315,14 +318,37 @@ function ciz(){
   document.querySelectorAll(".para").forEach(e=>{if(D.gizli)e.remove()});
   $("#altBaslik").textContent=`${D.hisseler.length} hisse · ${D.seans_acik?"Seans Açık":"Seans Kapalı"} · veri ${new Date(D.guncelleme).toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})} (${dkOnce(D.guncelleme)})`;
   $("#ustChip").innerHTML=vixChip(D.vix);
-  $("#nvMidas").hidden=!D.midas; if(!D.midas&&ls.get("dh-view")==="midas")goster("ozet");
+  $("#nvMidas").hidden=false; $("#nvMidas em").textContent=D.midas?"yerel":"🔒";
   cizBant();cizOzet();cizHisse();cizPusu();cizBilanco();cizHaber();cizMidas();
 }
 // 💼 Midas Portfoy Aynasi: yalnizca yerel veri_tam.json'da gelir; github.io kopyasinda bu alan yoktur, sekme gizlenir
+// Internette: veri_tam.enc (AES-GCM) yalnizca bu cihazda girilen sifreyle cozulur; sifre cihazda kalir (localStorage), sunucuya gitmez
+async function anahtar(sifre,salt){const km=await crypto.subtle.importKey("raw",new TextEncoder().encode(sifre),"PBKDF2",false,["deriveKey"]);
+  return crypto.subtle.deriveKey({name:"PBKDF2",salt,iterations:200000,hash:"SHA-256"},km,{name:"AES-GCM",length:256},false,["decrypt"])}
+const b64=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
+async function aynaCoz(sifre){
+  const r=await fetch("veri_tam.enc?t="+Date.now(),{cache:"no-store"}); if(!r.ok)throw new Error("veri_tam.enc yok (HTTP "+r.status+")");
+  const e=await r.json(); const k=await anahtar(sifre,b64(e.salt));
+  const acik=await crypto.subtle.decrypt({name:"AES-GCM",iv:b64(e.iv)},k,b64(e.ct));
+  return JSON.parse(new TextDecoder().decode(acik));
+}
+async function aynaAc(sifre){
+  try{const d=await aynaCoz(sifre); D.midas=d.midas; D.midas.sifreli_guncelleme=d.guncelleme; ls.set("dh-ayna",sifre); cizMidas()}
+  catch(e){const h=$("#aynaHata"); if(h)h.textContent=e.name==="OperationError"?"Şifre yanlış.":"Açılamadı: "+e.message}
+}
 function cizMidas(){
-  const v=$("#v-midas"), M=D.midas; if(!M){v.innerHTML="";return}
+  const v=$("#v-midas"), M=D.midas;
+  if(!M){
+    const kayitli=ls.get("dh-ayna");
+    if(kayitli&&!cizMidas.denendi){cizMidas.denendi=true;aynaAc(kayitli)}
+    v.innerHTML=`<div class="card" style="max-width:420px"><div class="k">🔒 Midas Portföy Aynası kilitli</div><div class="s" style="margin:6px 0 10px">Ayna verisi bu siteye şifreli gelir; yalnızca şifreyi bilen cihazda açılır. Şifre bu cihazda saklanır, bir daha sorulmaz.</div>
+      <form id="aynaForm" style="display:flex;gap:8px;flex-wrap:wrap"><input id="aynaSifre" type="password" placeholder="Ayna şifresi" autocomplete="current-password" style="flex:1 1 160px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);font:inherit"><button class="btn" type="submit">Aç</button></form>
+      <div id="aynaHata" class="boş" style="color:var(--bad)"></div></div>`;
+    $("#aynaForm").onsubmit=e=>{e.preventDefault();aynaAc($("#aynaSifre").value.trim())};
+    return;
+  }
   const K=M.kasa,T=M.toplam, pr=x=>`<span class="para">${x}</span>`;
-  v.innerHTML=`<div class="kural">🔒 Yalnız bu yerel ekranda görünür (veri_tam.json). İnternetteki dijital hisse kopyasına lot, bakiye ve K/Z hiçbir zaman gitmez.</div>
+  v.innerHTML=`<div class="kural">🔒 ${M.sifreli_guncelleme?"Şifreli ayna: siteye kilitli gelir, yalnızca bu cihazda çözülür.":"Yerel ayna (veri_tam.json)."} Lot, bakiye ve K/Z düz metin olarak hiçbir zaman yayınlanmaz.</div>
   <div class="grid kokpit">
     <div class="card hero"><div class="k">Toplam Kasa (hisse + nakit)</div><div class="v">${pr(usd(K.toplam_kasa))}</div><div class="s">hisse ${pr(usd(K.hisse_degeri))} · nakit ${pr(usd(K.toplam_nakit))} (%${K.nakit_orani}) · katkı sonrası ${pr(usd(K.toplam_kasa_katki_sonrasi))}</div></div>
     <div class="card"><div class="k">🛡 Kriz Rezervi</div><div class="v" style="font-size:19px">${pr(usd(K.kriz_rezervi))}</div><div class="s">${K.kriz_kosulu}</div></div>
@@ -335,7 +361,8 @@ function cizMidas(){
     <td>${p.pusu?`${p.pusu} <span class="${p.pusu_mesafe<0?"dn":""}">(${pc(p.pusu_mesafe)})</span>`:"—"}</td><td>${p.kartopu?`${p.kartopu} (${p.kartopu_mesafe.toFixed(1)}% kaldı)`:"—"}</td>
     <td style="white-space:normal;text-align:left;min-width:160px">${p.kalkan?`🛡 ${p.kalkan.satilan_lot} lot @ ${p.kalkan.satis_fiyati} satıldı (${p.kalkan.tarih}) → geri alım ${p.kalkan.geri_alim}`:p.muaf?"kale muafiyeti":""}</td></tr>`).join("")}
   </tbody></table></div>
-  <div class="boş">Ayna ${dkOnce(M.guncelleme)} üretildi · ${M.seans_etiketi}. Yerel sunucu 15 dakikada bir yeniler; elle: <code>.venv/bin/python .claude/scripts/izleme_guncelle.py --tam</code></div>`;
+  <div class="boş">Ayna ${dkOnce(M.guncelleme)} üretildi · ${M.seans_etiketi}. ${M.sifreli_guncelleme?'Şifreli kopya her yerel yayında (30 dk) yenilenir. <button class="btn" id="aynaUnut" style="padding:3px 8px;font-size:12px">Şifreyi bu cihazdan sil</button>':'Yerel sunucu 15 dakikada bir yeniler; elle: <code>.venv/bin/python .claude/scripts/izleme_guncelle.py --tam</code>'}</div>`;
+  const u=$("#aynaUnut"); if(u)u.onclick=()=>{ls.set("dh-ayna","");delete D.midas;cizMidas.denendi=true;cizMidas()};
   v.querySelectorAll("tr.tik").forEach(tr=>tr.onclick=()=>acCekmece(tr.dataset.t));
 }
 // 🔔 Seviye temasi bandi: pusu altinda (yesil), +%2 menzilde (kehribar), kartopuya %3 yakin (kirmizi)

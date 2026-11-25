@@ -215,6 +215,11 @@ def tam_yaz():
     gecici = KLASOR / "veri_tam.json.tmp"
     gecici.write_text(json.dumps(d, ensure_ascii=False, indent=1)); json.loads(gecici.read_text()); os.replace(gecici, KLASOR / "veri_tam.json")
     print(f"veri_tam.json yazıldı (YEREL, lot/K-Z + Midas aynası): {len(d['hisseler'])} hisse")
+    sifre = KLASOR.parent / ".ayna_sifre"
+    if sifre.exists():  # sifreli kopya: yalniz ayna bolumu, AES-GCM; yayina bu gider
+        import subprocess
+        r = subprocess.run(["node", str(Path(__file__).parent / "ayna_sifrele.js"), str(KLASOR / "veri_tam.json"), str(KLASOR / "veri_tam.enc"), str(sifre)], capture_output=True, text=True)
+        print(r.stdout.strip() or r.stderr.strip())
 
 
 def tam_dongu():
