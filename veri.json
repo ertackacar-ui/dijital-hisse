@@ -1,15 +1,15 @@
 {
- "guncelleme": "2026-11-25T11:01:23.172462+00:00",
+ "guncelleme": "2026-11-25T11:21:42.162655+00:00",
  "seans_acik": false,
  "seans_etiketi": "Seans Öncesi",
  "kesin_kapanis": "2026-11-24",
  "vix": {
-  "deger": 29.36,
-  "metin": "VIX 29.36 → TAM KİLİT (alım yok)",
+  "deger": 29.23,
+  "metin": "VIX 29.23 → TAM KİLİT (alım yok)",
   "rejim": "TAM KİLİT"
  },
  "tnx": 4.9,
- "dxy": 103.98,
+ "dxy": 104.02,
  "para_akisi": {
   "rejim": "RİSK-KAPALI / TAHVİL-DOLAR BASKISI",
   "taraf": "DEFANSİF",
@@ -94,9 +94,9 @@
    "lig": 1,
    "fiyat": 660.71,
    "d1": -0.48,
-   "canli": 651.19,
-   "canli_zaman": "2026-11-25T10:46:25+00:00",
-   "canli_degisim": -1.44,
+   "canli": 650.67,
+   "canli_zaman": "2026-11-25T11:15:00+00:00",
+   "canli_degisim": -1.52,
    "d5": -1.85,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -122,9 +122,9 @@
    "lig": 1,
    "fiyat": 34.89,
    "d1": 1.45,
-   "canli": 34.82,
-   "canli_zaman": "2026-11-25T10:58:30+00:00",
-   "canli_degisim": -0.2,
+   "canli": 34.83,
+   "canli_zaman": "2026-11-25T11:10:00+00:00",
+   "canli_degisim": -0.17,
    "d5": -1.19,
    "ema21": "ALT",
    "ema50": "ÜST",
@@ -149,9 +149,9 @@
    "lig": 1,
    "fiyat": 577.21,
    "d1": 0.85,
-   "canli": 579.5,
-   "canli_zaman": "2026-11-25T10:30:00+00:00",
-   "canli_degisim": 0.4,
+   "canli": 579.78,
+   "canli_zaman": "2026-11-25T11:05:00+00:00",
+   "canli_degisim": 0.45,
    "d5": -1.63,
    "ema21": "ÜST",
    "ema50": "ÜST",
@@ -177,9 +177,9 @@
    "lig": 1,
    "fiyat": 1407.59,
    "d1": 3.15,
-   "canli": 1419.86,
-   "canli_zaman": "2026-11-25T10:55:37+00:00",
-   "canli_degisim": 0.87,
+   "canli": 1418.0,
+   "canli_zaman": "2026-11-25T11:11:13+00:00",
+   "canli_degisim": 0.74,
    "d5": -0.56,
    "ema21": "ÜST",
    "ema50": "ÜST",
@@ -205,9 +205,9 @@
    "lig": 1,
    "fiyat": 416.78,
    "d1": 1.8,
-   "canli": 417.05,
-   "canli_zaman": "2026-11-25T10:35:00+00:00",
-   "canli_degisim": 0.06,
+   "canli": 417.54,
+   "canli_zaman": "2026-11-25T10:45:00+00:00",
+   "canli_degisim": 0.18,
    "d5": 0.0,
    "ema21": "ÜST",
    "ema50": "ÜST",
@@ -233,9 +233,9 @@
    "lig": 1,
    "fiyat": 496.13,
    "d1": 0.74,
-   "canli": 486.47,
-   "canli_zaman": "2026-11-25T11:00:12+00:00",
-   "canli_degisim": -1.95,
+   "canli": 485.2,
+   "canli_zaman": "2026-11-25T11:15:00+00:00",
+   "canli_degisim": -2.2,
    "d5": -2.0,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -258,9 +258,9 @@
    "lig": 1,
    "fiyat": 252.29,
    "d1": -1.21,
-   "canli": 245.0,
-   "canli_zaman": "2026-11-25T11:00:14+00:00",
-   "canli_degisim": -2.89,
+   "canli": 244.46,
+   "canli_zaman": "2026-11-25T11:20:21+00:00",
+   "canli_degisim": -3.1,
    "d5": -2.17,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -286,9 +286,9 @@
    "lig": 1,
    "fiyat": 276.58,
    "d1": -1.06,
-   "canli": 268.82,
-   "canli_zaman": "2026-11-25T11:00:16+00:00",
-   "canli_degisim": -2.81,
+   "canli": 269.0,
+   "canli_zaman": "2026-11-25T11:20:26+00:00",
+   "canli_degisim": -2.74,
    "d5": -0.37,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -341,9 +341,9 @@
    "lig": 2,
    "fiyat": 638.1,
    "d1": -1.99,
-   "canli": 623.06,
-   "canli_zaman": "2026-11-25T11:00:18+00:00",
-   "canli_degisim": -2.36,
+   "canli": 622.62,
+   "canli_zaman": "2026-11-25T11:15:00+00:00",
+   "canli_degisim": -2.43,
    "d5": -2.87,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -369,9 +369,9 @@
    "lig": 2,
    "fiyat": 155.38,
    "d1": -5.86,
-   "canli": 148.1,
-   "canli_zaman": "2026-11-25T11:00:17+00:00",
-   "canli_degisim": -4.69,
+   "canli": 148.67,
+   "canli_zaman": "2026-11-25T11:20:43+00:00",
+   "canli_degisim": -4.32,
    "d5": -0.05,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -396,9 +396,9 @@
    "lig": 2,
    "fiyat": 301.08,
    "d1": -3.98,
-   "canli": 290.48,
-   "canli_zaman": "2026-11-25T11:00:23+00:00",
-   "canli_degisim": -3.52,
+   "canli": 290.45,
+   "canli_zaman": "2026-11-25T11:20:26+00:00",
+   "canli_degisim": -3.53,
    "d5": -11.86,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -424,9 +424,9 @@
    "lig": 2,
    "fiyat": 173.82,
    "d1": -6.72,
-   "canli": 166.2,
-   "canli_zaman": "2026-11-25T10:55:00+00:00",
-   "canli_degisim": -4.38,
+   "canli": 165.52,
+   "canli_zaman": "2026-11-25T11:15:00+00:00",
+   "canli_degisim": -4.78,
    "d5": -8.69,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -449,9 +449,9 @@
    "lig": 2,
    "fiyat": 1336.06,
    "d1": -3.45,
-   "canli": 1284.79,
-   "canli_zaman": "2026-11-25T10:55:00+00:00",
-   "canli_degisim": -3.84,
+   "canli": 1282.61,
+   "canli_zaman": "2026-11-25T11:17:35+00:00",
+   "canli_degisim": -4.0,
    "d5": -3.4,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -477,9 +477,9 @@
    "lig": 2,
    "fiyat": 629.79,
    "d1": -11.01,
-   "canli": 595.6,
-   "canli_zaman": "2026-11-25T11:00:14+00:00",
-   "canli_degisim": -5.43,
+   "canli": 597.68,
+   "canli_zaman": "2026-11-25T11:20:44+00:00",
+   "canli_degisim": -5.1,
    "d5": -11.6,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -505,9 +505,9 @@
    "lig": 2,
    "fiyat": 413.27,
    "d1": -8.86,
-   "canli": 389.0,
-   "canli_zaman": "2026-11-25T11:00:12+00:00",
-   "canli_degisim": -5.87,
+   "canli": 389.3,
+   "canli_zaman": "2026-11-25T11:20:44+00:00",
+   "canli_degisim": -5.8,
    "d5": -17.91,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -532,9 +532,9 @@
    "lig": 2,
    "fiyat": 349.2,
    "d1": -3.96,
-   "canli": 338.28,
-   "canli_zaman": "2026-11-25T10:55:00+00:00",
-   "canli_degisim": -3.13,
+   "canli": 338.2,
+   "canli_zaman": "2026-11-25T11:20:00+00:00",
+   "canli_degisim": -3.15,
    "d5": -2.92,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -560,9 +560,9 @@
    "lig": 2,
    "fiyat": 168.56,
    "d1": -5.47,
-   "canli": 161.3,
-   "canli_zaman": "2026-11-25T10:45:00+00:00",
-   "canli_degisim": -4.31,
+   "canli": 161.2,
+   "canli_zaman": "2026-11-25T10:55:30+00:00",
+   "canli_degisim": -4.37,
    "d5": -9.58,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -587,9 +587,9 @@
    "lig": 2,
    "fiyat": 352.99,
    "d1": -0.12,
-   "canli": 338.86,
-   "canli_zaman": "2026-11-25T10:56:53+00:00",
-   "canli_degisim": -4.0,
+   "canli": 339.0,
+   "canli_zaman": "2026-11-25T11:11:04+00:00",
+   "canli_degisim": -3.96,
    "d5": 14.13,
    "ema21": "ÜST",
    "ema50": "ALT",
@@ -639,9 +639,9 @@
    "lig": 2,
    "fiyat": 589.64,
    "d1": -3.18,
-   "canli": 572.0,
-   "canli_zaman": "2026-11-25T10:40:00+00:00",
-   "canli_degisim": -2.99,
+   "canli": 570.5,
+   "canli_zaman": "2026-11-25T10:50:34+00:00",
+   "canli_degisim": -3.25,
    "d5": -1.49,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -664,9 +664,9 @@
    "lig": 2,
    "fiyat": 161.18,
    "d1": 1.14,
-   "canli": 154.5,
-   "canli_zaman": "2026-11-25T10:57:39+00:00",
-   "canli_degisim": -4.14,
+   "canli": 154.46,
+   "canli_zaman": "2026-11-25T11:15:00+00:00",
+   "canli_degisim": -4.17,
    "d5": 2.95,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -691,9 +691,9 @@
    "lig": 3,
    "fiyat": 19.2,
    "d1": -7.56,
-   "canli": 18.6,
-   "canli_zaman": "2026-11-25T11:00:13+00:00",
-   "canli_degisim": -3.13,
+   "canli": 18.56,
+   "canli_zaman": "2026-11-25T11:18:35+00:00",
+   "canli_degisim": -3.33,
    "d5": -14.17,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -716,9 +716,9 @@
    "lig": 3,
    "fiyat": 7.59,
    "d1": -6.24,
-   "canli": 7.27,
-   "canli_zaman": "2026-11-25T10:55:00+00:00",
-   "canli_degisim": -4.22,
+   "canli": 7.26,
+   "canli_zaman": "2026-11-25T11:20:29+00:00",
+   "canli_degisim": -4.35,
    "d5": -10.28,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -741,9 +741,9 @@
    "lig": 3,
    "fiyat": 125.81,
    "d1": -5.65,
-   "canli": 122.86,
-   "canli_zaman": "2026-11-25T11:00:18+00:00",
-   "canli_degisim": -2.34,
+   "canli": 123.5,
+   "canli_zaman": "2026-11-25T11:20:46+00:00",
+   "canli_degisim": -1.84,
    "d5": -11.21,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -766,9 +766,9 @@
    "lig": 3,
    "fiyat": 35.91,
    "d1": 1.04,
-   "canli": 34.87,
-   "canli_zaman": "2026-11-25T10:52:12+00:00",
-   "canli_degisim": -2.9,
+   "canli": 35.08,
+   "canli_zaman": "2026-11-25T11:15:00+00:00",
+   "canli_degisim": -2.31,
    "d5": 3.01,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -791,9 +791,9 @@
    "lig": 3,
    "fiyat": 106.46,
    "d1": -13.07,
-   "canli": 101.0,
-   "canli_zaman": "2026-11-25T10:59:20+00:00",
-   "canli_degisim": -5.13,
+   "canli": 100.98,
+   "canli_zaman": "2026-11-25T11:17:13+00:00",
+   "canli_degisim": -5.15,
    "d5": -14.11,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -986,69 +986,81 @@
  "haber": {
   "makro": [
    {
-    "z": "2026-11-25T09:03:09+00:00",
+    "z": "2026-11-25T11:04:12+00:00",
     "etiket": "🔴 OLUMSUZ / RİSK",
-    "baslik": "Most Covered Call ETFs Fall Just as Hard in a Selloff. This One Didn’t",
+    "baslik": "INVESCO QQQ Trust (QQQ) Sells Apple and NVIDIA on Nov. 23",
+    "kaynak": "GuruFocus.com"
+   },
+   {
+    "z": "2026-11-25T11:04:02+00:00",
+    "etiket": "⚪ BİLGİ/NÖTR",
+    "baslik": "SPDR S&P 500 ETF (SPY) Adds Apple and Nvidia on Monday",
+    "kaynak": "GuruFocus.com"
+   },
+   {
+    "z": "2026-11-25T11:03:37+00:00",
+    "etiket": "⚪ BİLGİ/NÖTR",
+    "baslik": "Forget the P/E Ratio. DSTL Picks 100 Large Stocks by the Cash They Generate and the Debt They Don’t Carry",
     "kaynak": "24/7 Wall St."
    },
    {
-    "z": "2026-11-25T06:56:18+00:00",
-    "etiket": "🟢 POZİTİF KATALİZÖR",
-    "baslik": "AI Concerns Resurface? ORCL, GOOGL, SPCX, CRWV Credit Default Swap Spreads Hit Records As NVDA, ANT Tumble",
-    "kaynak": "Stocktwits"
-   },
-   {
-    "z": "2026-11-25T06:06:17+00:00",
+    "z": "2026-11-25T11:02:57+00:00",
     "etiket": "⚪ BİLGİ/NÖTR",
-    "baslik": "Stock Market: Will S&P 500 Open Up or Down Today?",
-    "kaynak": "Benzinga Prediction Markets"
+    "baslik": "ETFs Are Net Sellers of Alphabet (GOOG) on Nov. 23",
+    "kaynak": "GuruFocus.com"
    },
    {
-    "z": "2026-11-25T00:12:12+00:00",
-    "etiket": "🔴 OLUMSUZ / RİSK",
-    "baslik": "S&P 500, Nasdaq End Lower As AI Jitters Resurface With Nvidia’s Governance Issues And Talks Of Fresh Import Tariffs  — NVDA, DELL, TSLA, TGTX In Focus",
-    "kaynak": "Stocktwits"
-   },
-   {
-    "z": "2026-11-24T21:15:09+00:00",
-    "etiket": "🔴 OLUMSUZ / RİSK",
-    "baslik": "She Retires at 65 With a $900,000 All-Stock 401(k) as the S&P 500 Swings From Its Worst Week to Its Best Day Since April 2025. The 8.6% Drop Erases $77,400, and the Rebound Still Leaves Her $38,409 Short",
-    "kaynak": "24/7 Wall St."
-   },
-   {
-    "z": "2026-11-24T21:13:24+00:00",
+    "z": "2026-11-25T11:02:51+00:00",
     "etiket": "⚪ BİLGİ/NÖTR",
-    "baslik": "Is Apple (AAPL) Above Fair Value As ETF Buying Returns?",
-    "kaynak": "Simply Wall St."
+    "baslik": "ETFs Are Net Sellers of Palantir (PLTR) on Monday",
+    "kaynak": "GuruFocus.com"
    },
    {
-    "z": "2026-11-24T20:40:56+00:00",
-    "etiket": "🟢 POZİTİF KATALİZÖR",
-    "baslik": "5 Dividend Growth ETFs to Buy",
-    "kaynak": "Kiplinger"
-   },
-   {
-    "z": "2026-11-24T19:09:58+00:00",
-    "etiket": "🟢 POZİTİF KATALİZÖR",
-    "baslik": "Harbor Arena Structured Income ETF (YLDS): Autocallable Income in an ETF Wrapper",
-    "kaynak": "etf.com"
-   },
-   {
-    "z": "2026-11-24T18:10:33+00:00",
+    "z": "2026-11-25T11:02:45+00:00",
     "etiket": "⚪ BİLGİ/NÖTR",
-    "baslik": "Exchange-Traded Funds, US Equities Mixed After Midday",
-    "kaynak": "MT Newswires"
+    "baslik": "ETFs Sold $96.9 Million of Rocket Lab (RKLB) on Monday",
+    "kaynak": "GuruFocus.com"
    },
    {
-    "z": "2026-11-24T17:45:59+00:00",
-    "etiket": "🟢 POZİTİF KATALİZÖR",
-    "baslik": "Here’s How Quickly NVIDIA Could Reach $200 Following Jensen Huang’s Reinstatement as CEO",
-    "kaynak": "24/7 Wall St."
+    "z": "2026-11-25T11:02:42+00:00",
+    "etiket": "⚪ BİLGİ/NÖTR",
+    "baslik": "ETFs Are Net Sellers of Amazon (AMZN) on Monday",
+    "kaynak": "GuruFocus.com"
+   },
+   {
+    "z": "2026-11-25T11:02:21+00:00",
+    "etiket": "⚪ BİLGİ/NÖTR",
+    "baslik": "ETFs Are Selling SpaceX (SPCX) on Monday",
+    "kaynak": "GuruFocus.com"
+   },
+   {
+    "z": "2026-11-25T11:02:17+00:00",
+    "etiket": "⚪ BİLGİ/NÖTR",
+    "baslik": "ETFs Are Net Sellers of Tesla (TSLA) on Nov. 23",
+    "kaynak": "GuruFocus.com"
+   },
+   {
+    "z": "2026-11-25T11:02:10+00:00",
+    "etiket": "⚪ BİLGİ/NÖTR",
+    "baslik": "ETFs Are Buying American International Group (AIG) on Monday",
+    "kaynak": "GuruFocus.com"
    }
   ],
   "hisse": {
    "AMD": {
     "basliklar": [
+     {
+      "z": "2026-11-25T11:05:36+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "State Street Technology SPDR (XLK) Adds Apple and Nvidia on Monday",
+      "kaynak": "GuruFocus.com"
+     },
+     {
+      "z": "2026-11-25T11:04:47+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "iShares PHLX SOX Semiconductor (SOXX) Buys $46.9 Million More AMD on Nov. 23",
+      "kaynak": "GuruFocus.com"
+     },
      {
       "z": "2026-11-25T10:49:03+00:00",
       "etiket": "⚪ BİLGİ/NÖTR",
@@ -1066,18 +1078,6 @@
       "etiket": "🔴 OLUMSUZ / RİSK",
       "baslik": "ASML Dips Premarket Amid Chip Rout: Dutch Lawmakers Push Back On Proposed US Curbs On Sales To China",
       "kaynak": "Stocktwits"
-     },
-     {
-      "z": "2026-11-25T09:25:09+00:00",
-      "etiket": "🔴 OLUMSUZ / RİSK",
-      "baslik": "AppLovin Jumped 32% in a Brutal Month—Then Dropped 15% This Week",
-      "kaynak": "Investing.com"
-     },
-     {
-      "z": "2026-11-25T08:26:02+00:00",
-      "etiket": "🔴 OLUMSUZ / RİSK",
-      "baslik": "1 Reason to Buy AMD Stock Before 2027",
-      "kaynak": "Motley Fool"
      }
     ],
     "hedef": 656.2122,
@@ -1124,6 +1124,12 @@
    "ASML": {
     "basliklar": [
      {
+      "z": "2026-11-25T11:01:30+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "ETFs Are Buying ASML (ASML) on Nov. 23",
+      "kaynak": "GuruFocus.com"
+     },
+     {
       "z": "2026-11-25T09:25:35+00:00",
       "etiket": "🔴 OLUMSUZ / RİSK",
       "baslik": "ASML Dips Premarket Amid Chip Rout: Dutch Lawmakers Push Back On Proposed US Curbs On Sales To China",
@@ -1146,20 +1152,32 @@
       "etiket": "⚪ BİLGİ/NÖTR",
       "baslik": "Dutch lawmakers urge government to resist US MATCH bill targeting ASML",
       "kaynak": "Reuters"
-     },
-     {
-      "z": "2026-11-24T18:23:02+00:00",
-      "etiket": "⚪ BİLGİ/NÖTR",
-      "baslik": "ASML Is the Most Important Company You’ve Never Heard Of. Should You Buy the Stock?",
-      "kaynak": "Motley Fool"
      }
     ],
-    "hedef": 2101.1653,
+    "hedef": 2101.8552,
     "tavsiye": "strong_buy",
     "potansiyel": 57.3
    },
    "AVGO": {
     "basliklar": [
+     {
+      "z": "2026-11-25T11:05:36+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "State Street Technology SPDR (XLK) Adds Apple and Nvidia on Monday",
+      "kaynak": "GuruFocus.com"
+     },
+     {
+      "z": "2026-11-25T11:04:47+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "iShares PHLX SOX Semiconductor (SOXX) Buys $46.9 Million More AMD on Nov. 23",
+      "kaynak": "GuruFocus.com"
+     },
+     {
+      "z": "2026-11-25T11:00:57+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "55 ETFs Add to Broadcom (AVGO) on Monday",
+      "kaynak": "GuruFocus.com"
+     },
      {
       "z": "2026-11-25T10:49:03+00:00",
       "etiket": "⚪ BİLGİ/NÖTR",
@@ -1171,24 +1189,6 @@
       "etiket": "⚪ BİLGİ/NÖTR",
       "baslik": "Billionaire David Tepper Dumped Appaloosa's Stake in AMD and Broadcom and Piled Into an Artificial Intelligence (AI) Stock Trading at 44x Forward Adjusted EPS",
       "kaynak": "Motley Fool"
-     },
-     {
-      "z": "2026-11-25T09:25:35+00:00",
-      "etiket": "🔴 OLUMSUZ / RİSK",
-      "baslik": "ASML Dips Premarket Amid Chip Rout: Dutch Lawmakers Push Back On Proposed US Curbs On Sales To China",
-      "kaynak": "Stocktwits"
-     },
-     {
-      "z": "2026-11-25T02:43:50+00:00",
-      "etiket": "🟢 POZİTİF KATALİZÖR",
-      "baslik": "Arista Networks vs. SentinelOne: Which Technology Stock Is a Better Buy for 2027?",
-      "kaynak": "Motley Fool"
-     },
-     {
-      "z": "2026-11-24T22:59:22+00:00",
-      "etiket": "⚪ BİLGİ/NÖTR",
-      "baslik": "Novanta Shares Just Jumped And We’re Buying This Robotics Play",
-      "kaynak": "24/7 Wall St."
      }
     ],
     "hedef": 525.5147,
