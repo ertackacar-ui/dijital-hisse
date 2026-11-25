@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="dijital hisse">
 <title>dijital hisse — Canlı İzleme</title>
-<meta name="dh-surum" content="8">
+<meta name="dh-surum" content="10">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icon-512.png">
@@ -115,8 +115,8 @@
   </aside>
   <div class="perde" id="perde"></div>
   <main class="main">
-    <div class="top"><div><h1 id="baslik">Genel Bakış</h1><div class="sub" id="altBaslik">Veri bekleniyor…</div></div><div id="ustChip"></div></div>
-    <section class="view on" id="v-ozet"></section>
+    <div class="top"><div><h1 id="baslik">Genel Bakış</h1><div class="sub" id="altBaslik">Veri bekleniyor…</div></div><div style="display:flex;gap:8px;align-items:center"><span id="ustChip"></span><button class="btn" id="yenileBtn" title="Veriyi yeniden çek">⟳ Yenile</button></div></div>
+    <section class="view on" id="v-ozet"><div class="boş" id="yukleniyor">⏳ Veri yükleniyor… (10 saniyeyi geçerse bağlantı zayıf demektir; ⟳ Yenile'ye basın)</div></section>
     <section class="view" id="v-hisse"></section>
     <section class="view" id="v-pusu"></section>
     <section class="view" id="v-bilanco"></section>
@@ -255,11 +255,20 @@ function ciz(){
   $("#ustChip").innerHTML=vixChip(D.vix);
   cizOzet();cizHisse();cizPusu();cizBilanco();cizHaber();
 }
+let yukleniyor=false;
 async function yukle(){
-  try{const r=await fetch("veri.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error(r.status);D=await r.json();ciz()}
-  catch(e){$("#altBaslik").textContent="veri.json okunamadı: "+e.message+" — izleme_guncelle.py çalıştırın."}
+  if(yukleniyor)return; yukleniyor=true; const b=$("#yenileBtn"); b.disabled=true; b.textContent="⟳ Yenileniyor…";
+  const ac=new AbortController(), zaman=setTimeout(()=>ac.abort(),10000); // 10 sn'de vazgeç, ekranı boş bırakma
+  try{const r=await fetch("veri.json?t="+Date.now(),{cache:"no-store",signal:ac.signal});if(!r.ok)throw new Error("HTTP "+r.status);
+    const d=await r.json(); if(!d||!Array.isArray(d.hisseler)||!d.hisseler.length)throw new Error("boş veri"); D=d; ciz()}
+  catch(e){const neden=e.name==="AbortError"?"zaman aşımı (bağlantı yavaş)":e.message;
+    if(D){$("#altBaslik").textContent=`Yenilenemedi: ${neden} · ekranda ${dkOnce(D.guncelleme)} verisi var`}
+    else{$("#altBaslik").textContent="veri.json okunamadı: "+neden;$("#v-ozet").innerHTML=`<div class="boş">⚠️ Veri alınamadı (${neden}). İnternet bağlantısını kontrol edip ⟳ Yenile'ye basın.</div>`}}
+  finally{clearTimeout(zaman); yukleniyor=false; b.disabled=false; b.textContent="⟳ Yenile"}
 }
+$("#yenileBtn").onclick=yukle;
 goster(ls.get("dh-view")||"ozet"); yukle(); setInterval(yukle,60000);
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)yukle()}); // telefonda uygulamaya dönünce hemen yenile
 if("serviceWorker" in navigator){
   navigator.serviceWorker.register("sw.js").then(r=>r.update()).catch(()=>{});
   let yenilendi=false; navigator.serviceWorker.addEventListener("controllerchange",()=>{if(!yenilendi){yenilendi=true;location.reload()}});

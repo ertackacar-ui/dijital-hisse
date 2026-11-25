@@ -1,15 +1,15 @@
 {
- "guncelleme": "2026-11-25T08:31:44.276931+00:00",
+ "guncelleme": "2026-11-25T08:38:45.236914+00:00",
  "seans_acik": false,
  "seans_etiketi": "Kapalı",
  "kesin_kapanis": "2026-11-24",
  "vix": {
-  "deger": 28.16,
-  "metin": "VIX 28.16 → TAM KİLİT (alım yok)",
+  "deger": 28.31,
+  "metin": "VIX 28.31 → TAM KİLİT (alım yok)",
   "rejim": "TAM KİLİT"
  },
  "tnx": 4.9,
- "dxy": 104.03,
+ "dxy": 104.05,
  "para_akisi": {
   "rejim": "RİSK-KAPALI / TAHVİL-DOLAR BASKISI",
   "taraf": "DEFANSİF",
