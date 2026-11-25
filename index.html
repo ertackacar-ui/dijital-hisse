@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="tr" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f1c2e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="dijital hisse">
+<title>dijital hisse — Canlı İzleme</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Quicksand:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#f8f7f4;--surface:#ffffff;--line:#e6e1d6;--fg:#111d2e;--muted:#5d6880;--send:#4b5be6;--send-fg:#fff;--send-soft:#e8eaff;
+    --good:#12805c;--good-soft:#dff3ea;--bad:#b0307e;--bad-soft:#fbe3f2;--warn:#8a5a00;--warn-soft:#fbf0d6;--idle-soft:#f1ede4;
+    --grad:linear-gradient(90deg,#5b72ff,#a66ce6 55%,#ff66c4);--cream:#111d2e;
+    --sans:"Google Sans","Google Sans Flex","Product Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--logo:"Quicksand",var(--sans);--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+  [data-theme="dark"]{--bg:#0f1c2e;--surface:#16253b;--line:#2a3b57;--fg:#fbf6ee;--muted:#9fb0c8;--send:#8794ff;--send-fg:#0f1c2e;--send-soft:#1f2c55;
+    --good:#3fbf8f;--good-soft:#173a30;--bad:#ff8fc0;--bad-soft:#40203a;--warn:#e9b866;--warn-soft:#3a2f18;--idle-soft:#1d2c44;--cream:#fbf6ee;color-scheme:dark}
+  *{box-sizing:border-box} [hidden]{display:none!important}
+  html,body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 var(--sans);-webkit-font-smoothing:antialiased}
+  button{font:inherit;color:inherit}
+  .app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+  .side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px;padding:18px 12px 16px max(12px,env(safe-area-inset-left,0px))}
+  .logo{display:flex;align-items:center;gap:8px;padding:4px 8px;font:700 24px/1 var(--logo);letter-spacing:-.01em;user-select:none;cursor:pointer;background:none;border:none;text-align:left}
+  .logo .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .logo .c{color:var(--cream)}
+  .logo .kisa{display:none}
+  .alt{font-size:11.5px;color:var(--muted);padding:0 8px;margin-top:-10px;letter-spacing:.04em}
+  .nv{display:flex;align-items:center;gap:10px;width:100%;border:none;background:none;border-radius:8px;padding:9px 10px;color:var(--muted);font-weight:500;text-align:left;cursor:pointer}
+  .nv:hover{color:var(--fg)} .nv[aria-current=true]{background:var(--send-soft);color:var(--send)}
+  .nv svg{flex:none} .nv span{flex:1} .nv em{font-style:normal;font-size:12px;background:var(--idle-soft);border-radius:999px;padding:1px 7px;color:var(--muted)}
+  .rule{border-top:1px solid var(--line);margin:4px 0}
+  .side .sp{flex:1}
+  .main{padding:18px 20px 40px;max-width:1180px;width:100%}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  h1{margin:0;font-size:22px;font-weight:700} .top .sub{color:var(--muted);font-size:13px}
+  .chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;font-size:12.5px;font-weight:500;background:var(--idle-soft);color:var(--muted);border:1px solid transparent}
+  .chip.good{background:var(--good-soft);color:var(--good)} .chip.bad{background:var(--bad-soft);color:var(--bad)} .chip.warn{background:var(--warn-soft);color:var(--warn)} .chip.send{background:var(--send-soft);color:var(--send)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .card .k{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:.02em} .card .v{font-size:24px;font-weight:700;margin-top:4px;font-family:var(--mono)} .card .s{font-size:13px;color:var(--muted);margin-top:4px}
+  .card.hero{background:var(--grad);color:#fff;border:none} .card.hero .k,.card.hero .s{color:rgba(255,255,255,.85)}
+  h2{font-size:14px;font-weight:700;margin:22px 0 8px;color:var(--fg)}
+  table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:13.5px}
+  th,td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap} th{font-weight:500;color:var(--muted);font-size:12px;background:var(--idle-soft)}
+  th:first-child,td:first-child{text-align:left;font-weight:600;font-family:var(--mono)} tr:last-child td{border-bottom:none}
+  .twrap{overflow-x:auto;border-radius:14px}
+  .up{color:var(--good)} .dn{color:var(--bad)} .mono{font-family:var(--mono)}
+  .lig{margin:14px 0 6px;font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+  .list{display:flex;flex-direction:column;gap:8px}
+  .row{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;flex-wrap:wrap}
+  .row .t{font:600 14px var(--mono);min-width:64px} .row .d{flex:1;font-size:13px;color:var(--muted)} .row .r{font-family:var(--mono);font-weight:600}
+  .bar{height:6px;border-radius:999px;background:var(--idle-soft);overflow:hidden;flex:1 1 100%} .bar i{display:block;height:100%;background:var(--grad)}
+  .news{display:flex;flex-direction:column;gap:6px}
+  .nw{display:grid;grid-template-columns:auto 1fr;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-size:13.5px;align-items:start}
+  .nw .z{font:500 11.5px var(--mono);color:var(--muted);padding-top:2px} .nw .src{color:var(--muted);font-size:12px}
+  .nw.bad{border-left:3px solid var(--bad)} .nw.good{border-left:3px solid var(--good)}
+  .ozet{background:var(--surface);border:1px solid var(--line);border-left:4px solid transparent;border-image:var(--grad) 1;border-radius:14px;padding:14px 16px}
+  .ozet ul{margin:8px 0 0 18px;padding:0} .ozet li{margin:4px 0}
+  .gizli .para{filter:blur(7px);user-select:none;pointer-events:none}
+  .boş{color:var(--muted);font-size:13px;padding:10px 0}
+  .view{display:none} .view.on{display:block}
+  .yon{background:var(--grad);color:#fff;border-radius:14px;padding:14px 16px;margin-bottom:14px}
+  .yon .k{font-size:12px;opacity:.85;font-weight:500;letter-spacing:.02em} .yon .h{font-size:18px;font-weight:700;margin:4px 0 2px;line-height:1.3} .yon .n{font-size:13px;opacity:.9}
+  .yon .cmd{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px} .yon code{background:rgba(0,0,0,.25);border-color:rgba(255,255,255,.25);color:#fff}
+  .yon .btn{background:#fff;color:#111d2e;border-color:#fff;font-weight:700} .yon .btn.ok{background:var(--good);color:#fff;border-color:var(--good)}
+  .yon .rozet{display:inline-block;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);border-radius:999px;padding:3px 10px;font-size:12px;font-weight:600;margin-top:8px}
+  .ag.oner{border-color:var(--send);box-shadow:0 0 0 2px var(--send-soft),0 8px 24px rgba(91,114,255,.25)} .ag .simdi{font-size:11px;font-weight:700;color:#fff;background:var(--grad);padding:3px 9px;border-radius:999px;margin-left:auto}
+  .kural{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:14px;font-size:13px} .kural b{font-family:var(--mono);font-weight:600} .kural li{margin:3px 0}
+  .ag{display:grid;grid-template-columns:34px 1fr;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+  .ag .num{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;font:700 13px var(--mono);background:var(--send-soft);color:var(--send)}
+  .ag .head{display:flex;align-items:center;gap:8px;flex-wrap:wrap} .ag .ad{font:600 13px var(--mono)} .ag .kat{font-size:11px;color:var(--send);background:var(--send-soft);padding:2px 8px;border-radius:999px}
+  .ag .gorev{font-size:13px;margin:4px 0 2px} .ag .zaman{font-size:12px;color:var(--muted)} .ag .zaman b{color:var(--send);font-weight:500}
+  .ag .cmd{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px} .ag code{font:500 11px var(--mono);background:var(--idle-soft);border:1px solid var(--line);padding:5px 8px;border-radius:8px;flex:1 1 200px;word-break:break-all}
+  .btn{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:8px;padding:7px 12px;cursor:pointer;font-weight:500;white-space:nowrap}
+  .btn.primary{background:var(--send);color:var(--send-fg);border-color:var(--send);font-weight:600} .btn.ok{background:var(--good);border-color:var(--good);color:#fff}
+  .alarmk{background:var(--surface);border:1px solid var(--bad);border-radius:14px;padding:12px 14px;margin-bottom:14px}
+  .alarmk .k{font-size:12px;color:var(--bad);font-weight:600} .alarmk input{width:100%;background:var(--idle-soft);border:1px solid var(--line);color:var(--fg);border-radius:8px;padding:9px 10px;font:500 14px var(--mono);margin:8px 0;text-transform:uppercase;outline:none}
+  .kopya{display:none;font-size:12px;font-weight:600;color:var(--good);background:var(--good-soft);padding:4px 10px;border-radius:999px} .kopya.show{display:inline-flex}
+  .perde{display:none}
+  @media (max-width:860px){
+    .app{grid-template-columns:1fr}
+    .side{position:fixed;top:0;bottom:0;left:0;width:60px;height:100%;z-index:15;gap:10px;padding:max(14px,env(safe-area-inset-top,0px)) 6px calc(12px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px));overflow-y:auto;overflow-x:hidden;transition:width .2s}
+    .side .nv span,.side .nv em,.side .alt,.side .rule,.logo .uzun{display:none} .nv{justify-content:center;padding:10px 0} .logo{justify-content:center;padding:4px 0;font-size:20px} .logo .kisa{display:inline}
+    .app.acik .side{width:min(86vw,300px);box-shadow:0 0 40px rgba(0,0,0,.25);padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:12px}
+    .app.acik .side .nv span,.app.acik .side .nv em,.app.acik .side .alt,.app.acik .side .rule,.app.acik .logo .uzun{display:inline} .app.acik .logo .kisa{display:none} .app.acik .nv{justify-content:flex-start;padding:9px 10px}
+    .app.acik .side .rule{display:block}
+    .perde{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:14;display:none} .app.acik .perde{display:block}
+    .main{padding:14px 14px 40px 74px} h1{font-size:19px} .card .v{font-size:21px}
+  }
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <aside class="side">
+    <button class="logo" id="logoBtn" title="Menüyü Aç / Kapat"><span class="uzun"><span class="g">dijital</span> <span class="c">hisse</span></span><span class="kisa g">dh</span></button>
+    <div class="alt">Canlı İzleme Merkezi</div>
+    <nav>
+      <button class="nv" data-v="ozet" aria-current="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg><span>Genel Bakış</span></button>
+      <button class="nv" data-v="hisse"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-6 4 4 5-7 4 5"/><path d="M3 21h18"/></svg><span>Hisseler</span><em id="nHisse"></em></button>
+      <button class="nv" data-v="pusu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg><span>Pusu ve Kartopu</span></button>
+      <button class="nv" data-v="bilanco"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Bilanço Takvimi</span><em id="nMayin"></em></button>
+      <button class="nv" data-v="haber"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13a2 2 0 0 1 2 2v12H6a2 2 0 0 1-2-2z"/><path d="M19 9h1a1 1 0 0 1 1 1v8a2 2 0 0 1-2 2"/><path d="M8 9h5M8 13h5M8 17h5"/></svg><span>Haber ve Analist</span></button>
+      <button class="nv" data-v="ajan"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span>Ajanlar</span><em>10</em></button>
+    </nav>
+    <div class="sp"></div>
+    <div class="rule"></div>
+    <button class="nv" id="gizleBtn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="3"/></svg><span>Tutarları Gizle</span></button>
+    <button class="nv" id="temaBtn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span>Gece Modu</span></button>
+  </aside>
+  <div class="perde" id="perde"></div>
+  <main class="main">
+    <div class="top"><div><h1 id="baslik">Genel Bakış</h1><div class="sub" id="altBaslik">Veri bekleniyor…</div></div><div id="ustChip"></div></div>
+    <section class="view on" id="v-ozet"></section>
+    <section class="view" id="v-hisse"></section>
+    <section class="view" id="v-pusu"></section>
+    <section class="view" id="v-bilanco"></section>
+    <section class="view" id="v-haber"></section>
+    <section class="view" id="v-ajan"></section>
+  </main>
+</div>
+<script>
+const $=s=>document.querySelector(s), app=$("#app"); let D=null;
+const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const f2=n=>n==null?"—":n.toLocaleString("tr-TR",{minimumFractionDigits:2,maximumFractionDigits:2});
+const pc=n=>n==null?"—":(n>0?"+":"")+n.toFixed(1)+"%";
+const cls=n=>n==null?"":(n>0?"up":n<0?"dn":"");
+const usd=n=>n==null?"—":"$"+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+const BASLIK={ozet:"Genel Bakış",hisse:"Hisseler",pusu:"Pusu ve Kartopu",bilanco:"Bilanço Takvimi",haber:"Haber ve Analist",ajan:"Ajanlar"};
+
+// Tema, gizleme, menü
+document.documentElement.setAttribute("data-theme",ls.get("dh-tema")||"dark");
+$("#temaBtn").onclick=()=>{const t=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",t);ls.set("dh-tema",t)};
+function gizleYaz(){const g=ls.get("dh-gizli")==="1";app.classList.toggle("gizli",g);$("#gizleBtn span").textContent=g?"Tutarları Göster":"Tutarları Gizle"}
+$("#gizleBtn").onclick=()=>{ls.set("dh-gizli",ls.get("dh-gizli")==="1"?"0":"1");gizleYaz()}; gizleYaz();
+$("#logoBtn").onclick=()=>app.classList.toggle("acik"); $("#perde").onclick=()=>app.classList.remove("acik");
+document.querySelectorAll(".nv[data-v]").forEach(b=>b.onclick=()=>{goster(b.dataset.v);app.classList.remove("acik")});
+function goster(v){document.querySelectorAll(".nv[data-v]").forEach(b=>b.setAttribute("aria-current",b.dataset.v===v));document.querySelectorAll(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));$("#baslik").textContent=BASLIK[v];ls.set("dh-view",v)}
+
+function vixChip(v){const r=v.rejim;return `<span class="chip ${r==="AÇIK"?"good":r==="TAM KİLİT"?"bad":"warn"}">🔒 VIX ${v.deger??"—"} · ${r}</span>`}
+function dkOnce(iso){const m=Math.round((Date.now()-new Date(iso))/60000);return m<1?"az önce":m<60?m+" dk önce":Math.round(m/60)+" sa önce"}
+
+function cizOzet(){
+  const T=D.toplam, pa=D.para_akisi, eski=(Date.now()-new Date(D.guncelleme))>2*3600e3;
+  const yakin=D.hisseler.filter(h=>h.pusu_mesafe!=null).sort((a,b)=>Math.abs(a.pusu_mesafe)-Math.abs(b.pusu_mesafe)).slice(0,4);
+  const mayin=D.bilanco.filter(b=>b.mayin);
+  const kk=karar();
+  $("#v-ozet").innerHTML=yonKarti(kk)+`
+  <div class="grid">
+    <div class="card hero"><div class="k">Toplam Hisse Portföyü</div><div class="v">${pc(T.tum.kz_pct)}</div><div class="s">${D.gizli?"":`<span class="para">${T.tum.deger!=null?usd(T.tum.deger)+" · K/Z "+usd(T.tum.kz):""}</span> `}1. Lig ${pc(T.lig1.kz_pct)} · 2. Lig ${pc(T.lig2.kz_pct)}</div></div>
+    <div class="card"><div class="k">VIX Rejim Kilidi</div><div class="v ${D.vix.rejim==="AÇIK"?"up":D.vix.rejim==="TAM KİLİT"?"dn":""}">${D.vix.deger??"—"}</div><div class="s">${D.vix.rejim} · 10Y ${D.tnx??"—"}% · DXY ${D.dxy??"—"}</div></div>
+    <div class="card"><div class="k">Piyasa ve Sektör Para Akışı</div><div class="v" style="font-size:17px;font-family:var(--sans)">${pa.taraf} tarafta</div><div class="s">${pa.rejim}<br>${pa.sektorler.slice(0,3).map(s=>s.etf+" "+pc(s.rs)).join(" · ")}</div></div>
+    <div class="card"><div class="k">Son Güncelleme</div><div class="v" style="font-size:17px;font-family:var(--sans)">${dkOnce(D.guncelleme)}${eski?' <span class="chip warn">Veri Eski</span>':""}</div><div class="s">${new Date(D.guncelleme).toLocaleString("tr-TR")} · ${D.seans_acik?"Seans Açık (canlı)":"Seans Kapalı · kesin "+D.kesin_kapanis}</div></div>
+  </div>
+  <h2>Pusuya En Yakın</h2><div class="list">${yakin.map(h=>`<div class="row"><span class="t">${h.t}</span><span class="d">Pusu ${h.pusu_yakin} · fiyat ${f2(h.fiyat)} · Dönüş ${h.puan}/4 · RSI ${h.rsi}</span><span class="r ${h.pusu_mesafe<0?"dn":""}">${pc(h.pusu_mesafe)}</span></div>`).join("")}</div>
+  <h2>Bilanço Mayınları (14 Gün)</h2><div class="list">${mayin.length?mayin.map(b=>`<div class="row"><span class="t">${b.t}</span><span class="d">${b.tarih}</span><span class="chip bad">💣 ${b.kalan} gün</span></div>`).join(""):'<div class="boş">Önümüzdeki 14 günde bilanço yok.</div>'}</div>`;
+  yonBagla($("#v-ozet"));
+}
+function cizHisse(){
+  const ligAd={1:"1. Lig — Kaleler",2:"2. Lig — Büyüme",3:"3. Lig — İzleme"};
+  let h="";
+  for(const L of [1,2,3]){
+    const rows=D.hisseler.filter(x=>x.lig===L);
+    h+=`<div class="lig">${ligAd[L]}</div><div class="twrap"><table><thead><tr><th>Hisse</th><th>Fiyat</th><th>1G</th><th>K/Z</th>${D.gizli?"":'<th class="para">Değer</th>'}<th>EMA21</th><th>RSI</th><th>OBV</th><th>Dönüş</th></tr></thead><tbody>`+
+      rows.map(x=>x.veri_yok?`<tr><td>${x.t}</td><td colspan="8" class="boş">Veri Yok</td></tr>`:
+      `<tr><td>${x.t}${x.kalkan?" 🛡":""}${x.muaf?" 🏰":""}</td><td class="mono">${f2(x.fiyat)}</td><td class="${cls(x.d1)}">${pc(x.d1)}</td><td class="${cls(x.kz_pct)}">${x.kz_pct!=null?pc(x.kz_pct):"—"}</td>${D.gizli?"":`<td class="para mono">${x.deger!=null?usd(x.deger):"—"}</td>`}<td class="${x.ema21==="ÜST"?"up":"dn"}">${x.ema21}</td><td>${x.rsi}</td><td class="${x.obv_ust?"up":"dn"}">${x.obv_ust?"Giriş ↑":"Çıkış ↓"}</td><td>${x.puan}/4</td></tr>`).join("")+`</tbody></table></div>`;
+  }
+  $("#v-hisse").innerHTML=h+`<div class="boş">🛡 kalkan icra edildi · 🏰 kale muafiyeti · OBV = kurumsal para yönü · Dönüş = 4 şartlı teyit puanı</div>`;
+  $("#nHisse").textContent=D.hisseler.length;
+}
+function cizPusu(){
+  const p=D.hisseler.filter(h=>h.pusu_mesafe!=null).sort((a,b)=>Math.abs(a.pusu_mesafe)-Math.abs(b.pusu_mesafe));
+  const k=D.hisseler.filter(h=>h.kartopu_mesafe!=null).sort((a,b)=>a.kartopu_mesafe-b.kartopu_mesafe);
+  const satir=(h,lvl,m,alt)=>`<div class="row"><span class="t">${h.t}</span><span class="d">${alt} ${lvl} · fiyat ${f2(h.fiyat)} · Dönüş ${h.puan}/4 · RSI ${h.rsi} · OBV ${h.obv_ust?"↑":"↓"}</span><span class="r ${m<0?"dn":""}">${pc(m)}</span><span class="bar"><i style="width:${Math.max(4,Math.min(100,100-Math.abs(m)*4))}%"></i></span></div>`;
+  $("#v-pusu").innerHTML=`<h2>🎯 Alt Pusu Yakınlığı</h2><div class="list">${p.map(h=>satir(h,h.pusu_yakin,h.pusu_mesafe,"Pusu")).join("")}</div>
+  <h2>❄️ Kartopu Üst Hedefe Kalan</h2><div class="list">${k.map(h=>satir(h,h.kartopu,h.kartopu_mesafe,"Hedef")).join("")}</div>
+  <div class="boş">Eksi mesafe = seviyenin altında. VIX ${D.vix.rejim} iken pusu alımı ${D.vix.rejim==="AÇIK"?"serbest":D.vix.rejim==="TAM KİLİT"?"kapalı":"yalnız 1. Lig"}.</div>`;
+}
+function cizBilanco(){
+  $("#v-bilanco").innerHTML=`<div class="list">${D.bilanco.map(b=>b.veri_yok?`<div class="row"><span class="t">${b.t}</span><span class="d">Veri Yok</span></div>`:
+  `<div class="row"><span class="t">${b.t}</span><span class="d">${b.tarih} · ${b.lig}. Lig</span>${b.mayin?`<span class="chip bad">💣 ${b.kalan} gün · Yakın Mayın</span>`:`<span class="chip">${b.kalan} gün</span>`}</div>`).join("")}</div><div class="boş">ETF'ler (VOO, SCHD, QQQ) bilanço açıklamaz. Tarihler Yahoo Finance kaynaklıdır.</div>`;
+  $("#nMayin").textContent=D.bilanco.filter(b=>b.mayin).length||"";
+}
+function haberSatir(h){const c=h.etiket.startsWith("🔴")?"bad":h.etiket.startsWith("🟢")?"good":"";return `<div class="nw ${c}"><span class="z">${h.z?new Date(h.z).toLocaleString("tr-TR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"—"}</span><div>${h.baslik}<div class="src">${h.etiket} · ${h.kaynak}</div></div></div>`}
+function cizHaber(){
+  const o=D.ozet_tr, H=D.haber;
+  $("#v-haber").innerHTML=(o?`<div class="ozet"><div class="k" style="font-size:12px;color:var(--muted)">📰 Türkçe Özet · ${o.tarih||""}</div><strong>${o.baslik||"Bu haberler portföyü nasıl etkiler?"}</strong><ul>${(o.maddeler||[]).map(m=>`<li>${m}</li>`).join("")}</ul></div>`:`<div class="boş">Türkçe özet henüz yazılmadı (haber-istihbarat ajanı ozet_tr.json dosyasını günceller).</div>`)+
+  `<h2>Makro ve Piyasa Gündemi</h2><div class="news">${H.makro.map(haberSatir).join("")||'<div class="boş">Veri Yok</div>'}</div>`+
+  Object.entries(H.hisse).map(([t,x])=>`<h2>${t} ${x.potansiyel!=null?`<span class="chip send">Analist hedef ${f2(x.hedef)} · ${pc(x.potansiyel)} · ${x.tavsiye||""}</span>`:""}</h2><div class="news">${x.basliklar.map(haberSatir).join("")||'<div class="boş">Haber Yok</div>'}</div>`).join("");
+}
+const PY=".venv/bin/python .claude/scripts/";
+const AJANLAR=[
+  ["kar-kalkani-bekcisi","Risk / Kâr Koruma","27 hisse: VIX kilidi, EMA21/50, SMA200, RSI, OBV, Dönüş 0/4; kalkan, EMA21 guard, pusu/kartopu uyarıları.","Her işlem günü seans sonrası","kar_kalkani.py"],
+  ["portfoy-yol-haritasi","Portföy Muhasebesi","$ bazlı K/Z, $3,100 tavan doluluğu ve alım boşluğu, kalkan özeti, KARTOPU/PUSU öncelik sırası.","Haftada 1 + her karar öncesi","portfoy_haritasi.py"],
+  ["makro-fraktal-analisti","Makro / Rejim","QQQ-VOO-VIX 10Y: 8 şelale sinyali, kriz benzerlik skoru, dip mesafesi, endeks pusu haritası.","Haftada 1 + VIX > 22.50","makro_fraktal.py"],
+  ["monte-carlo-kant","Olasılık / Simülasyon","Student-t 10.000 yol: 30G/60G bantlar, PUSU değme ve altında bitme olasılığı.","Pusuya <%5 yakınlıkta","monte_carlo.py QQQ VOO NVDA GOOG AVGO MU TSM ASML NOW PLTR AMZN"],
+  ["bilanco-istihbarat","Takvim / Olay Riski","Yaklaşan bilançolar, 14 gün YAKIN MAYIN, son 8 bilanço şok istatistiği.","Haftada 1 + alım öncesi","bilanco_takvimi.py --gun 45"],
+  ["makro-para-akisi","Sektör Rotasyonu","Tahvil-dolar-VIX baskı rejimi; sektör ETF göreceli güç ve OBV; defansif mi çip mi.","Haftada 1 (Cuma)","makro_para_akisi.py"],
+  ["yildiz-kesifcisi","Keşif / Radar","Portföy dışı 45 lider, 5 kriterli Yıldız Puanı; 3. Lig / izleme adayları.","2 haftada 1","yildiz_kesifcisi.py --top 12"],
+  ["balina-korelasyon","Çeşitlendirme / Insider","60G korelasyon ve ikiz çiftler, tema kümesi yığılma uyarısı, 90G içeriden alım/satım.","Ayda 1 + yeni hisse öncesi","balina_korelasyon.py"],
+  ["alarm-mail-okuyucu","Acil Alarm","TradingView e-postalarını okur, sembolleri ayıklar, tek kart Acil Alarm Röntgeni basar.","Alarm çaldığı anda","alarm_okuyucu.py --hisse MU AVGO"],
+  ["haber-istihbarat","Haber ve Analist","Makro/Fed/tarife/çip gündemi + hisse haberleri (3 kaynak), 30G analist notu, hedef fiyat potansiyeli.","Her sabah ABD açılışı öncesi + sert hareket sonrası","haber_istihbarat.py --hisse MU AVGO"],
+];
+function kopyala(btn,text,badge){navigator.clipboard.writeText(text).then(()=>{const o=btn.textContent;btn.textContent="✓ Kopyalandı";btn.classList.add("ok");setTimeout(()=>{btn.textContent=o;btn.classList.remove("ok")},1400);if(badge){badge.classList.add("show");clearTimeout(badge._x);badge._x=setTimeout(()=>badge.classList.remove("show"),5000)}}).catch(()=>prompt("Kopyala:",text))}
+// Yonlendirme: TSI saat + gun. ABD seansi TSI 16:30-00:04 acik sayilir. (komuta_paneli.html ile ayni mantik)
+function karar(){
+  const p=new Intl.DateTimeFormat("tr-TR",{timeZone:"Europe/Istanbul",hour:"2-digit",minute:"2-digit",weekday:"long",hour12:false}).formatToParts(new Date());
+  const g=o=>p.find(x=>x.type===o).value, dk=parseInt(g("hour"))*60+parseInt(g("minute")), gun=g("weekday");
+  const haftaSonu=gun==="Cumartesi"||gun==="Pazar", acik=!haftaSonu&&(dk>=990||dk<5), pzt=gun==="Pazartesi";
+  const sabah=!acik&&dk>=720&&dk<990&&!haftaSonu; // TSI 12:00-16:30: ABD acilisi oncesi haber turu
+  let ajan, hedef, neden, cmd;
+  if(acik){ajan=0;hedef="Seans Açık: 1. Ajan ile anlık durum, alarm çaldıysa 9. Ajan";neden="ABD seansı açık. Alarm yoksa kar_kalkani.py ile anlık bakış; alarm varsa Ajanlar'daki alarm kutusunu kullan.";cmd=PY+"kar_kalkani.py"}
+  else if(sabah){ajan=9;hedef="ABD açılışı öncesi: 10. Ajan ile gündemi oku";neden="Öğleden sonra, seans henüz açılmadı. Önce haber ve analist turu, sonra 1. Ajan kapanış tablosu.";cmd=PY+"haber_istihbarat.py"}
+  else{ajan=0;hedef="1. Ajan — Kesin Kapanış Kontrolü (--kapanis)";neden=(haftaSonu?"Hafta sonu":"ABD seansı kapalı")+". Kesinleşmiş 1G kapanışı pusu eşikleri ve EMA21 guard ile oku.";cmd=PY+"kar_kalkani.py --kapanis"}
+  const ekstra=pzt?[1,4,5]:[];
+  return {ajan,ekstra,hedef,neden,cmd,acik,gun,pzt,saat:g("hour")+":"+g("minute")};
+}
+function yonKarti(k){
+  return `<div class="yon"><div class="k">👉 Şimdi Basman Gereken · TSİ ${k.saat} ${k.gun} · seans ${k.acik?"açık":"kapalı"}</div><div class="h">${k.hedef}</div><div class="n">${k.neden}</div>
+  <div class="cmd"><button class="btn" data-yon="${k.cmd}">📋 Bu Komutu Kopyala</button><code>${k.cmd}</code></div>${k.pzt?'<span class="rozet">📅 Bugün Pazartesi: 2, 5 ve 6. Ajanları da çalıştır</span>':""}</div>`;
+}
+function yonBagla(v){v.querySelectorAll("button[data-yon]").forEach(b=>b.onclick=e=>kopyala(e.target,b.dataset.yon))}
+function cizAjan(){
+  const v=$("#v-ajan");
+  const k=karar(), onerilen=new Set([k.ajan,...k.ekstra]);
+  v.innerHTML=yonKarti(k)+`<div class="kural"><strong>Hangi butona ne zaman basılır?</strong><ul style="margin:6px 0 0 18px;padding:0">
+  <li>Seans kapalıyken (TSİ 00:05–16:29, hafta sonu): <b>1</b> kapanış kontrolü. Pazartesi ek olarak <b>2</b>, <b>5</b>, <b>6</b>.</li>
+  <li>ABD açılışı öncesi (öğleden sonra): <b>10</b> haber turu.</li><li>Seans açıkken: <b>1</b> anlık bakış; TradingView alarmı gelirse hisseyi yaz, <b>9</b> röntgen.</li>
+  <li>Bir hisse pusuya %5'ten yaklaştı: <b>4</b> olasılık. Yeni aday arıyorsun: <b>7</b>. Ayda bir: <b>8</b>. VIX 22.50'yi aştı: <b>3</b>.</li></ul></div>
+  <div class="alarmk"><div class="k">🔔 Alarm Çaldı · Hisse Yaz ve Kopyala</div><input id="alarmIn" placeholder="MU AVGO" spellcheck="false" autocomplete="off"><div class="cmd" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="btn primary" id="alarmBtn">📋 Röntgen Komutunu Kopyala</button><span class="kopya" id="kopyaA">✓ Kopyalandı! Mesaj kutusuna yapıştır</span><code id="alarmCmd" style="font:500 11px var(--mono);background:var(--idle-soft);border:1px solid var(--line);padding:5px 8px;border-radius:8px;flex:1 1 200px;word-break:break-all"></code></div></div>
+  <div class="list">${AJANLAR.map((a,i)=>`<div class="ag${onerilen.has(i)?" oner":""}"><div class="num">${String(i+1).padStart(2,"0")}</div><div><div class="head"><span class="ad">${a[0]}</span><span class="kat">${a[1]}</span>${onerilen.has(i)?'<span class="simdi">👉 ŞİMDİ</span>':""}</div><div class="gorev">${a[2]}</div><div class="zaman">Ne zaman: <b>${a[3]}</b></div><div class="cmd"><code>${PY+a[4]}</code><button class="btn" data-cmd="${PY+a[4]}">📋 Komutu Kopyala</button></div></div></div>`).join("")}</div>
+  <div class="boş">Komutlar Claude Code'daki HEDGE FUND oturumunda çalışır: butona bas, komutu mesaj kutusuna yapıştır, Enter.</div>`;
+  v.querySelectorAll("button[data-cmd]").forEach(b=>b.onclick=e=>kopyala(e.target,b.dataset.cmd));
+  const inp=v.querySelector("#alarmIn"),out=v.querySelector("#alarmCmd");
+  const alarmCmd=()=>{const syms=inp.value.toUpperCase().replace(/^\s*ALARM\s*:?/,"").match(/[A-Z]{1,5}(?:-B)?/g)||[];const c=PY+"alarm_okuyucu.py --hisse "+(syms.join(" ")||"…");out.textContent=c;return c};
+  inp.addEventListener("input",alarmCmd);alarmCmd();
+  v.querySelector("#alarmBtn").onclick=e=>kopyala(e.target,alarmCmd(),v.querySelector("#kopyaA"));
+  yonBagla(v);
+}
+cizAjan(); setInterval(cizAjan,60000);
+function ciz(){
+  $("#gizleBtn").hidden=!!D.gizli;
+  document.querySelectorAll(".para").forEach(e=>{if(D.gizli)e.remove()});
+  $("#altBaslik").textContent=`${D.hisseler.length} hisse · ${D.seans_acik?"Seans Açık":"Seans Kapalı"} · ${dkOnce(D.guncelleme)}`;
+  $("#ustChip").innerHTML=vixChip(D.vix);
+  cizOzet();cizHisse();cizPusu();cizBilanco();cizHaber();
+}
+async function yukle(){
+  try{const r=await fetch("veri.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)throw new Error(r.status);D=await r.json();ciz()}
+  catch(e){$("#altBaslik").textContent="veri.json okunamadı: "+e.message+" — izleme_guncelle.py çalıştırın."}
+}
+goster(ls.get("dh-view")||"ozet"); yukle(); setInterval(yukle,60000);
+if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{})}
+</script>
+</body>
+</html>

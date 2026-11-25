@@ -1,0 +1,1236 @@
+{
+ "guncelleme": "2026-11-25T06:33:59.768504+00:00",
+ "seans_acik": false,
+ "kesin_kapanis": "2026-11-24",
+ "vix": {
+  "deger": 26.36,
+  "metin": "VIX 26.36 → TAM KİLİT (alım yok)",
+  "rejim": "TAM KİLİT"
+ },
+ "tnx": 4.9,
+ "dxy": 104.1,
+ "para_akisi": {
+  "rejim": "RİSK-KAPALI / TAHVİL-DOLAR BASKISI",
+  "taraf": "DEFANSİF",
+  "fark": 23.3,
+  "sektorler": [
+   {
+    "etf": "XLP",
+    "ad": "Defansif Tüketim (COST)",
+    "d5": 0.5,
+    "d20": 5.4,
+    "rs": 12.0,
+    "rsi": 59.9,
+    "obv_ust": false,
+    "ema21": true
+   },
+   {
+    "etf": "XLV",
+    "ad": "Sağlık (LLY)",
+    "d5": -0.3,
+    "d20": 3.1,
+    "rs": 9.7,
+    "rsi": 55.5,
+    "obv_ust": false,
+    "ema21": true
+   },
+   {
+    "etf": "XLF",
+    "ad": "Finans (BRK-B/V)",
+    "d5": -1.7,
+    "d20": 0.4,
+    "rs": 7.0,
+    "rsi": 47.1,
+    "obv_ust": false,
+    "ema21": false
+   },
+   {
+    "etf": "XLI",
+    "ad": "Sanayi/Altyapı (PWR/VRT)",
+    "d5": -1.9,
+    "d20": -3.8,
+    "rs": 2.9,
+    "rsi": 42.5,
+    "obv_ust": false,
+    "ema21": false
+   },
+   {
+    "etf": "VOO",
+    "ad": "S&P 500 (kıyas)",
+    "d5": -1.9,
+    "d20": -6.6,
+    "rs": 0.0,
+    "rsi": 40.2,
+    "obv_ust": false,
+    "ema21": false
+   },
+   {
+    "etf": "XLK",
+    "ad": "Teknoloji (MSFT/NOW/PANW)",
+    "d5": -3.8,
+    "d20": -17.1,
+    "rs": -10.5,
+    "rsi": 37.8,
+    "obv_ust": false,
+    "ema21": false
+   },
+   {
+    "etf": "SMH",
+    "ad": "Yarı İletken (NVDA/AVGO/TSM/ASML/MU/AMD)",
+    "d5": -7.2,
+    "d20": -23.5,
+    "rs": -16.9,
+    "rsi": 37.5,
+    "obv_ust": false,
+    "ema21": false
+   }
+  ]
+ },
+ "tavan": 3100.0,
+ "hisseler": [
+  {
+   "t": "VOO",
+   "lig": 1,
+   "fiyat": 660.71,
+   "d1": -0.48,
+   "d5": -1.85,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 679.83,
+   "rsi": 40.2,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [
+    645,
+    573
+   ],
+   "pusu_yakin": 645,
+   "pusu_mesafe": 2.44,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": -2.66
+  },
+  {
+   "t": "SCHD",
+   "lig": 1,
+   "fiyat": 34.89,
+   "d1": 1.45,
+   "d5": -1.19,
+   "ema21": "ALT",
+   "ema50": "ÜST",
+   "sma200": "ÜST",
+   "ema21_deger": 35.01,
+   "rsi": 49.2,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [
+    32.5
+   ],
+   "pusu_yakin": 32.5,
+   "pusu_mesafe": 7.35,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": true,
+   "guard": false,
+   "kz_pct": 1.72
+  },
+  {
+   "t": "BRK-B",
+   "lig": 1,
+   "fiyat": 577.21,
+   "d1": 0.85,
+   "d5": -1.63,
+   "ema21": "ÜST",
+   "ema50": "ÜST",
+   "sma200": "ÜST",
+   "ema21_deger": 568.7,
+   "rsi": 61.4,
+   "obv_ust": true,
+   "puan": 4,
+   "pusu": [
+    538,
+    521
+   ],
+   "pusu_yakin": 538,
+   "pusu_mesafe": 7.29,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": true,
+   "guard": false,
+   "kz_pct": 14.16
+  },
+  {
+   "t": "LLY",
+   "lig": 1,
+   "fiyat": 1407.59,
+   "d1": 3.15,
+   "d5": -0.56,
+   "ema21": "ÜST",
+   "ema50": "ÜST",
+   "sma200": "ÜST",
+   "ema21_deger": 1369.61,
+   "rsi": 59.2,
+   "obv_ust": false,
+   "puan": 3,
+   "pusu": [
+    1325,
+    1293
+   ],
+   "pusu_yakin": 1325,
+   "pusu_mesafe": 6.23,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": false,
+   "guard": true,
+   "kz_pct": 20.82
+  },
+  {
+   "t": "V",
+   "lig": 1,
+   "fiyat": 416.78,
+   "d1": 1.8,
+   "d5": 0.0,
+   "ema21": "ÜST",
+   "ema50": "ÜST",
+   "sma200": "ÜST",
+   "ema21_deger": 412.84,
+   "rsi": 54.5,
+   "obv_ust": false,
+   "puan": 3,
+   "pusu": [
+    400,
+    386
+   ],
+   "pusu_yakin": 400,
+   "pusu_mesafe": 4.19,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": false,
+   "guard": true,
+   "kz_pct": 11.44
+  },
+  {
+   "t": "MSFT",
+   "lig": 1,
+   "fiyat": 496.13,
+   "d1": 0.74,
+   "d5": -2.0,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ÜST",
+   "ema21_deger": 513.96,
+   "rsi": 41.0,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [],
+   "pusu_yakin": null,
+   "pusu_mesafe": null,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": -1.5
+  },
+  {
+   "t": "AMZN",
+   "lig": 1,
+   "fiyat": 252.29,
+   "d1": -1.21,
+   "d5": -2.17,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ÜST",
+   "ema21_deger": 257.57,
+   "rsi": 46.5,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [
+    243.4,
+    232.0
+   ],
+   "pusu_yakin": 243.4,
+   "pusu_mesafe": 3.65,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": true,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": 5.56
+  },
+  {
+   "t": "GOOG",
+   "lig": 1,
+   "fiyat": 276.58,
+   "d1": -1.06,
+   "d5": -0.37,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 288.56,
+   "rsi": 38.8,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [
+    265,
+    248
+   ],
+   "pusu_yakin": 265,
+   "pusu_mesafe": 4.37,
+   "kartopu": 311.3,
+   "kartopu_mesafe": 12.55,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": -14.87
+  },
+  {
+   "t": "COST",
+   "lig": 1,
+   "fiyat": 1091.71,
+   "d1": -0.56,
+   "d5": -1.65,
+   "ema21": "ÜST",
+   "ema50": "ÜST",
+   "sma200": "ÜST",
+   "ema21_deger": 1066.53,
+   "rsi": 64.6,
+   "obv_ust": true,
+   "puan": 3,
+   "pusu": [
+    975
+   ],
+   "pusu_yakin": 975,
+   "pusu_mesafe": 11.97,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false
+  },
+  {
+   "t": "QQQ",
+   "lig": 2,
+   "fiyat": 638.1,
+   "d1": -1.99,
+   "d5": -2.87,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 670.13,
+   "rsi": 39.4,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [
+    635,
+    600
+   ],
+   "pusu_yakin": 635,
+   "pusu_mesafe": 0.49,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": -1.01
+  },
+  {
+   "t": "NVDA",
+   "lig": 2,
+   "fiyat": 155.38,
+   "d1": -5.86,
+   "d5": -0.05,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 172.97,
+   "rsi": 39.5,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [
+    129.8
+   ],
+   "pusu_yakin": 129.8,
+   "pusu_mesafe": 19.71,
+   "kartopu": 213.8,
+   "kartopu_mesafe": 37.6,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": -16.27
+  },
+  {
+   "t": "AVGO",
+   "lig": 2,
+   "fiyat": 301.08,
+   "d1": -3.98,
+   "d5": -11.86,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 330.35,
+   "rsi": 40.8,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [
+    285,
+    260
+   ],
+   "pusu_yakin": 285,
+   "pusu_mesafe": 5.64,
+   "kartopu": 372.5,
+   "kartopu_mesafe": 23.72,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": -16.04
+  },
+  {
+   "t": "VRT",
+   "lig": 2,
+   "fiyat": 173.82,
+   "d1": -6.72,
+   "d5": -8.69,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 197.5,
+   "rsi": 40.1,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [],
+   "pusu_yakin": null,
+   "pusu_mesafe": null,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": -32.39
+  },
+  {
+   "t": "ASML",
+   "lig": 2,
+   "fiyat": 1336.06,
+   "d1": -3.45,
+   "d5": -3.4,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 1460.14,
+   "rsi": 38.1,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [
+    1310,
+    1220
+   ],
+   "pusu_yakin": 1310,
+   "pusu_mesafe": 1.99,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": -13.02
+  },
+  {
+   "t": "MU",
+   "lig": 2,
+   "fiyat": 629.79,
+   "d1": -11.01,
+   "d5": -11.6,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 756.91,
+   "rsi": 37.4,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [
+    640,
+    580
+   ],
+   "pusu_yakin": 640,
+   "pusu_mesafe": -1.6,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": -21.84
+  },
+  {
+   "t": "AMD",
+   "lig": 2,
+   "fiyat": 413.27,
+   "d1": -8.86,
+   "d5": -17.91,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 498.29,
+   "rsi": 38.7,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [
+    375
+   ],
+   "pusu_yakin": 375,
+   "pusu_mesafe": 10.21,
+   "kartopu": 600.0,
+   "kartopu_mesafe": 45.18,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": -13.51
+  },
+  {
+   "t": "TSM",
+   "lig": 2,
+   "fiyat": 349.2,
+   "d1": -3.96,
+   "d5": -2.92,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 381.63,
+   "rsi": 40.2,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [
+    340,
+    315
+   ],
+   "pusu_yakin": 340,
+   "pusu_mesafe": 2.71,
+   "kartopu": 408.0,
+   "kartopu_mesafe": 16.84,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": -14.62
+  },
+  {
+   "t": "ANET",
+   "lig": 2,
+   "fiyat": 168.56,
+   "d1": -5.47,
+   "d5": -9.58,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 183.21,
+   "rsi": 43.0,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [
+    142
+   ],
+   "pusu_yakin": 142,
+   "pusu_mesafe": 18.7,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": 13.2
+  },
+  {
+   "t": "PANW",
+   "lig": 2,
+   "fiyat": 352.99,
+   "d1": -0.12,
+   "d5": 14.13,
+   "ema21": "ÜST",
+   "ema50": "ALT",
+   "sma200": "ÜST",
+   "ema21_deger": 345.22,
+   "rsi": 51.7,
+   "obv_ust": false,
+   "puan": 2,
+   "pusu": [],
+   "pusu_yakin": null,
+   "pusu_mesafe": null,
+   "kartopu": 382.0,
+   "kartopu_mesafe": 8.22,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": -2.08
+  },
+  {
+   "t": "NOW",
+   "lig": 2,
+   "fiyat": 91.74,
+   "d1": 0.02,
+   "d5": -1.25,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 104.7,
+   "rsi": 30.3,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [
+    89.4
+   ],
+   "pusu_yakin": 89.4,
+   "pusu_mesafe": 2.62,
+   "kartopu": 128.0,
+   "kartopu_mesafe": 39.52,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": -24.74
+  },
+  {
+   "t": "PWR",
+   "lig": 2,
+   "fiyat": 589.64,
+   "d1": -3.18,
+   "d5": -1.49,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 596.26,
+   "rsi": 48.2,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [],
+   "pusu_yakin": null,
+   "pusu_mesafe": null,
+   "kartopu": 645.0,
+   "kartopu_mesafe": 9.39,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": -7.55
+  },
+  {
+   "t": "PLTR",
+   "lig": 2,
+   "fiyat": 161.18,
+   "d1": 1.14,
+   "d5": 2.95,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ÜST",
+   "ema21_deger": 167.56,
+   "rsi": 43.2,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [
+    134.0
+   ],
+   "pusu_yakin": 134.0,
+   "pusu_mesafe": 20.28,
+   "kartopu": 170.0,
+   "kartopu_mesafe": 5.47,
+   "kalkan": true,
+   "muaf": false,
+   "guard": false,
+   "kz_pct": 26.32
+  },
+  {
+   "t": "OKLO",
+   "lig": 3,
+   "fiyat": 19.2,
+   "d1": -7.56,
+   "d5": -14.17,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 23.64,
+   "rsi": 32.7,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [],
+   "pusu_yakin": null,
+   "pusu_mesafe": null,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false
+  },
+  {
+   "t": "RGTI",
+   "lig": 3,
+   "fiyat": 7.59,
+   "d1": -6.24,
+   "d5": -10.28,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 9.9,
+   "rsi": 33.0,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [],
+   "pusu_yakin": null,
+   "pusu_mesafe": null,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false
+  },
+  {
+   "t": "SPCX",
+   "lig": 3,
+   "fiyat": 125.81,
+   "d1": -5.65,
+   "d5": -11.21,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 138.47,
+   "rsi": 39.0,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [],
+   "pusu_yakin": null,
+   "pusu_mesafe": null,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false
+  },
+  {
+   "t": "MP",
+   "lig": 3,
+   "fiyat": 35.91,
+   "d1": 1.04,
+   "d5": 3.01,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 37.27,
+   "rsi": 43.7,
+   "obv_ust": true,
+   "puan": 1,
+   "pusu": [],
+   "pusu_yakin": null,
+   "pusu_mesafe": null,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false
+  },
+  {
+   "t": "CRDO",
+   "lig": 3,
+   "fiyat": 106.46,
+   "d1": -13.07,
+   "d5": -14.11,
+   "ema21": "ALT",
+   "ema50": "ALT",
+   "sma200": "ALT",
+   "ema21_deger": 133.03,
+   "rsi": 38.0,
+   "obv_ust": false,
+   "puan": 0,
+   "pusu": [],
+   "pusu_yakin": null,
+   "pusu_mesafe": null,
+   "kartopu": null,
+   "kartopu_mesafe": null,
+   "kalkan": false,
+   "muaf": false,
+   "guard": false
+  }
+ ],
+ "toplam": {
+  "lig1": {
+   "kz_pct": -2.68
+  },
+  "lig2": {
+   "kz_pct": -16.45
+  },
+  "tum": {
+   "kz_pct": -10.45
+  }
+ },
+ "bilanco": [
+  {
+   "t": "CRDO",
+   "tarih": "2026-12-01",
+   "kalan": 6,
+   "mayin": true,
+   "lig": 3
+  },
+  {
+   "t": "AVGO",
+   "tarih": "2026-12-09",
+   "kalan": 14,
+   "mayin": true,
+   "lig": 2
+  },
+  {
+   "t": "COST",
+   "tarih": "2026-12-10",
+   "kalan": 15,
+   "mayin": false,
+   "lig": 1
+  },
+  {
+   "t": "MU",
+   "tarih": "2026-12-17",
+   "kalan": 22,
+   "mayin": false,
+   "lig": 2
+  },
+  {
+   "t": "TSM",
+   "tarih": "2027-01-14",
+   "kalan": 50,
+   "mayin": false,
+   "lig": 2
+  },
+  {
+   "t": "V",
+   "tarih": "2027-01-26",
+   "kalan": 62,
+   "mayin": false,
+   "lig": 1
+  },
+  {
+   "t": "MSFT",
+   "tarih": "2027-01-27",
+   "kalan": 63,
+   "mayin": false,
+   "lig": 1
+  },
+  {
+   "t": "ASML",
+   "tarih": "2027-01-27",
+   "kalan": 63,
+   "mayin": false,
+   "lig": 2
+  },
+  {
+   "t": "NOW",
+   "tarih": "2027-01-27",
+   "kalan": 63,
+   "mayin": false,
+   "lig": 2
+  },
+  {
+   "t": "PLTR",
+   "tarih": "2027-02-01",
+   "kalan": 68,
+   "mayin": false,
+   "lig": 2
+  },
+  {
+   "t": "AMD",
+   "tarih": "2027-02-02",
+   "kalan": 69,
+   "mayin": false,
+   "lig": 2
+  },
+  {
+   "t": "LLY",
+   "tarih": "2027-02-03",
+   "kalan": 70,
+   "mayin": false,
+   "lig": 1
+  },
+  {
+   "t": "GOOG",
+   "tarih": "2027-02-03",
+   "kalan": 70,
+   "mayin": false,
+   "lig": 1
+  },
+  {
+   "t": "AMZN",
+   "tarih": "2027-02-04",
+   "kalan": 71,
+   "mayin": false,
+   "lig": 1
+  },
+  {
+   "t": "ANET",
+   "tarih": "2027-02-09",
+   "kalan": 76,
+   "mayin": false,
+   "lig": 2
+  },
+  {
+   "t": "SPCX",
+   "tarih": "2027-02-09",
+   "kalan": 76,
+   "mayin": false,
+   "lig": 3
+  },
+  {
+   "t": "VRT",
+   "tarih": "2027-02-10",
+   "kalan": 77,
+   "mayin": false,
+   "lig": 2
+  },
+  {
+   "t": "PANW",
+   "tarih": "2027-02-16",
+   "kalan": 83,
+   "mayin": false,
+   "lig": 2
+  },
+  {
+   "t": "PWR",
+   "tarih": "2027-02-18",
+   "kalan": 85,
+   "mayin": false,
+   "lig": 2
+  },
+  {
+   "t": "NVDA",
+   "tarih": "2027-02-24",
+   "kalan": 91,
+   "mayin": false,
+   "lig": 2
+  },
+  {
+   "t": "MP",
+   "tarih": "2027-02-25",
+   "kalan": 92,
+   "mayin": false,
+   "lig": 3
+  },
+  {
+   "t": "BRK-B",
+   "tarih": "2027-03-01",
+   "kalan": 96,
+   "mayin": false,
+   "lig": 1
+  },
+  {
+   "t": "RGTI",
+   "tarih": "2027-03-04",
+   "kalan": 99,
+   "mayin": false,
+   "lig": 3
+  },
+  {
+   "t": "OKLO",
+   "tarih": "2027-03-16",
+   "kalan": 111,
+   "mayin": false,
+   "lig": 3
+  }
+ ],
+ "haber": {
+  "makro": [
+   {
+    "z": "2026-11-25T06:06:17+00:00",
+    "etiket": "⚪ BİLGİ/NÖTR",
+    "baslik": "Stock Market: Will S&P 500 Open Up or Down Today?",
+    "kaynak": "Benzinga Prediction Markets"
+   },
+   {
+    "z": "2026-11-25T00:12:12+00:00",
+    "etiket": "🔴 OLUMSUZ / RİSK",
+    "baslik": "S&P 500, Nasdaq End Lower As AI Jitters Resurface With Nvidia’s Governance Issues And Talks Of Fresh Import Tariffs  — NVDA, DELL, TSLA, TGTX In Focus",
+    "kaynak": "Stocktwits"
+   },
+   {
+    "z": "2026-11-24T21:15:09+00:00",
+    "etiket": "🔴 OLUMSUZ / RİSK",
+    "baslik": "She Retires at 65 With a $900,000 All-Stock 401(k) as the S&P 500 Swings From Its Worst Week to Its Best Day Since April 2025. The 8.6% Drop Erases $77,400, and the Rebound Still Leaves Her $38,409 Short",
+    "kaynak": "24/7 Wall St."
+   },
+   {
+    "z": "2026-11-24T21:13:24+00:00",
+    "etiket": "⚪ BİLGİ/NÖTR",
+    "baslik": "Is Apple (AAPL) Above Fair Value As ETF Buying Returns?",
+    "kaynak": "Simply Wall St."
+   },
+   {
+    "z": "2026-11-24T20:40:56+00:00",
+    "etiket": "🟢 POZİTİF KATALİZÖR",
+    "baslik": "5 Dividend Growth ETFs to Buy",
+    "kaynak": "Kiplinger"
+   },
+   {
+    "z": "2026-11-24T19:09:58+00:00",
+    "etiket": "🟢 POZİTİF KATALİZÖR",
+    "baslik": "Harbor Arena Structured Income ETF (YLDS): Autocallable Income in an ETF Wrapper",
+    "kaynak": "etf.com"
+   },
+   {
+    "z": "2026-11-24T18:10:33+00:00",
+    "etiket": "⚪ BİLGİ/NÖTR",
+    "baslik": "Exchange-Traded Funds, US Equities Mixed After Midday",
+    "kaynak": "MT Newswires"
+   },
+   {
+    "z": "2026-11-24T17:45:59+00:00",
+    "etiket": "🟢 POZİTİF KATALİZÖR",
+    "baslik": "Here’s How Quickly NVIDIA Could Reach $200 Following Jensen Huang’s Reinstatement as CEO",
+    "kaynak": "24/7 Wall St."
+   },
+   {
+    "z": "2026-11-24T17:00:25+00:00",
+    "etiket": "🟢 POZİTİF KATALİZÖR",
+    "baslik": "Hashed and Nurihaus Bring U.S. Beauty Investors to Brooklyn for K-Beauty Investor Day",
+    "kaynak": "etf.com"
+   },
+   {
+    "z": "2026-11-24T16:50:01+00:00",
+    "etiket": "🟢 POZİTİF KATALİZÖR",
+    "baslik": "Stock Market Today: Jensen’s Return to Nvidia Is Causing Index Indigestion",
+    "kaynak": "24/7 Wall St."
+   }
+  ],
+  "hisse": {
+   "AMD": {
+    "basliklar": [
+     {
+      "z": "2026-11-25T04:04:33+00:00",
+      "etiket": "🔴 OLUMSUZ / RİSK",
+      "baslik": "Dow Jones Futures Fall; Trump Says 'Not Too Late' For U.S. To Take Nvidia Stake",
+      "kaynak": "Investor's Business Daily"
+     },
+     {
+      "z": "2026-11-25T00:53:43+00:00",
+      "etiket": "🔴 OLUMSUZ / RİSK",
+      "baslik": "Jim Cramer and Tom Lee are Buying More AI Stocks. Are They Right?",
+      "kaynak": "BeInCrypto"
+     },
+     {
+      "z": "2026-11-24T23:25:02+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "Why AMD Stock Fell Today",
+      "kaynak": "Motley Fool"
+     },
+     {
+      "z": "2026-11-24T23:17:00+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "A scandal like the one haunting Nvidia just reached AMD, its biggest rival",
+      "kaynak": "TheStreet"
+     },
+     {
+      "z": "2026-11-24T22:39:38+00:00",
+      "etiket": "🔴 OLUMSUZ / RİSK",
+      "baslik": "Stock Market Today, Nov. 24: AMD Plunges 9% as 337 Million-Share Resale Filing Adds to AI Sell-Off",
+      "kaynak": "Motley Fool"
+     }
+    ],
+    "hedef": 656.2122,
+    "tavsiye": "strong_buy",
+    "potansiyel": 58.8
+   },
+   "ANET": {
+    "basliklar": [
+     {
+      "z": "2026-11-25T02:43:50+00:00",
+      "etiket": "🟢 POZİTİF KATALİZÖR",
+      "baslik": "Arista Networks vs. SentinelOne: Which Technology Stock Is a Better Buy for 2027?",
+      "kaynak": "Motley Fool"
+     },
+     {
+      "z": "2026-11-24T21:15:57+00:00",
+      "etiket": "🔴 OLUMSUZ / RİSK",
+      "baslik": "Could Meta Actually Climb 30%? Or Is J.P. Morgan Totally Wrong?",
+      "kaynak": "TIKR"
+     },
+     {
+      "z": "2026-11-24T17:37:29+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "Can Ciena Stock Hit $400?",
+      "kaynak": "Trefis"
+     },
+     {
+      "z": "2026-11-24T17:31:08+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "Why Did Cisco Stock Jump?",
+      "kaynak": "Trefis"
+     },
+     {
+      "z": "2026-11-24T17:17:12+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "Can Arista Networks Stock Hit $270?",
+      "kaynak": "Trefis"
+     }
+    ],
+    "hedef": 249.64662,
+    "tavsiye": "strong_buy",
+    "potansiyel": 48.1
+   },
+   "ASML": {
+    "basliklar": [
+     {
+      "z": "2026-11-24T21:21:14+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "Dutch lawmakers urge government to resist US MATCH bill targeting ASML",
+      "kaynak": "Reuters"
+     },
+     {
+      "z": "2026-11-24T18:23:02+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "ASML Is the Most Important Company You’ve Never Heard Of. Should You Buy the Stock?",
+      "kaynak": "Motley Fool"
+     },
+     {
+      "z": "2026-11-24T17:40:08+00:00",
+      "etiket": "🔴 OLUMSUZ / RİSK",
+      "baslik": "Nvidia, AMD and Micron Lead AI Selloff as Chip Stocks Slide",
+      "kaynak": "GuruFocus.com"
+     },
+     {
+      "z": "2026-11-24T14:16:35+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "Nvidia, AMD, Broadcom lead chip stocks lower as AI trade comes under pressure",
+      "kaynak": "Yahoo Finance"
+     },
+     {
+      "z": "2026-11-24T12:15:58+00:00",
+      "etiket": "🟢 POZİTİF KATALİZÖR",
+      "baslik": "ASML Stock What Changed After Nvidia CEO Return",
+      "kaynak": "Simply Wall St."
+     }
+    ],
+    "hedef": 2100.9355,
+    "tavsiye": "strong_buy",
+    "potansiyel": 57.2
+   },
+   "AVGO": {
+    "basliklar": [
+     {
+      "z": "2026-11-25T02:43:50+00:00",
+      "etiket": "🟢 POZİTİF KATALİZÖR",
+      "baslik": "Arista Networks vs. SentinelOne: Which Technology Stock Is a Better Buy for 2027?",
+      "kaynak": "Motley Fool"
+     },
+     {
+      "z": "2026-11-24T22:59:22+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "Novanta Shares Just Jumped And We’re Buying This Robotics Play",
+      "kaynak": "24/7 Wall St."
+     },
+     {
+      "z": "2026-11-24T21:49:49+00:00",
+      "etiket": "🟢 POZİTİF KATALİZÖR",
+      "baslik": "Stock Market Today, Nov. 24: Nvidia Gives Back $240 Billion in Market Value Despite Wall Street Upgrade Signaling 29% Upside",
+      "kaynak": "Motley Fool"
+     },
+     {
+      "z": "2026-11-24T21:20:01+00:00",
+      "etiket": "🔴 OLUMSUZ / RİSK",
+      "baslik": "Ambarella (AMBA) Misses Q3 Earnings and Revenue Estimates",
+      "kaynak": "Zacks"
+     },
+     {
+      "z": "2026-11-24T21:18:40+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "Billionaire Philippe Laffont’s 10 High-Conviction Stock Bets for 2027",
+      "kaynak": "Insider Monkey"
+     }
+    ],
+    "hedef": 525.5147,
+    "tavsiye": "strong_buy",
+    "potansiyel": 74.5
+   },
+   "CRDO": {
+    "basliklar": [
+     {
+      "z": "2026-11-25T05:24:46+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "From Smiling to Selling: Why Credo Technology (CRDO) is Getting Hammered",
+      "kaynak": "Insider Monkey"
+     },
+     {
+      "z": "2026-11-24T15:48:28+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "Sandisk Sinks 14% as Memory Stocks Give Back Nvidia’s Huang Rally",
+      "kaynak": "TIKR"
+     },
+     {
+      "z": "2026-11-24T15:25:51+00:00",
+      "etiket": "🔴 OLUMSUZ / RİSK",
+      "baslik": "Nvidia Sinks 7% as US Blacklists Customer Megaspeed and Kyle Bass Slams “Calamitous Governance Failure”",
+      "kaynak": "TIKR"
+     },
+     {
+      "z": "2026-11-24T12:14:00+00:00",
+      "etiket": "🔴 OLUMSUZ / RİSK",
+      "baslik": "MaxLinear Stock Drops 24% in a Month: Should You Buy it on the Dip?",
+      "kaynak": "Zacks"
+     },
+     {
+      "z": "2026-11-24T12:03:00+00:00",
+      "etiket": "🟢 POZİTİF KATALİZÖR",
+      "baslik": "Credo's Optical Expansion: Can It Gain Ground Against Rivals?",
+      "kaynak": "Zacks"
+     }
+    ],
+    "hedef": 274.30853,
+    "tavsiye": "strong_buy",
+    "potansiyel": 157.7
+   },
+   "LLY": {
+    "basliklar": [
+     {
+      "z": "2026-11-24T21:45:58+00:00",
+      "etiket": "🔴 OLUMSUZ / RİSK",
+      "baslik": "Anthropic falls below IPO price as Nvidia gives back gains",
+      "kaynak": "Yahoo Finance Video"
+     },
+     {
+      "z": "2026-11-24T21:16:44+00:00",
+      "etiket": "🟢 POZİTİF KATALİZÖR",
+      "baslik": "Will 'Anti-Pharma' Democrats Chop Away At Biotech Stocks' Big Wins?",
+      "kaynak": "Investor's Business Daily"
+     },
+     {
+      "z": "2026-11-24T21:00:38+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "Why Is AbbVie (ABBV) Stock Up Today? Health Care Rally as Tech Slides",
+      "kaynak": "GuruFocus.com"
+     },
+     {
+      "z": "2026-11-24T20:50:02+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "Eli Lilly vs. Novo Nordisk: Not Every GLP-1 Maker Is Enjoying Booming Sales Trends",
+      "kaynak": "Motley Fool"
+     },
+     {
+      "z": "2026-11-24T20:45:51+00:00",
+      "etiket": "🟢 POZİTİF KATALİZÖR",
+      "baslik": "Why Gilead (GILD) Stock Is Up Today: Health Care Rally and New Rating",
+      "kaynak": "GuruFocus.com"
+     }
+    ],
+    "hedef": 1470.0565,
+    "tavsiye": "buy",
+    "potansiyel": 4.4
+   }
+  }
+ },
+ "ozet_tr": {
+  "tarih": "25.11.2026",
+  "baslik": "Bu haberler portföyümüzü nasıl etkiler?",
+  "maddeler": [
+   "Fed'in 9 Aralık toplantısı gündemin merkezinde; Bessent ve Ackman \"politika hatası\" uyarısı yapıyor. AVGO bilançosu aynı güne denk geliyor: çift mayın.",
+   "NVDA: Jensen Huang'ın CEO'luğa dönüşüyle Pazartesi %31 yükseliş, Salı %7 geri verme. Bernstein ve StoneX notu Al'a yükseltti; ortalama hedef 244.71 (+%57).",
+   "MU: Çip satışı dalgasında geri çekildi, 640 pususunun altında. 45 analist güçlü al diyor (hedef 1529) ama son 30 günde yalnız bir koru notu var.",
+   "AVGO: Rothschild 13 Kasım'da Al'dan Nötr'e indirdi (hedef 595→398). Hisseye özel sert haber yok, baskı sektörden.",
+   "Çip kümesi (NVDA, MU, AVGO) portföyün %31'i ve AI harcama endişesiyle baskı altında. Para defansif tarafa kaçıyor: XLP, XLV, XLF VOO'yu 20 günde 7-12 puan geçti.",
+   "VIX 26 ile TAM KİLİT: analist hedefleri yüksek olsa da alım penceresi kapalı, seviyeler izlenir."
+  ]
+ },
+ "gizli": true
+}
