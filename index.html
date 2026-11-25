@@ -8,28 +8,32 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="dijital hisse">
 <title>dijital hisse — Canlı İzleme</title>
-<meta name="dh-surum" content="12">
+<meta name="dh-surum" content="13">
 <link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Quicksand:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{--bg:#f8f7f4;--surface:#ffffff;--line:#e6e1d6;--fg:#111d2e;--muted:#5d6880;--send:#4b5be6;--send-fg:#fff;--send-soft:#e8eaff;
     --good:#12805c;--good-soft:#dff3ea;--bad:#b0307e;--bad-soft:#fbe3f2;--warn:#8a5a00;--warn-soft:#fbf0d6;--idle-soft:#f1ede4;
-    --grad:linear-gradient(90deg,#5b72ff,#a66ce6 55%,#ff66c4);--cream:#111d2e;
+    --grad:linear-gradient(90deg,#5b72ff,#a66ce6 55%,#ff66c4);--cream:#111d2e;--dl:inline;--dd:none;
     --sans:"Google Sans","Google Sans Flex","Product Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--logo:"Quicksand",var(--sans);--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
   [data-theme="dark"]{--bg:#0f1c2e;--surface:#16253b;--line:#2a3b57;--fg:#fbf6ee;--muted:#9fb0c8;--send:#8794ff;--send-fg:#0f1c2e;--send-soft:#1f2c55;
-    --good:#3fbf8f;--good-soft:#173a30;--bad:#ff8fc0;--bad-soft:#40203a;--warn:#e9b866;--warn-soft:#3a2f18;--idle-soft:#1d2c44;--cream:#fbf6ee;color-scheme:dark}
+    --good:#3fbf8f;--good-soft:#173a30;--bad:#ff8fc0;--bad-soft:#40203a;--warn:#e9b866;--warn-soft:#3a2f18;--idle-soft:#1d2c44;--cream:#fbf6ee;--dl:none;--dd:inline;color-scheme:dark}
   *{box-sizing:border-box} [hidden]{display:none!important}
   html,body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 var(--sans);-webkit-font-smoothing:antialiased}
   button{font:inherit;color:inherit}
   .app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
   .side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px;padding:18px 12px 16px max(12px,env(safe-area-inset-left,0px))}
-  .logo{display:flex;align-items:center;gap:8px;padding:4px 8px;font:700 24px/1 var(--logo);letter-spacing:-.01em;user-select:none;cursor:pointer;background:none;border:none;text-align:left}
-  .logo .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .logo .c{color:var(--cream)}
-  .logo .kisa{display:none}
+  .logo{display:flex;align-items:center;gap:8px;padding:4px 8px;min-height:36px;user-select:none;cursor:pointer;background:none;border:none;text-align:left}
+  .logo img{display:none;width:auto;height:26px} .logo .kisa{height:28px}
+  .logo .uzun.l{display:var(--dl)} .logo .uzun.d{display:var(--dd)}
+  /* masaustu daraltilmis menu (.dar): yalnizca simgeler + dh isareti; tooltip'ler etiketi soyler */
+  .app.dar{grid-template-columns:76px 1fr}
+  .app.dar .side .nv span,.app.dar .side .nv em,.app.dar .side .alt,.app.dar .side .rule,.app.dar .logo .uzun{display:none}
+  .app.dar .logo .kisa.l{display:var(--dl)} .app.dar .logo .kisa.d{display:var(--dd)}
+  .app.dar .nv{justify-content:center;padding:10px 0} .app.dar .logo{justify-content:center;padding:4px 0}
   .alt{font-size:11.5px;color:var(--muted);padding:0 8px;margin-top:-10px;letter-spacing:.04em}
   .nv{display:flex;align-items:center;gap:10px;width:100%;border:none;background:none;border-radius:8px;padding:9px 10px;color:var(--muted);font-weight:500;text-align:left;cursor:pointer}
   .nv:hover{color:var(--fg)} .nv[aria-current=true]{background:var(--send-soft);color:var(--send)}
@@ -86,9 +90,10 @@
   @media (max-width:860px){
     .app{grid-template-columns:1fr}
     .side{position:fixed;top:0;bottom:0;left:0;width:60px;height:100%;z-index:15;gap:10px;padding:max(14px,env(safe-area-inset-top,0px)) 6px calc(12px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px));overflow-y:auto;overflow-x:hidden;transition:width .2s}
-    .side .nv span,.side .nv em,.side .alt,.side .rule,.logo .uzun{display:none} .nv{justify-content:center;padding:10px 0} .logo{justify-content:center;padding:4px 0;font-size:20px} .logo .kisa{display:inline}
+    .side .nv span,.side .nv em,.side .alt,.side .rule,.app:not(.acik) .logo .uzun{display:none} .nv{justify-content:center;padding:10px 0} .logo{justify-content:center;padding:4px 0}
+    .app:not(.acik) .logo .kisa.l{display:var(--dl)} .app:not(.acik) .logo .kisa.d{display:var(--dd)}
     .app.acik .side{width:min(86vw,300px);box-shadow:0 0 40px rgba(0,0,0,.25);padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:12px}
-    .app.acik .side .nv span,.app.acik .side .nv em,.app.acik .side .alt,.app.acik .side .rule,.app.acik .logo .uzun{display:inline} .app.acik .logo .kisa{display:none} .app.acik .nv{justify-content:flex-start;padding:9px 10px}
+    .app.acik .side .nv span,.app.acik .side .nv em,.app.acik .side .alt,.app.acik .side .rule{display:inline} .app.acik .logo .uzun.l{display:var(--dl)} .app.acik .logo .uzun.d{display:var(--dd)} .app.acik .logo .kisa{display:none} .app.acik .nv{justify-content:flex-start;padding:9px 10px}
     .app.acik .side .rule{display:block}
     .perde{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:14;display:none} .app.acik .perde{display:block}
     .main{padding:14px 14px 40px 74px} h1{font-size:19px} .card .v{font-size:21px}
@@ -98,7 +103,7 @@
 <body>
 <div class="app" id="app">
   <aside class="side">
-    <button class="logo" id="logoBtn" title="Menüyü Aç / Kapat"><span class="uzun"><span class="g">dijital</span> <span class="c">hisse</span></span><span class="kisa g">dh</span></button>
+    <button class="logo" id="logoBtn" title="Menüyü Daralt / Genişlet"><img class="uzun l" src="logo-light.png" alt="dijital hisse"><img class="uzun d" src="logo-dark.png" alt="dijital hisse"><img class="kisa l" src="mark-light.png" alt="dh"><img class="kisa d" src="mark-dark.png" alt="dh"></button>
     <div class="alt">Canlı İzleme Merkezi</div>
     <nav>
       <button class="nv" data-v="ozet" aria-current="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg><span>Genel Bakış</span></button>
@@ -139,7 +144,11 @@ document.documentElement.setAttribute("data-theme",ls.get("dh-tema")||"dark");
 $("#temaBtn").onclick=()=>{const t=document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark";document.documentElement.setAttribute("data-theme",t);ls.set("dh-tema",t)};
 function gizleYaz(){const g=ls.get("dh-gizli")==="1";app.classList.toggle("gizli",g);$("#gizleBtn span").textContent=g?"Tutarları Göster":"Tutarları Gizle"}
 $("#gizleBtn").onclick=()=>{ls.set("dh-gizli",ls.get("dh-gizli")==="1"?"0":"1");gizleYaz()}; gizleYaz();
-$("#logoBtn").onclick=()=>app.classList.toggle("acik"); $("#perde").onclick=()=>app.classList.remove("acik");
+const mobil=()=>matchMedia("(max-width:860px)").matches;
+if(ls.get("dh-dar")==="1")app.classList.add("dar");
+$("#logoBtn").onclick=()=>{if(mobil())app.classList.toggle("acik");else{app.classList.toggle("dar");ls.set("dh-dar",app.classList.contains("dar")?"1":"0")}};
+$("#perde").onclick=()=>app.classList.remove("acik");
+document.querySelectorAll(".nv").forEach(b=>{const t=b.querySelector("span");if(t&&!b.title)b.title=t.textContent});
 document.querySelectorAll(".nv[data-v]").forEach(b=>b.onclick=()=>{goster(b.dataset.v);app.classList.remove("acik")});
 function goster(v){document.querySelectorAll(".nv[data-v]").forEach(b=>b.setAttribute("aria-current",b.dataset.v===v));document.querySelectorAll(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));$("#baslik").textContent=BASLIK[v];ls.set("dh-view",v)}
 

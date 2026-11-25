@@ -1,6 +1,6 @@
-// dijital hisse PWA v10: once ag (network-first); ag 4 sn icinde cevap vermezse veya yoksa onbellek. Eski sayfa kopyasi asla once sunulmaz.
-const K = "dh-v10", BEKLE_MS = 4000;
-const KABUK = ["./", "./index.html", "./manifest.json", "./icon.svg", "./icon-192.png", "./icon-512.png"];
+// dijital hisse PWA v11: once ag (network-first); ag 4 sn icinde cevap vermezse veya yoksa onbellek. Eski sayfa kopyasi asla once sunulmaz.
+const K = "dh-v11", BEKLE_MS = 4000;
+const KABUK = ["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png", "./logo-light.png", "./logo-dark.png", "./mark-light.png", "./mark-dark.png"];
 self.addEventListener("install", e => { e.waitUntil(caches.open(K).then(c => c.addAll(KABUK)).catch(() => {})); self.skipWaiting(); });
 self.addEventListener("activate", e => { e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== K).map(k => caches.delete(k))))); self.clients.claim(); });
 const anahtar = req => { const u = new URL(req.url); u.search = ""; return u.href; }; // veri.json?t=... tek kayitta tutulur

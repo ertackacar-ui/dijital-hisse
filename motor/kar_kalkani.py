@@ -15,7 +15,7 @@ import yfinance as yf
 
 sys.path.insert(0, str(Path(__file__).parent))
 from ortak_veri import (ACTIVE_SHIELDS, EMA21_GUARD, KADRO, KARTOPU, MAKRO,
-                        PUSU, SHIELD_EXEMPT)
+                        PUSU, SHIELD_EXEMPT, MIKRO_LOT_NOTU, mikro_lot)
 
 KRITIK_PUSU = ["QQQ", "VOO", "MU", "TSM", "ASML", "NOW", "AVGO", "AMZN", "PLTR"]
 
@@ -142,6 +142,8 @@ def tam_rapor(veri):
                         f"{pct(s['fiyat'], pusu):+.1f}%")
         elif t in SHIELD_EXEMPT:
             not_.append("Kale Muafiyeti")
+        elif mikro_lot(t, s["fiyat"]) and (t in EMA21_GUARD or (k is not None and k > 3)):
+            not_.append(MIKRO_LOT_NOTU)  # satis uyarisi bastirildi; zarardaki hisselerde zaten uyari yok, not da yok
         else:
             if t in EMA21_GUARD:
                 if kesin["fiyat"] < kesin["ema21"]:
@@ -166,7 +168,8 @@ def tam_rapor(veri):
     for u in uyarilar:
         print(u)
     if not uyarilar:
-        print("EMA21 Guard (LLY, V): kesin kapanış EMA21 üstünde.")
+        aktif = [t for t in EMA21_GUARD if t in hesap and not mikro_lot(t, hesap[t][0]["fiyat"])]
+        print(f"EMA21 Guard ({', '.join(aktif) or 'yok'}): kesin kapanış EMA21 üstünde.")
     print("Üstten kâr kalkanı adayları:", ", ".join(adaylar) or "yok")
 
     print("\n--- PUSU (alt seviyeye %3'ten yakın veya altında) ---")
