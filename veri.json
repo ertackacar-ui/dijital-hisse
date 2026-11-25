@@ -1,5 +1,5 @@
 {
- "guncelleme": "2026-11-25T07:41:57.674098+00:00",
+ "guncelleme": "2026-11-25T08:13:09.028904+00:00",
  "seans_acik": false,
  "seans_etiketi": "Kapalı",
  "kesin_kapanis": "2026-11-24",
@@ -9,7 +9,7 @@
   "rejim": "TAM KİLİT"
  },
  "tnx": 4.9,
- "dxy": 104.02,
+ "dxy": 104.05,
  "para_akisi": {
   "rejim": "RİSK-KAPALI / TAHVİL-DOLAR BASKISI",
   "taraf": "DEFANSİF",
@@ -1124,6 +1124,12 @@
    "ASML": {
     "basliklar": [
      {
+      "z": "2026-11-25T06:42:30+00:00",
+      "etiket": "🔴 OLUMSUZ / RİSK",
+      "baslik": "‘Disastrous' for ASML: Dutch Lawmakers Revolt Against US Push to Tighten China Chip Curbs",
+      "kaynak": "Benzinga"
+     },
+     {
       "z": "2026-11-24T21:21:14+00:00",
       "etiket": "⚪ BİLGİ/NÖTR",
       "baslik": "Dutch lawmakers urge government to resist US MATCH bill targeting ASML",
@@ -1146,17 +1152,11 @@
       "etiket": "⚪ BİLGİ/NÖTR",
       "baslik": "Nvidia, AMD, Broadcom lead chip stocks lower as AI trade comes under pressure",
       "kaynak": "Yahoo Finance"
-     },
-     {
-      "z": "2026-11-24T12:15:58+00:00",
-      "etiket": "🟢 POZİTİF KATALİZÖR",
-      "baslik": "ASML Stock What Changed After Nvidia CEO Return",
-      "kaynak": "Simply Wall St."
      }
     ],
-    "hedef": 2101.1653,
+    "hedef": 2100.4758,
     "tavsiye": "strong_buy",
-    "potansiyel": 57.3
+    "potansiyel": 57.2
    },
    "AVGO": {
     "basliklar": [
