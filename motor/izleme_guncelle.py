@@ -2,8 +2,8 @@
 
 Kullanim:
   .venv/bin/python .claude/scripts/izleme_guncelle.py            # veri.json uret: SIFIR dolar/lot/maliyet (varsayilan, yayina uygun)
-  .venv/bin/python .claude/scripts/izleme_guncelle.py --tam      # yalniz yerel kullanim: dolar/lot dahil (internete YAYINLANMAZ)
-  .venv/bin/python .claude/scripts/izleme_guncelle.py --sunucu   # yerel sunucu (port 8765), yerel IP'yi yazar
+  .venv/bin/python .claude/scripts/izleme_guncelle.py --tam      # YALNIZ YEREL: veri_tam.json (lot/K-Z + Midas aynasi); yayinla.sh kopyalamaz
+  .venv/bin/python .claude/scripts/izleme_guncelle.py --sunucu   # yerel sunucu (port 8765); veri_tam.json'u 15 dk'da bir arka planda yeniler
 Turkce haber ozeti: .claude/izleme_uygulamasi/ozet_tr.json (haber-istihbarat ajani yazar; script oldugu gibi gomer).
 """
 import contextlib
@@ -69,7 +69,7 @@ def ud(a, b):
     return "ÜST" if a > b else "ALT"
 
 
-def topla():
+def topla(tam=False):
     sessiz = io.StringIO()
     veri = veri_cek(list(KADRO) + list(MAKRO_T) + [DXY_YEDEK, "^VIX9D", "^VIX3M"] + list(SEKTOR), period="1y")
     ref = next(iter(veri.values()))
@@ -164,8 +164,12 @@ def topla():
     else: egri = "CONTANGO"
     makro_mayin = [{"tarih": d, "ad": "FOMC karar günü", "kalan": (date.fromisoformat(d) - date.today()).days}
                    for d in FOMC if 0 <= (date.fromisoformat(d) - date.today()).days <= 14]
+    midas = None
+    if tam:
+        from midas_ayna import uret
+        midas = uret(veri, {h["t"]: (h["canli"], None) for h in hisseler if h.get("canli")})
     return {
-        "guncelleme": datetime.now(timezone.utc).isoformat(),
+        "guncelleme": datetime.now(timezone.utc).isoformat(), "midas": midas,
         "vix_egri": {"vix9d": round(v9, 2) if v9 is not None else None, "vix3m": round(v3, 2) if v3 is not None else None, "yapi": egri},
         "makro_mayin": makro_mayin, "seans_acik": acik, "seans_etiketi": seans_etiketi(), "kesin_kapanis": str(ref.index[-2 if acik else -1].date()),
         "vix": {"deger": round(vix, 2) if vix is not None else None, "metin": vix_rejimi(vix) if vix is not None else "VERİ YOK",
@@ -184,6 +188,7 @@ def gizle(d):
         for k in ("lot", "maliyet", "ana", "deger", "kz", "kz_pct", "bosluk", "doluluk"):
             h.pop(k, None)
     d["toplam"] = None
+    d.pop("midas", None)
     d["gizli"] = True
     return d
 
@@ -204,17 +209,35 @@ class Handler(SimpleHTTPRequestHandler):
         pass
 
 
+def tam_yaz():
+    """YALNIZ YEREL veri_tam.json: lot/K-Z ve Midas aynasi dahil. yayinla.sh bu dosyayi kopyalamaz."""
+    d = topla(tam=True)
+    gecici = KLASOR / "veri_tam.json.tmp"
+    gecici.write_text(json.dumps(d, ensure_ascii=False, indent=1)); json.loads(gecici.read_text()); os.replace(gecici, KLASOR / "veri_tam.json")
+    print(f"veri_tam.json yazıldı (YEREL, lot/K-Z + Midas aynası): {len(d['hisseler'])} hisse")
+
+
+def tam_dongu():
+    import threading
+    def tur():
+        try: tam_yaz()
+        except Exception as e: print("veri_tam yenilenemedi:", e)
+        threading.Timer(900, tur).start()
+    threading.Thread(target=tur, daemon=True).start()
+
+
 if __name__ == "__main__":
+    if "--tam" in sys.argv:
+        tam_yaz(); sys.exit()
     if "--sunucu" in sys.argv:
+        tam_dongu()
         ip = yerel_ip()
         print(f"HEDGE FUND Canlı İzleme sunucusu çalışıyor (Ctrl+C ile durdur)")
         print(f"  Bu bilgisayar : http://localhost:{PORT}/")
         print(f"  Telefon (aynı Wi-Fi): http://{ip}:{PORT}/")
         ThreadingHTTPServer(("0.0.0.0", PORT), Handler).serve_forever()
     else:
-        d = topla()
-        if "--tam" not in sys.argv:  # varsayilan: sifir dolar/lot/maliyet
-            d = gizle(d)
+        d = gizle(topla())  # yayina giden veri.json her zaman gizli
         KLASOR.mkdir(exist_ok=True)
         # Sema dogrulama: eksik/bozuk veri eski dosyayi ezmesin
         hata = []
@@ -225,7 +248,7 @@ if __name__ == "__main__":
             if d.get(k) is None: hata.append(f"{k} yok")
         if d.get("gizli"):
             yasak = {"lot", "maliyet", "ana", "deger", "kz", "kz_pct", "bosluk", "doluluk"}
-            if any(yasak & set(h) for h in d["hisseler"]) or d.get("toplam") is not None: hata.append("gizli modda yasak alan var")
+            if any(yasak & set(h) for h in d["hisseler"]) or d.get("toplam") is not None or d.get("midas") is not None: hata.append("gizli modda yasak alan var")
         if hata:
             sys.exit("veri.json YAZILMADI (eski dosya korundu): " + "; ".join(hata))
         # Atomik yazim: once gecici dosya, JSON geri okunur, sonra tek adimda yerine konur

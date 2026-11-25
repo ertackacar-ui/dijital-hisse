@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="dijital hisse">
 <title>dijital hisse — Canlı İzleme</title>
-<meta name="dh-surum" content="19">
+<meta name="dh-surum" content="20">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-512.png">
@@ -139,6 +139,7 @@
       <button class="nv" data-v="pusu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg><span>Pusu ve Kartopu</span></button>
       <button class="nv" data-v="bilanco"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Bilanço Takvimi</span><em id="nMayin"></em></button>
       <button class="nv" data-v="haber"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13a2 2 0 0 1 2 2v12H6a2 2 0 0 1-2-2z"/><path d="M19 9h1a1 1 0 0 1 1 1v8a2 2 0 0 1-2 2"/><path d="M8 9h5M8 13h5M8 17h5"/></svg><span>Haber ve Analist</span></button>
+      <button class="nv" data-v="midas" id="nvMidas" hidden><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg><span>Midas Aynası</span><em>yerel</em></button>
       <button class="nv" data-v="ajan"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span>Ajanlar</span><em>20</em></button>
     </nav>
     <div class="sp"></div>
@@ -157,6 +158,7 @@
     <section class="view" id="v-bilanco"></section>
     <section class="view" id="v-haber"></section>
     <section class="view" id="v-ajan"></section>
+    <section class="view" id="v-midas"></section>
   </main>
 </div>
 <div class="cek-perde" id="cekPerde"></div>
@@ -168,7 +170,9 @@ const f2=n=>n==null?"—":n.toLocaleString("tr-TR",{minimumFractionDigits:2,maxi
 const pc=n=>n==null?"—":(n>0?"+":"")+n.toFixed(1)+"%";
 const cls=n=>n==null?"":(n>0?"up":n<0?"dn":"");
 const usd=n=>n==null?"—":"$"+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
-const BASLIK={ozet:"Genel Bakış",hisse:"Hisseler",pusu:"Pusu ve Kartopu",bilanco:"Bilanço Takvimi",haber:"Haber ve Analist",ajan:"Ajanlar"};
+const BASLIK={ozet:"Genel Bakış",hisse:"Hisseler",pusu:"Pusu ve Kartopu",bilanco:"Bilanço Takvimi",haber:"Haber ve Analist",ajan:"Ajanlar",midas:"Midas Portföy Aynası"};
+// Veri kaynagi: internette (github.io) her zaman gizli veri.json; yerel sunucuda lot/K-Z + Midas aynali veri_tam.json (yoksa veri.json)
+const YEREL=!/github\.io$/.test(location.hostname), KAYNAK=YEREL?"veri_tam.json":"veri.json";
 
 // Tema, gizleme, menü
 document.documentElement.setAttribute("data-theme",ls.get("dh-tema")||"dark");
@@ -291,7 +295,10 @@ function cizAjan(){
   v.innerHTML=yonKarti(k)+`<div class="kural"><strong>Hangi butona ne zaman basılır?</strong><ul style="margin:6px 0 0 18px;padding:0">
   <li>Seans kapalıyken (TSİ 00:05–16:29, hafta sonu): <b>1</b> kapanış kontrolü. Pazartesi ek olarak <b>2</b>, <b>5</b>, <b>6</b>.</li>
   <li>ABD açılışı öncesi (öğleden sonra): <b>10</b> haber turu.</li><li>Seans açıkken: <b>1</b> anlık bakış; TradingView alarmı gelirse hisseyi yaz, <b>9</b> röntgen.</li>
-  <li>Bir hisse pusuya %5'ten yaklaştı: <b>4</b> olasılık. Yeni aday arıyorsun: <b>7</b>. Ayda bir: <b>8</b>. VIX 22.50'yi aştı: <b>3</b>.</li></ul></div>
+  <li>Bir hisse pusuya %5'ten yaklaştı: <b>4</b> olasılık. Yeni aday arıyorsun: <b>7</b>. Ayda bir: <b>8</b>. VIX 22.50'yi aştı: <b>3</b>.</li>
+  <li>Seans içi güç: <b>16</b> VWAP. Opsiyon duvarı: <b>11</b>. Resmi bildirim: <b>17</b>. Nereye gidiyor: <b>13</b> (--rota). Sistem sağlığı: <b>20</b>.</li></ul>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"><span class="chip bad">🔒 VIX ≥ 22.50 TAM KİLİT</span><span class="chip warn">20–22.50 YALNIZ 1. LİG</span><span class="chip good">&lt; 20 AÇIK</span><span class="chip">🎯 Tekil tavan $3,100 · &gt;%85 dolu → alım kısıtlı</span></div>
+  <div class="boş" style="padding:6px 0 0">Her ajan için üst kural; alım kararı bu rejime tabidir. Tüm komutlar sırayla: <code>.venv/bin/python .claude/scripts/orkestra.py gunluk|haftalik|hepsi</code></div></div>
   <div class="alarmk"><div class="k">🔔 Alarm Çaldı · Hisse Yaz ve Kopyala</div><input id="alarmIn" placeholder="MU AVGO" spellcheck="false" autocomplete="off"><div class="cmd" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="btn primary" id="alarmBtn">📋 Röntgen Komutunu Kopyala</button><span class="kopya" id="kopyaA">✓ Kopyalandı! Mesaj kutusuna yapıştır</span><code id="alarmCmd" style="font:500 11px var(--mono);background:var(--idle-soft);border:1px solid var(--line);padding:5px 8px;border-radius:8px;flex:1 1 200px;word-break:break-all"></code></div></div>
   <div class="list">${AJANLAR.map((a,i)=>`<div class="ag${onerilen.has(i)?" oner":""}"><div class="num">${String(i+1).padStart(2,"0")}</div><div><div class="head"><span class="ad">${a[0]}</span><span class="kat">${a[1]}</span>${onerilen.has(i)?'<span class="simdi">👉 ŞİMDİ</span>':""}</div><div class="gorev">${a[2]}</div><div class="zaman">Ne zaman: <b>${a[3]}</b></div><div class="cmd"><code>${PY+a[4]}</code><button class="btn" data-cmd="${PY+a[4]}">📋 Komutu Kopyala</button></div></div></div>`).join("")}</div>
   <div class="boş">Komutlar Claude Code'daki HEDGE FUND oturumunda çalışır: butona bas, komutu mesaj kutusuna yapıştır, Enter.</div>`;
@@ -308,7 +315,28 @@ function ciz(){
   document.querySelectorAll(".para").forEach(e=>{if(D.gizli)e.remove()});
   $("#altBaslik").textContent=`${D.hisseler.length} hisse · ${D.seans_acik?"Seans Açık":"Seans Kapalı"} · veri ${new Date(D.guncelleme).toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})} (${dkOnce(D.guncelleme)})`;
   $("#ustChip").innerHTML=vixChip(D.vix);
-  cizBant();cizOzet();cizHisse();cizPusu();cizBilanco();cizHaber();
+  $("#nvMidas").hidden=!D.midas; if(!D.midas&&ls.get("dh-view")==="midas")goster("ozet");
+  cizBant();cizOzet();cizHisse();cizPusu();cizBilanco();cizHaber();cizMidas();
+}
+// 💼 Midas Portfoy Aynasi: yalnizca yerel veri_tam.json'da gelir; github.io kopyasinda bu alan yoktur, sekme gizlenir
+function cizMidas(){
+  const v=$("#v-midas"), M=D.midas; if(!M){v.innerHTML="";return}
+  const K=M.kasa,T=M.toplam, pr=x=>`<span class="para">${x}</span>`;
+  v.innerHTML=`<div class="kural">🔒 Yalnız bu yerel ekranda görünür (veri_tam.json). İnternetteki dijital hisse kopyasına lot, bakiye ve K/Z hiçbir zaman gitmez.</div>
+  <div class="grid kokpit">
+    <div class="card hero"><div class="k">Toplam Kasa (hisse + nakit)</div><div class="v">${pr(usd(K.toplam_kasa))}</div><div class="s">hisse ${pr(usd(K.hisse_degeri))} · nakit ${pr(usd(K.toplam_nakit))} (%${K.nakit_orani}) · katkı sonrası ${pr(usd(K.toplam_kasa_katki_sonrasi))}</div></div>
+    <div class="card"><div class="k">🛡 Kriz Rezervi</div><div class="v" style="font-size:19px">${pr(usd(K.kriz_rezervi))}</div><div class="s">${K.kriz_kosulu}</div></div>
+    <div class="card"><div class="k">🎯 Aktif Pusu Nakdi</div><div class="v" style="font-size:19px">${pr(usd(K.aktif_pusu))}</div><div class="s">+ yakında ${pr(usd(K.yakin_katki))} · tekil tavan ${usd(K.tekil_tavan)}</div></div>
+    <div class="card"><div class="k">Hisse Net K/Z</div><div class="v ${cls(T.kz)}" style="font-size:19px">${pr(usd(T.kz))} (${pc(T.kz_pct)})</div><div class="s">${T.pozisyon} pozisyon · maliyet ${pr(usd(T.ana))}${M.uyarilar.length?" · ⚠ "+M.uyarilar.join(", "):""}</div></div>
+  </div>
+  <h2>Pozisyonlar</h2><div class="twrap"><table><thead><tr><th>Hisse</th><th>Lot</th><th>Maliyet</th><th>Güncel</th><th>Değer</th><th>K/Z $</th><th>K/Z %</th><th>Tavan %</th><th>Boşluk</th><th>Pusu</th><th>Kartopu</th><th>Durum</th></tr></thead><tbody>
+  ${M.pozisyonlar.map(p=>`<tr class="tik" data-t="${p.t}"><td>${p.t}${p.muaf?" 🏰":""}${p.kalkan?" 🛡":""}</td><td class="mono">${p.lot}</td><td class="mono">${pr(usd(p.maliyet))}</td><td class="mono">${f2(p.canli??p.kapanis)}${p.canli!=null?" 🌙":""}</td><td class="mono">${pr(usd(p.deger))}</td><td class="${cls(p.kz)} mono">${pr(usd(p.kz))}</td><td class="${cls(p.kz_pct)}">${pc(p.kz_pct)}</td>
+    <td><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end">${p.doluluk.toFixed(0)}%<span class="bar" style="flex:none;width:56px"><i style="width:${Math.min(100,p.doluluk)}%"></i></span></div></td><td class="mono">${pr(usd(p.bosluk))}</td>
+    <td>${p.pusu?`${p.pusu} <span class="${p.pusu_mesafe<0?"dn":""}">(${pc(p.pusu_mesafe)})</span>`:"—"}</td><td>${p.kartopu?`${p.kartopu} (${p.kartopu_mesafe.toFixed(1)}% kaldı)`:"—"}</td>
+    <td style="white-space:normal;text-align:left;min-width:160px">${p.kalkan?`🛡 ${p.kalkan.satilan_lot} lot @ ${p.kalkan.satis_fiyati} satıldı (${p.kalkan.tarih}) → geri alım ${p.kalkan.geri_alim}`:p.muaf?"kale muafiyeti":""}</td></tr>`).join("")}
+  </tbody></table></div>
+  <div class="boş">Ayna ${dkOnce(M.guncelleme)} üretildi · ${M.seans_etiketi}. Yerel sunucu 15 dakikada bir yeniler; elle: <code>.venv/bin/python .claude/scripts/izleme_guncelle.py --tam</code></div>`;
+  v.querySelectorAll("tr.tik").forEach(tr=>tr.onclick=()=>acCekmece(tr.dataset.t));
 }
 // 🔔 Seviye temasi bandi: pusu altinda (yesil), +%2 menzilde (kehribar), kartopuya %3 yakin (kirmizi)
 function cizBant(){
@@ -351,7 +379,9 @@ function haber(m){const h=$("#yenileHaber");h.textContent=m;h.hidden=false;clear
 async function yukle(elle){
   if(yukleniyor)return; yukleniyor=true; const b=$("#yenileBtn"); b.disabled=true; b.textContent="⟳ Yenileniyor…";
   const ac=new AbortController(), zaman=setTimeout(()=>ac.abort(),10000); // 10 sn'de vazgeç, ekranı boş bırakma
-  try{const r=await fetch("veri.json?t="+Date.now(),{cache:"no-store",signal:ac.signal});if(!r.ok)throw new Error("HTTP "+r.status);
+  try{let r=await fetch(KAYNAK+"?t="+Date.now(),{cache:"no-store",signal:ac.signal});
+    if(!r.ok&&KAYNAK!=="veri.json")r=await fetch("veri.json?t="+Date.now(),{cache:"no-store",signal:ac.signal}); // yerelde veri_tam.json yoksa gizli veriye dus
+    if(!r.ok)throw new Error("HTTP "+r.status);
     const d=await r.json(); if(!d||!Array.isArray(d.hisseler)||!d.hisseler.length)throw new Error("boş veri");
     const yeni=!D||d.guncelleme!==D.guncelleme; D=d; ciz(); if(elle)haber(yeni?"✓ Yeni veri geldi":"✓ Sunucuda daha yeni veri yok; ekran güncel");
     fetch("derin.json?t="+Date.now(),{cache:"no-store"}).then(x=>x.ok?x.json():null).then(x=>{if(x&&x.hisseler){DD=x;if(cekAcik)acCekmece(cekAcik)}}).catch(()=>{})}
