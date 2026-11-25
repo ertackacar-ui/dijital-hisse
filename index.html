@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="dijital hisse">
 <title>dijital hisse — Canlı İzleme</title>
-<meta name="dh-surum" content="18">
+<meta name="dh-surum" content="19">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-512.png">
@@ -121,7 +121,8 @@
     .grid.kokpit .card.hero{grid-column:1/-1}
     .top{margin-bottom:10px} .top .sub{font-size:12px}
     table{font-size:12.5px} th,td{padding:8px 7px}
-    #v-hisse th:nth-child(4),#v-hisse td:nth-child(4),#v-hisse th:nth-child(5),#v-hisse td:nth-child(5),#v-hisse th:nth-child(7),#v-hisse td:nth-child(7){display:none}
+    #v-hisse th:nth-child(n+5),#v-hisse td:nth-child(n+5){display:none}
+    #v-hisse th,#v-hisse td{padding:8px 4px;font-size:12px} #v-hisse td:first-child{font-size:12.5px} #v-hisse td:nth-child(4){font-size:10.5px}
     .cekmece{width:100vw;padding:14px 14px calc(24px + env(safe-area-inset-bottom,0px))}
     .yon .h{font-size:16px} .yon code{display:none}
   }
