@@ -208,7 +208,7 @@ const AJANLAR=[
   ["yildiz-kesifcisi","Keşif / Radar","Portföy dışı 45 lider, 5 kriterli Yıldız Puanı; 3. Lig / izleme adayları.","2 haftada 1","yildiz_kesifcisi.py --top 12"],
   ["balina-korelasyon","Çeşitlendirme / Insider","60G korelasyon ve ikiz çiftler, tema kümesi yığılma uyarısı, 90G içeriden alım/satım.","Ayda 1 + yeni hisse öncesi","balina_korelasyon.py"],
   ["alarm-mail-okuyucu","Acil Alarm","TradingView e-postalarını okur, sembolleri ayıklar, tek kart Acil Alarm Röntgeni basar.","Alarm çaldığı anda","alarm_okuyucu.py --hisse MU AVGO"],
-  ["haber-istihbarat","Haber ve Analist","Makro/Fed/tarife/çip gündemi + hisse haberleri (3 kaynak), 30G analist notu, hedef fiyat potansiyeli.","Her sabah ABD açılışı öncesi + sert hareket sonrası","haber_istihbarat.py --hisse MU AVGO"],
+  ["haber-istihbarat","Haber ve Analist","Makro/Fed/tarife/çip gündemi + hisse haberleri (3 kaynak), 30G analist notu, hedef fiyat potansiyeli.","Her sabah ABD açılışı öncesi + sert hareket sonrası","haber_istihbarat.py --tum"],
 ];
 function kopyala(btn,text,badge){navigator.clipboard.writeText(text).then(()=>{const o=btn.textContent;btn.textContent="✓ Kopyalandı";btn.classList.add("ok");setTimeout(()=>{btn.textContent=o;btn.classList.remove("ok")},1400);if(badge){badge.classList.add("show");clearTimeout(badge._x);badge._x=setTimeout(()=>badge.classList.remove("show"),5000)}}).catch(()=>prompt("Kopyala:",text))}
 // Yonlendirme: TSI saat + gun. ABD seansi TSI 16:30-00:04 acik sayilir. (komuta_paneli.html ile ayni mantik)
