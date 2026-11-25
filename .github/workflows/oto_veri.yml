@@ -1,9 +1,7 @@
 name: oto veri (dijital hisse)
 # Hafta ici her 15 dakikada GitHub'in kendi sunucusunda veri.json uretir (dolar/lot/maliyet YOK) ve sayfayi gunceller.
 on:
-  schedule:
-    - cron: "*/15 * * * 1-5"
-  workflow_dispatch:
+  workflow_dispatch:   # otomatik zamanlama 25 Kasim 2026'da durduruldu (Komutan tek yerel ekran kullaniyor); elle tetiklenebilir
 permissions:
   contents: write
 concurrency:

@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="dijital hisse">
 <title>dijital hisse — Canlı İzleme</title>
-<meta name="dh-surum" content="21">
+<meta name="dh-surum" content="22">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-512.png">
@@ -74,6 +74,19 @@
   .gizli .para{filter:blur(7px);user-select:none;pointer-events:none}
   .boş{color:var(--muted);font-size:13px;padding:10px 0}
   .view{display:none} .view.on{display:block}
+  /* AL/SAT vitrini (yalniz yerel / sifreli ayna) */
+  .vitrin{border-radius:16px;padding:16px 18px;margin-bottom:14px;border:1px solid var(--line);background:var(--surface)}
+  .vitrin.yok{border-color:var(--good);background:linear-gradient(135deg,var(--good-soft),var(--surface))} .vitrin.var{border-color:var(--warn)}
+  .vitrin .buyuk{font-size:22px;font-weight:700;line-height:1.25} .vitrin .neden{color:var(--muted);font-size:13.5px;margin-top:4px}
+  .vitrin .ust{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}
+  .fis{border-radius:12px;padding:12px 14px;margin-top:10px;border:1px solid var(--line);display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:6px 14px;font-size:13.5px}
+  .fis.al{border-color:var(--good);background:var(--good-soft)} .fis.sat{border-color:var(--bad);background:var(--bad-soft)}
+  .fis .b{grid-column:1/-1;font-weight:700;font-size:15px} .fis .g{grid-column:1/-1;color:var(--muted);font-size:12.5px} .fis span b{display:block;font-size:11px;color:var(--muted);font-weight:500}
+  .katki{display:grid;grid-template-columns:140px 150px 1fr auto;gap:8px;align-items:end;margin-top:10px} .katki label{font-size:11.5px;color:var(--muted);display:block;margin-bottom:3px}
+  .katki input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);font:inherit}
+  .defter{display:flex;flex-direction:column;gap:4px;margin-top:8px;font-size:13px} .defter div{display:flex;gap:10px;align-items:center;justify-content:space-between;background:var(--idle-soft);border-radius:8px;padding:6px 10px}
+  .btn.primary{background:var(--send);color:var(--send-fg);border-color:var(--send);font-weight:600} .btn.tehlike{color:var(--bad);border-color:var(--bad)}
+  @media (max-width:860px){ .katki{grid-template-columns:1fr 1fr} .vitrin .buyuk{font-size:18px} }
   /* seviye temasi bandi */
   .bant{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:14px}
   .bant .bk{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.04em;margin-right:4px} .bant .chip{cursor:pointer;font-family:var(--mono);font-size:12px}
@@ -204,7 +217,7 @@ function cizOzet(){
   const yakin=D.hisseler.filter(h=>h.pusu_mesafe!=null).sort((a,b)=>Math.abs(a.pusu_mesafe)-Math.abs(b.pusu_mesafe)).slice(0,4);
   const mayin=D.bilanco.filter(b=>b.mayin), mm=D.makro_mayin||[], eg=D.vix_egri&&D.vix_egri.yapi!=="VERİ YOK"?D.vix_egri:null;
   const kk=karar();
-  $("#v-ozet").innerHTML=yonKarti(kk)+`
+  $("#v-ozet").innerHTML=vitrin()+yonKarti(kk)+`
   <div class="grid kokpit">
     ${hero}
     <div class="card"><div class="k">VIX Rejim Kilidi</div><div class="v ${D.vix.rejim==="AÇIK"?"up":D.vix.rejim==="TAM KİLİT"?"dn":""}">${D.vix.deger??"—"}</div><div class="s">${D.vix.rejim}${eg?` · <b class="${eg.yapi.includes("BACKWARDATION")?"dn":"up"}">${eg.yapi}</b> (9D ${eg.vix9d??"—"} · 3M ${eg.vix3m??"—"})`:""}</div></div>
@@ -216,7 +229,29 @@ function cizOzet(){
   </div>
   <h2>Pusuya En Yakın</h2><div class="list">${yakin.map(h=>`<div class="row"><span class="t">${h.t}</span><span class="d">Pusu ${h.pusu_yakin} · kapanış ${f2(h.fiyat)}${h.canli!=null?" · 🌙 "+f2(h.canli):""} · Dönüş ${h.puan}/4 · RSI ${h.rsi}</span><span class="r ${h.pusu_mesafe<0?"dn":""}">${pc(h.pusu_mesafe)}</span></div>`).join("")}</div>
   <h2>Bilanço ve Makro Mayınları (14 Gün)</h2><div class="list">${[...mayin.map(b=>`<div class="row"><span class="t">${b.t}</span><span class="d">bilanço ${b.tarih}</span><span class="chip bad">💣 ${b.kalan} gün</span></div>`),...mm.map(x=>`<div class="row"><span class="t">MAKRO</span><span class="d">${x.ad} ${x.tarih}</span><span class="chip warn">🏛 ${x.kalan} gün</span></div>`)].join("")||'<div class="boş">Önümüzdeki 14 günde bilanço veya makro mayın yok.</div>'}</div>`;
-  yonBagla($("#v-ozet"));
+  yonBagla($("#v-ozet")); vitrinBagla();
+}
+// 🟢🔴 Midas AL/SAT vitrini + 💵 aylik katki defteri (yalniz yerel sunucu / sifreli ayna; github.io gizli kopyasinda yoktur)
+function vitrin(){
+  const A=D.alsat, M=D.midas; if(!A||!M)return "";
+  const K=M.kasa, yok=!A.al.length&&!A.sat.length;
+  const fisAl=a=>`<div class="fis al"><div class="b">🟢 MİDAS'TA AL: ${a.t}${a.uyari?` <span class="chip warn">${a.uyari}</span>`:""}</div><span><b>Limit Fiyat</b>${usd(a.limit)}</span><span><b>Alınacak Net Tutar</b>${usd(a.tutar)}</span><span><b>Net Lot</b>${a.lot}</span><span><b>Kaynak</b>${a.kaynak}</span><div class="g">Gerekçe: ${a.gerekce}</div></div>`;
+  const fisSat=x=>`<div class="fis sat"><div class="b">🔴 MİDAS'TA SAT: ${x.t} · ${x.tur}</div><span><b>Limit Fiyat</b>${usd(x.limit)}</span><span><b>Satılacak Net Lot</b>${x.lot}</span><span><b>Tutar</b>${usd(x.tutar)}</span><span><b>Alt Geri Alım Pususu</b>${x.geri_alim??"—"}</span><div class="g">Gerekçe: ${x.gerekce}</div></div>`;
+  const bek=A.bekleyen.map(b=>`<div class="row"><span class="t">${b.t}</span><span class="d">pusu ${b.pusu} · kapanış ${f2(b.kapanis)} · Dönüş ${b.puan}/4 · kilit açılınca ≈ <span class="para">${usd(b.tutar)}</span> / ${b.lot} lot</span><span class="r ${b.mesafe<0?"dn":""}">${pc(b.mesafe)}</span></div>`).join("");
+  const defter=(M.katkilar||[]).slice().reverse().map(k=>`<div><span>${k.tarih} · <span class="para">${usd(k.tutar)}</span> · ${k.not||""}</span>${YEREL?`<button class="btn tehlike" data-sil="${k.id}" style="padding:3px 8px;font-size:12px">Sil</button>`:""}</div>`).join("");
+  return `<div class="vitrin ${yok?"yok":"var"}"><div class="ust"><div><div class="buyuk">${yok?"🛡️ ŞU AN AL-SAT YOK — MİDAS'A DOKUNMA":"⚡ MİDAS FİŞİ HAZIR: "+A.al.length+" alış · "+A.sat.length+" satış"}</div><div class="neden">${A.gerekce} · kesin bar: ${A.kesin}${A.not?" · "+A.not:""}</div></div>
+    ${YEREL?`<button class="btn primary" id="yenileCanli">🔄 Şimdi Canlı Yenile</button>`:""}</div>
+    ${A.al.map(fisAl).join("")}${A.sat.map(fisSat).join("")}
+    <h2 style="margin-top:14px">⏳ Pusuda Sıra Bekleyen İlk 5 Aday</h2><div class="list">${bek||'<div class="boş">Aday yok.</div>'}</div></div>
+  <div class="vitrin"><div class="ust"><div><div class="buyuk" style="font-size:17px">💵 Aylık Katkı / Nakit Ekle</div><div class="neden">Toplam kasa <span class="para">${usd(K.toplam_kasa)}</span> · Aktif pusu nakdi <span class="para">${usd(K.aktif_pusu)}</span> · Kriz rezervi <span class="para">${usd(K.kriz_rezervi)}</span> (${K.kriz_kosulu}) · Tekil %${Math.round(K.tavan_oran*100)} tavan <span class="para">${usd(K.tekil_tavan)}</span> · Toplam yatırılan ek katkı <span class="para">${usd(K.ek_katki_toplam)}</span> (hisse K/Z'ye karışmaz)</div></div></div>
+    ${YEREL?`<form class="katki" id="katkiForm"><div><label>Tarih</label><input type="date" id="kTarih" value="${new Date().toISOString().slice(0,10)}"></div><div><label>Yatırılan Tutar ($)</label><input type="number" step="0.01" min="0.01" id="kTutar" placeholder="2700" required></div><div><label>Not</label><input type="text" id="kNot" placeholder="Kasım Aylık Katkı"></div><button class="btn primary" type="submit">➕ Kasaya Ekle</button></form>`:'<div class="boş">Katkı ekleme yalnızca bilgisayardaki yerel ekranda yapılır.</div>'}
+    <div class="defter">${defter||'<div class="boş" style="padding:4px 0">Henüz ek katkı yok; baz nakit korunuyor.</div>'}</div><div id="katkiHaber" class="boş"></div></div>`;
+}
+async function api(yol,secenek){const r=await fetch(yol,{headers:{"Content-Type":"application/json"},...secenek});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.hata||("HTTP "+r.status));return j}
+function vitrinBagla(){
+  const y=$("#yenileCanli"); if(y)y.onclick=async()=>{y.disabled=true;y.textContent="🔄 Canlı fiyat çekiliyor…";try{await api("/api/yenile",{method:"POST"});for(let i=0;i<60;i++){await new Promise(r=>setTimeout(r,3000));const d=await api("/api/durum");if(!d.yenileniyor){if(d.hata)throw new Error(d.hata);break}}await yukle(true)}catch(e){haber("Yenilenemedi: "+e.message)}finally{const b=$("#yenileCanli");if(b){b.disabled=false;b.textContent="🔄 Şimdi Canlı Yenile"}}};
+  const f=$("#katkiForm"); if(f)f.onsubmit=async e=>{e.preventDefault();const h=$("#katkiHaber");try{const j=await api("/api/katki",{method:"POST",body:JSON.stringify({tarih:$("#kTarih").value,tutar:$("#kTutar").value,not:$("#kNot").value})});h.textContent=`✓ Eklendi: ${usd(j.eklendi.tutar)} · toplam ek katkı ${usd(j.toplam_katki)}`;await yukle()}catch(err){h.textContent="Eklenemedi: "+err.message}};
+  document.querySelectorAll("[data-sil]").forEach(b=>b.onclick=async()=>{if(!confirm("Bu katkı kaydı silinsin mi?"))return;try{await api("/api/katki/"+b.dataset.sil,{method:"DELETE"});await yukle()}catch(err){$("#katkiHaber").textContent="Silinemedi: "+err.message}});
 }
 function cizHisse(){
   const ligAd={1:"1. Lig — Kaleler",2:"2. Lig — Büyüme",3:"3. Lig — İzleme"};

@@ -164,12 +164,14 @@ def topla(tam=False):
     else: egri = "CONTANGO"
     makro_mayin = [{"tarih": d, "ad": "FOMC karar günü", "kalan": (date.fromisoformat(d) - date.today()).days}
                    for d in FOMC if 0 <= (date.fromisoformat(d) - date.today()).days <= 14]
-    midas = None
+    midas = alsat = None
     if tam:
+        from alsat_motoru import uret as alsat_uret
         from midas_ayna import uret
         midas = uret(veri, {h["t"]: (h["canli"], None) for h in hisseler if h.get("canli")})
+        alsat = alsat_uret(veri, midas, bilanco, vix, acik) if midas else None
     return {
-        "guncelleme": datetime.now(timezone.utc).isoformat(), "midas": midas,
+        "guncelleme": datetime.now(timezone.utc).isoformat(), "midas": midas, "alsat": alsat,
         "vix_egri": {"vix9d": round(v9, 2) if v9 is not None else None, "vix3m": round(v3, 2) if v3 is not None else None, "yapi": egri},
         "makro_mayin": makro_mayin, "seans_acik": acik, "seans_etiketi": seans_etiketi(), "kesin_kapanis": str(ref.index[-2 if acik else -1].date()),
         "vix": {"deger": round(vix, 2) if vix is not None else None, "metin": vix_rejimi(vix) if vix is not None else "VERİ YOK",
@@ -188,7 +190,7 @@ def gizle(d):
         for k in ("lot", "maliyet", "ana", "deger", "kz", "kz_pct", "bosluk", "doluluk"):
             h.pop(k, None)
     d["toplam"] = None
-    d.pop("midas", None)
+    d.pop("midas", None); d.pop("alsat", None)
     d["gizli"] = True
     return d
 
@@ -253,7 +255,7 @@ if __name__ == "__main__":
             if d.get(k) is None: hata.append(f"{k} yok")
         if d.get("gizli"):
             yasak = {"lot", "maliyet", "ana", "deger", "kz", "kz_pct", "bosluk", "doluluk"}
-            if any(yasak & set(h) for h in d["hisseler"]) or d.get("toplam") is not None or d.get("midas") is not None: hata.append("gizli modda yasak alan var")
+            if any(yasak & set(h) for h in d["hisseler"]) or d.get("toplam") is not None or d.get("midas") is not None or d.get("alsat") is not None: hata.append("gizli modda yasak alan var")
         if hata:
             sys.exit("veri.json YAZILMADI (eski dosya korundu): " + "; ".join(hata))
         # Atomik yazim: once gecici dosya, JSON geri okunur, sonra tek adimda yerine konur
