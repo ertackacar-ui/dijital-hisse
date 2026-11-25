@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="dijital hisse">
 <title>dijital hisse — Canlı İzleme</title>
-<meta name="dh-surum" content="14">
+<meta name="dh-surum" content="15">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-512.png">
@@ -111,7 +111,7 @@
       <button class="nv" data-v="pusu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg><span>Pusu ve Kartopu</span></button>
       <button class="nv" data-v="bilanco"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Bilanço Takvimi</span><em id="nMayin"></em></button>
       <button class="nv" data-v="haber"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13a2 2 0 0 1 2 2v12H6a2 2 0 0 1-2-2z"/><path d="M19 9h1a1 1 0 0 1 1 1v8a2 2 0 0 1-2 2"/><path d="M8 9h5M8 13h5M8 17h5"/></svg><span>Haber ve Analist</span></button>
-      <button class="nv" data-v="ajan"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span>Ajanlar</span><em>10</em></button>
+      <button class="nv" data-v="ajan"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span>Ajanlar</span><em>20</em></button>
     </nav>
     <div class="sp"></div>
     <div class="rule"></div>
@@ -220,6 +220,16 @@ const AJANLAR=[
   ["balina-korelasyon","Çeşitlendirme / Insider","60G korelasyon ve ikiz çiftler, tema kümesi yığılma uyarısı, 90G içeriden alım/satım.","Ayda 1 + yeni hisse öncesi","balina_korelasyon.py"],
   ["alarm-mail-okuyucu","Acil Alarm","TradingView e-postalarını okur, sembolleri ayıklar, tek kart Acil Alarm Röntgeni basar.","Alarm çaldığı anda","alarm_okuyucu.py --hisse MU AVGO"],
   ["haber-istihbarat","Haber ve Analist","Makro/Fed/tarife/çip gündemi + hisse haberleri (3 kaynak), 30G analist notu, hedef fiyat potansiyeli.","Her sabah ABD açılışı öncesi + sert hareket sonrası","haber_istihbarat.py --tum"],
+  ['opsiyon-duvar-analisti','Opsiyon / Türev Akışı','Yakın vadeli opsiyon zincirinden Put/Call OI duvarları, Max Pain, Put/Call oranı, ATM beklenen hareket (±%) ve pusu/kartopu seviyeleriyle örtüşme.','Pusuya yaklaşan hisselerde ve bilanço haftasında','opsiyon_duvari.py AMD NVDA AVGO'],
+  ['aciga-satis-hacim-radari','Hacim / Açığa Satış','20G RVOL, UDVR (alıcı/satıcı hacmi), shortPercentOfFloat, shortRatio ve 20G dibinde Kurumsal Emilim Mumu tespiti.','Sert düşüş günlerinde ve pusu temasında','aciga_satis_hacim.py'],
+  ['temel-degerleme-kalite','Temel Analiz / Kalite','24 şirket için Fwd P/E, PEG, EV/EBITDA, FCF Yield %, 0-100 Kalite Puanı ve 3. Lig için Cash Runway (nakit ömrü).','Ayda 1 ve yeni hisse/3. Lig kararı öncesi','temel_degerleme.py'],
+  ['makro-likidite-takvim','Makro / Likidite / Takvim','VIX vade eğrisi (VIX9D/VIX/VIX3M → contango/backwardation), HYG/IEF kredi iştahı, SOXX/QQQ çip liderliği, FOMC ve NYSE tatil/yarım gün takvimi; NFP/CPI/PCE pencereleri.','Her hafta başı ve FOMC/CPI haftasında','makro_likidite_takvim.py'],
+  ['stres-testi-mermi-matematigi','Risk / Stres Testi','1Y Beta, volatilite, Max Drawdown, Sharpe/Sortino; yerel modda portföy VaR ve VOO şok senaryoları; 0-100 Optimal Pusu Öncelik Skoru.','Haftada 1 ve VIX > 30 günlerinde','stres_kelly_motoru.py'],
+  ['seans-ici-mikroyapi-vwap','Seans İçi / Mikroyapı','5 dk seans içi veriden VWAP ve uzaklık, açılış boşluğu (Gap %), ilk 30 dk aralığı (ORB) kırılımı, pre/post-market şoku ve kapanış hacim yoğunluğu (MOC).','Seans açıkken; alarm ve sert açılış günlerinde','seans_mikroyapi.py AMD NVDA VOO'],
+  ['sec-edgar-kap-dedektifi','Resmi Bildirim / SEC',"Ücretsiz SEC EDGAR API ile son 30 gündeki 8-K, 10-Q/10-K, 6-K/20-F, Form 4 ve SC 13D/G bildirimleri; ETF ve CIK'sizler ayrılır.",'Haftada 1 ve haber şüphesinde','sec_edgar_radari.py --gun 30'],
+  ['tedarik-zinciri-domino','Değer Zinciri / Domino','Çip Üretim → Tasarım/Bellek → Hyperscaler CapEx → AI Enerji/Altyapı zinciri, Siber/Yazılım ve Defansif kümeleri; 1G/5G/20G küme hareketi, lead-lag ve POZİTİF AYRIŞAN hisseler.','Haftada 1 ve sektörel şok günlerinde','tedarik_domino.py'],
+  ['coklu-zaman-harmoni','Teknik / Çoklu Zaman','15m-1h-1d-1wk EMA21+RSI uyumundan 0/4-4/4 MTF Harmoni Skoru; 1Y VPOC ve 52H Fibonacci %50/%61.8; pusu ile ±%2 kesişen Çelik Destek Kesişimi.','Pusu alımı öncesi ve haftada 1','coklu_zaman_harmoni.py'],
+  ['sistem-saglik-alfa-denetci','Sistem / Denetim','20 script + 20 ajan dosyası, launchd nöbetçi, veri.json/ozet_tr.json yaşı ve GitHub workflow durumu; yerelde kalkan alfa karnesi ve temettü özeti.','Her sabah ve yayın sonrası','sistem_denetci.py'],
 ];
 function kopyala(btn,text,badge){navigator.clipboard.writeText(text).then(()=>{const o=btn.textContent;btn.textContent="✓ Kopyalandı";btn.classList.add("ok");setTimeout(()=>{btn.textContent=o;btn.classList.remove("ok")},1400);if(badge){badge.classList.add("show");clearTimeout(badge._x);badge._x=setTimeout(()=>badge.classList.remove("show"),5000)}}).catch(()=>prompt("Kopyala:",text))}
 // Yonlendirme: TSI saat + gun. ABD seansi TSI 16:30-00:04 acik sayilir. (komuta_paneli.html ile ayni mantik)
