@@ -1,5 +1,5 @@
 {
- "guncelleme": "2026-11-25T06:52:02.042493+00:00",
+ "guncelleme": "2026-11-25T07:10:47.344772+00:00",
  "seans_acik": false,
  "seans_etiketi": "Kapalı",
  "kesin_kapanis": "2026-11-24",
@@ -9,7 +9,7 @@
   "rejim": "TAM KİLİT"
  },
  "tnx": 4.9,
- "dxy": 104.07,
+ "dxy": 104.05,
  "para_akisi": {
   "rejim": "RİSK-KAPALI / TAHVİL-DOLAR BASKISI",
   "taraf": "DEFANSİF",
@@ -986,6 +986,12 @@
  "haber": {
   "makro": [
    {
+    "z": "2026-11-25T06:56:18+00:00",
+    "etiket": "🟢 POZİTİF KATALİZÖR",
+    "baslik": "AI Concerns Resurface? ORCL, GOOGL, SPCX, CRWV Credit Default Swap Spreads Hit Records As NVDA, ANT Tumble",
+    "kaynak": "Stocktwits"
+   },
+   {
     "z": "2026-11-25T06:06:17+00:00",
     "etiket": "⚪ BİLGİ/NÖTR",
     "baslik": "Stock Market: Will S&P 500 Open Up or Down Today?",
@@ -1038,12 +1044,6 @@
     "etiket": "🟢 POZİTİF KATALİZÖR",
     "baslik": "Hashed and Nurihaus Bring U.S. Beauty Investors to Brooklyn for K-Beauty Investor Day",
     "kaynak": "etf.com"
-   },
-   {
-    "z": "2026-11-24T16:50:01+00:00",
-    "etiket": "🟢 POZİTİF KATALİZÖR",
-    "baslik": "Stock Market Today: Jensen’s Return to Nvidia Is Causing Index Indigestion",
-    "kaynak": "24/7 Wall St."
    }
   ],
   "hisse": {
@@ -1154,7 +1154,7 @@
       "kaynak": "Simply Wall St."
      }
     ],
-    "hedef": 2101.3953,
+    "hedef": 2101.1653,
     "tavsiye": "strong_buy",
     "potansiyel": 57.3
    },
