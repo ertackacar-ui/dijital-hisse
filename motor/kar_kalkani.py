@@ -33,7 +33,7 @@ def veri_cek(tickers=None, period="1y"):
     for t in tickers or list(KADRO) + MAKRO:
         for deneme in range(5):
             try:
-                d = yf.Ticker(t).history(period=period, interval="1d", auto_adjust=False)
+                d = yf.Ticker(t).history(period=period, interval="1d", auto_adjust=False, timeout=20)
                 if len(d):
                     out[t] = d.dropna(subset=["Close"])
                     break

@@ -10,4 +10,13 @@ ACTIVE_SHIELDS = {'PLTR': {'geri_alim_pusu': 134.0, 'tarih': '2026-11-24'}, 'AMZ
 EMA21_GUARD = ['LLY', 'V']
 KARTOPU = {'AVGO': 372.5, 'TSM': 408.0, 'GOOG': 311.3, 'NVDA': 213.8, 'NOW': 128.0, 'AMD': 600.0, 'PANW': 382.0, 'PWR': 645.0, 'PLTR': 170.0}
 PUSU = {'VOO': [645, 573], 'SCHD': [32.5], 'BRK-B': [538, 521], 'LLY': [1325, 1293], 'V': [400, 386], 'AMZN': [243.4, 232.0], 'GOOG': [265, 248], 'COST': [975], 'QQQ': [635, 600], 'NVDA': [129.8], 'AVGO': [285, 260], 'ASML': [1310, 1220], 'MU': [640, 580], 'AMD': [375], 'TSM': [340, 315], 'ANET': [142], 'NOW': [89.4], 'PLTR': [134.0]}
+MIN_SHIELD_POS_USD = 200.0
+MIN_SHIELD_PROFIT_USD = 25.0
+MIKRO_LOT_NOTU = '(Mikro lot — komisyon eşiği altı)'
+
+
+def mikro_lot(t, fiyat):
+    return False  # yayin kopyasinda pozisyon yok
+
+
 assert len(KADRO) == 27
