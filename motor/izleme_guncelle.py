@@ -21,6 +21,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from bilanco_takvimi import ETF, bilanco_tarihleri
 from haber_istihbarat import MAKRO_SORGULAR, analist, birlestir, hisse_haberleri, rss, yf_haber
 from kar_kalkani import gostergeler, pct, satir, seans_acik_mi, veri_cek, vix_rejimi
+from makro_likidite_takvim import FOMC
 from makro_para_akisi import CIP, DEFANSIF, DXY_YEDEK, MAKRO as MAKRO_T, SEKTOR, makro_baski, sektor_tablosu
 from ortak_veri import ACTIVE_SHIELDS, EMA21_GUARD, KADRO, KARTOPU, LIG_1, LIG_2, PUSU, SHIELD_EXEMPT
 from portfoy_haritasi import TAVAN, muhasebe
@@ -70,7 +71,7 @@ def ud(a, b):
 
 def topla():
     sessiz = io.StringIO()
-    veri = veri_cek(list(KADRO) + list(MAKRO_T) + [DXY_YEDEK] + list(SEKTOR), period="1y")
+    veri = veri_cek(list(KADRO) + list(MAKRO_T) + [DXY_YEDEK, "^VIX9D", "^VIX3M"] + list(SEKTOR), period="1y")
     ref = next(iter(veri.values()))
     acik = seans_acik_mi(ref.index[-1].date())
     poz = muhasebe(veri)
@@ -155,8 +156,18 @@ def topla():
         except Exception:
             ozet_tr = None
 
+    v9 = veri["^VIX9D"]["Close"].iloc[-1] if "^VIX9D" in veri else None
+    v3 = veri["^VIX3M"]["Close"].iloc[-1] if "^VIX3M" in veri else None
+    if vix is None or v9 is None or v3 is None: egri = "VERİ YOK"
+    elif v9 > vix > v3: egri = "TAM BACKWARDATION"
+    elif v9 > vix or vix > v3: egri = "KISMİ BACKWARDATION"
+    else: egri = "CONTANGO"
+    makro_mayin = [{"tarih": d, "ad": "FOMC karar günü", "kalan": (date.fromisoformat(d) - date.today()).days}
+                   for d in FOMC if 0 <= (date.fromisoformat(d) - date.today()).days <= 14]
     return {
-        "guncelleme": datetime.now(timezone.utc).isoformat(), "seans_acik": acik, "seans_etiketi": seans_etiketi(), "kesin_kapanis": str(ref.index[-2 if acik else -1].date()),
+        "guncelleme": datetime.now(timezone.utc).isoformat(),
+        "vix_egri": {"vix9d": round(v9, 2) if v9 is not None else None, "vix3m": round(v3, 2) if v3 is not None else None, "yapi": egri},
+        "makro_mayin": makro_mayin, "seans_acik": acik, "seans_etiketi": seans_etiketi(), "kesin_kapanis": str(ref.index[-2 if acik else -1].date()),
         "vix": {"deger": round(vix, 2) if vix is not None else None, "metin": vix_rejimi(vix) if vix is not None else "VERİ YOK",
                 "rejim": "TAM KİLİT" if vix is None or vix >= 22.5 else ("YALNIZ 1. LİG" if vix >= 20 else "AÇIK")},
         "tnx": round(veri["^TNX"]["Close"].iloc[-1], 2) if "^TNX" in veri else None,

@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="dijital hisse">
 <title>dijital hisse — Canlı İzleme</title>
-<meta name="dh-surum" content="15">
+<meta name="dh-surum" content="16">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-512.png">
@@ -69,6 +69,21 @@
   .gizli .para{filter:blur(7px);user-select:none;pointer-events:none}
   .boş{color:var(--muted);font-size:13px;padding:10px 0}
   .view{display:none} .view.on{display:block}
+  /* seviye temasi bandi */
+  .bant{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:14px}
+  .bant .bk{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.04em;margin-right:4px} .bant .chip{cursor:pointer;font-family:var(--mono);font-size:12px}
+  .bant .chip.yesil{background:var(--good-soft);color:var(--good);border-color:var(--good)} .bant .chip.kehribar{background:var(--warn-soft);color:var(--warn);border-color:var(--warn)} .bant .chip.kirmizi{background:var(--bad-soft);color:var(--bad);border-color:var(--bad)}
+  /* kokpit */
+  .grid.kokpit{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))} .grid.kokpit .card .v{font-size:20px}
+  /* hisse cekmecesi */
+  tr.tik{cursor:pointer} tr.tik:hover td{background:var(--idle-soft)}
+  .cek-perde{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:30;display:none} .cek-perde.on{display:block}
+  .cekmece{position:fixed;top:0;right:0;bottom:0;width:min(520px,100vw);background:var(--bg);border-left:1px solid var(--line);z-index:31;overflow:auto;padding:16px 18px calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(100%);transition:transform .22s}
+  .cekmece.on{transform:none} .cekmece .ust{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px} .cekmece h3{margin:0;font:700 20px var(--mono)}
+  .cekmece .sec{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px} .cekmece .sec .k{font-size:11.5px;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
+  .cekmece .kv{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:13.5px} .cekmece .kv b{font-family:var(--mono);font-weight:600;text-align:right}
+  .cekmece .rota{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;text-align:center;font-family:var(--mono);font-size:13px} .cekmece .rota div{background:var(--idle-soft);border-radius:8px;padding:6px 4px} .cekmece .rota small{display:block;color:var(--muted);font-family:var(--sans);font-size:11px}
+  .cekmece ul{margin:4px 0 0 16px;padding:0;font-size:13px} .cekmece li{margin:3px 0}
   .yon{background:var(--grad);color:#fff;border-radius:14px;padding:14px 16px;margin-bottom:14px}
   .yon .k{font-size:12px;opacity:.85;font-weight:500;letter-spacing:.02em} .yon .h{font-size:18px;font-weight:700;margin:4px 0 2px;line-height:1.3} .yon .n{font-size:13px;opacity:.9}
   .yon .cmd{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:10px} .yon code{background:rgba(0,0,0,.25);border-color:rgba(255,255,255,.25);color:#fff}
@@ -122,6 +137,7 @@
   <main class="main">
     <div class="top"><div><h1 id="baslik">Genel Bakış</h1><div class="sub" id="altBaslik">Veri bekleniyor…</div></div><div style="display:flex;gap:8px;align-items:center"><span id="ustChip"></span><button class="btn" id="yenileBtn" title="Veriyi yeniden çek">⟳ Yenile</button></div></div>
     <div class="chip send" id="yenileHaber" hidden style="margin:-6px 0 10px"></div>
+    <div class="bant" id="bant" hidden></div>
     <section class="view on" id="v-ozet"><div class="boş" id="yukleniyor">⏳ Veri yükleniyor… (10 saniyeyi geçerse bağlantı zayıf demektir; ⟳ Yenile'ye basın)</div></section>
     <section class="view" id="v-hisse"></section>
     <section class="view" id="v-pusu"></section>
@@ -130,8 +146,10 @@
     <section class="view" id="v-ajan"></section>
   </main>
 </div>
+<div class="cek-perde" id="cekPerde"></div>
+<aside class="cekmece" id="cekmece" aria-label="Hisse çekmecesi"><div class="ust"><h3 id="cekBaslik"></h3><button class="btn" id="cekKapat">✕ Kapat</button></div><div id="cekIcerik"></div></aside>
 <script>
-const $=s=>document.querySelector(s), app=$("#app"); let D=null;
+const $=s=>document.querySelector(s), app=$("#app"); let D=null, DD=null, cekAcik=null;
 const ls={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 const f2=n=>n==null?"—":n.toLocaleString("tr-TR",{minimumFractionDigits:2,maximumFractionDigits:2});
 const pc=n=>n==null?"—":(n>0?"+":"")+n.toFixed(1)+"%";
@@ -163,17 +181,20 @@ function cizOzet(){
   const hero=T?`<div class="card hero"><div class="k">Toplam Hisse Portföyü</div><div class="v">${pc(T.tum.kz_pct)}</div><div class="s">${D.gizli?"":`<span class="para">${T.tum.deger!=null?usd(T.tum.deger)+" · K/Z "+usd(T.tum.kz):""}</span> `}1. Lig ${pc(T.lig1.kz_pct)} · 2. Lig ${pc(T.lig2.kz_pct)}</div></div>`
     :`<div class="card hero"><div class="k">Piyasa Nabzı · ${D.seans_etiketi||""}</div><div class="v" style="font-size:19px">${canliSatir(qqq)} · ${canliSatir(voo)}</div><div class="s">Kapanış QQQ ${f2(qqq.fiyat)} (${pc(qqq.d1)}) · VOO ${f2(voo.fiyat)} (${pc(voo.d1)}) · EMA21 üstü ${ustEma}/${D.hisseler.length} · Dönüş 3+/4: ${donus}</div></div>`;
   const yakin=D.hisseler.filter(h=>h.pusu_mesafe!=null).sort((a,b)=>Math.abs(a.pusu_mesafe)-Math.abs(b.pusu_mesafe)).slice(0,4);
-  const mayin=D.bilanco.filter(b=>b.mayin);
+  const mayin=D.bilanco.filter(b=>b.mayin), mm=D.makro_mayin||[], eg=D.vix_egri&&D.vix_egri.yapi!=="VERİ YOK"?D.vix_egri:null;
   const kk=karar();
   $("#v-ozet").innerHTML=yonKarti(kk)+`
-  <div class="grid">
+  <div class="grid kokpit">
     ${hero}
-    <div class="card"><div class="k">VIX Rejim Kilidi</div><div class="v ${D.vix.rejim==="AÇIK"?"up":D.vix.rejim==="TAM KİLİT"?"dn":""}">${D.vix.deger??"—"}</div><div class="s">${D.vix.rejim} · 10Y ${D.tnx??"—"}% · DXY ${D.dxy??"—"}</div></div>
+    <div class="card"><div class="k">VIX Rejim Kilidi</div><div class="v ${D.vix.rejim==="AÇIK"?"up":D.vix.rejim==="TAM KİLİT"?"dn":""}">${D.vix.deger??"—"}</div><div class="s">${D.vix.rejim}${eg?` · <b class="${eg.yapi.includes("BACKWARDATION")?"dn":"up"}">${eg.yapi}</b> (9D ${eg.vix9d??"—"} · 3M ${eg.vix3m??"—"})`:""}</div></div>
+    <div class="card"><div class="k">10Y Tahvil · DXY</div><div class="v" style="font-size:19px">${D.tnx??"—"}% · ${D.dxy??"—"}</div><div class="s">tahvil faizi · dolar endeksi</div></div>
+    <div class="card"><div class="k">EMA21 Üstü (piyasa genişliği)</div><div class="v ${ustEma>=D.hisseler.length/2?"up":"dn"}">${ustEma}/${D.hisseler.length}</div><div class="s">Dönüş 3+/4: ${donus} hisse</div></div>
+    <div class="card"><div class="k">14 Günlük Mayın Sayacı</div><div class="v ${mayin.length+mm.length?"dn":""}">${mayin.length+mm.length}</div><div class="s">${mayin.length} bilanço · ${mm.length} makro${mm.length?" ("+mm.map(x=>x.ad+" "+x.kalan+"g").join(", ")+")":""}</div></div>
     <div class="card"><div class="k">Piyasa ve Sektör Para Akışı</div><div class="v" style="font-size:17px;font-family:var(--sans)">${pa.taraf} tarafta</div><div class="s">${pa.rejim}<br>${pa.sektorler.slice(0,3).map(s=>s.etf+" "+pc(s.rs)).join(" · ")}</div></div>
     <div class="card"><div class="k">Son Güncelleme</div><div class="v" style="font-size:17px;font-family:var(--sans)">${dkOnce(D.guncelleme)}${eski?' <span class="chip warn">Veri Eski</span>':""}</div><div class="s">${new Date(D.guncelleme).toLocaleString("tr-TR")} · ${D.seans_etiketi||(D.seans_acik?"Seans Açık":"Seans Kapalı")} · kesin kapanış ${D.kesin_kapanis}</div></div>
   </div>
   <h2>Pusuya En Yakın</h2><div class="list">${yakin.map(h=>`<div class="row"><span class="t">${h.t}</span><span class="d">Pusu ${h.pusu_yakin} · kapanış ${f2(h.fiyat)}${h.canli!=null?" · 🌙 "+f2(h.canli):""} · Dönüş ${h.puan}/4 · RSI ${h.rsi}</span><span class="r ${h.pusu_mesafe<0?"dn":""}">${pc(h.pusu_mesafe)}</span></div>`).join("")}</div>
-  <h2>Bilanço Mayınları (14 Gün)</h2><div class="list">${mayin.length?mayin.map(b=>`<div class="row"><span class="t">${b.t}</span><span class="d">${b.tarih}</span><span class="chip bad">💣 ${b.kalan} gün</span></div>`).join(""):'<div class="boş">Önümüzdeki 14 günde bilanço yok.</div>'}</div>`;
+  <h2>Bilanço ve Makro Mayınları (14 Gün)</h2><div class="list">${[...mayin.map(b=>`<div class="row"><span class="t">${b.t}</span><span class="d">bilanço ${b.tarih}</span><span class="chip bad">💣 ${b.kalan} gün</span></div>`),...mm.map(x=>`<div class="row"><span class="t">MAKRO</span><span class="d">${x.ad} ${x.tarih}</span><span class="chip warn">🏛 ${x.kalan} gün</span></div>`)].join("")||'<div class="boş">Önümüzdeki 14 günde bilanço veya makro mayın yok.</div>'}</div>`;
   yonBagla($("#v-ozet"));
 }
 function cizHisse(){
@@ -183,7 +204,7 @@ function cizHisse(){
     const rows=D.hisseler.filter(x=>x.lig===L);
     h+=`<div class="lig">${ligAd[L]}</div><div class="twrap"><table><thead><tr><th>Hisse</th><th>${D.seans_acik?"Fiyat":"🌙 Canlı"}</th><th>Değişim</th><th>Kapanış · 1G</th>${D.gizli?"":"<th>K/Z</th>"}${D.gizli?"":'<th class="para">Değer</th>'}<th>EMA21</th><th>RSI</th><th>OBV</th><th>Dönüş</th></tr></thead><tbody>`+
       rows.map(x=>x.veri_yok?`<tr><td>${x.t}</td><td colspan="9" class="boş">Veri Yok</td></tr>`:
-      `<tr><td>${x.t}${x.kalkan?" 🛡":""}${x.muaf?" 🏰":""}</td><td class="mono">${f2(x.canli!=null?x.canli:x.fiyat)}</td><td class="${cls(x.canli!=null?x.canli_degisim:x.d1)}">${pc(x.canli!=null?x.canli_degisim:x.d1)}</td><td class="mono" style="font-size:11px;opacity:.75">${f2(x.fiyat)} <span class="${cls(x.d1)}">${pc(x.d1)}</span></td>${D.gizli?"":`<td class="${cls(x.kz_pct)}">${x.kz_pct!=null?pc(x.kz_pct):"—"}</td>`}${D.gizli?"":`<td class="para mono">${x.deger!=null?usd(x.deger):"—"}</td>`}<td class="${x.ema21==="ÜST"?"up":"dn"}">${x.ema21}</td><td>${x.rsi}</td><td class="${x.obv_ust?"up":"dn"}">${x.obv_ust?"Giriş ↑":"Çıkış ↓"}</td><td>${x.puan}/4</td></tr>`).join("")+`</tbody></table></div>`;
+      `<tr class="tik" data-t="${x.t}" title="📊 Derin istatistik ve gelecek rotası"><td>${x.t}${x.kalkan?" 🛡":""}${x.muaf?" 🏰":""}</td><td class="mono">${f2(x.canli!=null?x.canli:x.fiyat)}</td><td class="${cls(x.canli!=null?x.canli_degisim:x.d1)}">${pc(x.canli!=null?x.canli_degisim:x.d1)}</td><td class="mono" style="font-size:11px;opacity:.75">${f2(x.fiyat)} <span class="${cls(x.d1)}">${pc(x.d1)}</span></td>${D.gizli?"":`<td class="${cls(x.kz_pct)}">${x.kz_pct!=null?pc(x.kz_pct):"—"}</td>`}${D.gizli?"":`<td class="para mono">${x.deger!=null?usd(x.deger):"—"}</td>`}<td class="${x.ema21==="ÜST"?"up":"dn"}">${x.ema21}</td><td>${x.rsi}</td><td class="${x.obv_ust?"up":"dn"}">${x.obv_ust?"Giriş ↑":"Çıkış ↓"}</td><td>${x.puan}/4</td></tr>`).join("")+`</tbody></table></div>`;
   }
   $("#v-hisse").innerHTML=h+`<div class="boş">🛡 kalkan icra edildi · 🏰 kale muafiyeti · 🌙 Canlı = seans öncesi/sonrası son işlem (göstergeler kesin günlük bardan) · OBV = kurumsal para yönü · Dönüş = 4 şartlı teyit puanı</div>`;
   $("#nHisse").textContent=D.hisseler.length;
@@ -273,8 +294,44 @@ function ciz(){
   document.querySelectorAll(".para").forEach(e=>{if(D.gizli)e.remove()});
   $("#altBaslik").textContent=`${D.hisseler.length} hisse · ${D.seans_acik?"Seans Açık":"Seans Kapalı"} · veri ${new Date(D.guncelleme).toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})} (${dkOnce(D.guncelleme)})`;
   $("#ustChip").innerHTML=vixChip(D.vix);
-  cizOzet();cizHisse();cizPusu();cizBilanco();cizHaber();
+  cizBant();cizOzet();cizHisse();cizPusu();cizBilanco();cizHaber();
 }
+// 🔔 Seviye temasi bandi: pusu altinda (yesil), +%2 menzilde (kehribar), kartopuya %3 yakin (kirmizi)
+function cizBant(){
+  const b=$("#bant"), H=D.hisseler.filter(h=>!h.veri_yok);
+  const alt=H.filter(h=>h.pusu_mesafe!=null&&h.pusu_mesafe<0), yakin=H.filter(h=>h.pusu_mesafe!=null&&h.pusu_mesafe>=0&&h.pusu_mesafe<=2), kar=H.filter(h=>h.kartopu_mesafe!=null&&h.kartopu_mesafe<=3);
+  const cip=(h,c,tx)=>`<span class="chip ${c}" data-cek="${h.t}" title="Çekmeceyi aç">${h.t} ${tx}</span>`;
+  const parca=[...alt.map(h=>cip(h,"yesil",`${f2(h.canli??h.fiyat)} · pusu ${h.pusu_yakin} altında (${pc(h.pusu_mesafe)})`)),
+    ...yakin.map(h=>cip(h,"kehribar",`${f2(h.canli??h.fiyat)} · pusu ${h.pusu_yakin} (${pc(h.pusu_mesafe)})`)),
+    ...kar.map(h=>cip(h,"kirmizi",`${f2(h.canli??h.fiyat)} · kartopu ${h.kartopu} (${h.kartopu_mesafe<=0?"AŞILDI":h.kartopu_mesafe.toFixed(1)+"% kaldı"})`))];
+  b.hidden=false; b.innerHTML=`<span class="bk">🔔 SEVİYE TEMASI</span>`+(parca.join("")||`<span class="boş" style="padding:0">Pusu altında, +%2 menzilde veya kartopuya %3 yakın hisse yok.</span>`);
+  b.querySelectorAll("[data-cek]").forEach(e=>e.onclick=()=>acCekmece(e.dataset.cek));
+}
+// 📊 Derin istatistik & gelecek rotasi cekmecesi (derin.json + veri.json + ozet_tr)
+function acCekmece(t){
+  cekAcik=t; const h=D.hisseler.find(x=>x.t===t)||{}, d=(DD&&DD.hisseler&&DD.hisseler[t])||null, hb=(D.haber&&D.haber.hisse&&D.haber.hisse[t])||null;
+  const g=v=>v==null?"—":f2(v), kv=(a)=>`<div class="kv">${a.map(([k,v])=>`<span>${k}</span><b>${v}</b>`).join("")}</div>`;
+  const ozet=((D.ozet_tr&&D.ozet_tr.maddeler)||[]).filter(m=>new RegExp("(^|[^A-Z])"+t.replace("-","[-.]")+"([^A-Z]|$)").test(m)).slice(0,4);
+  let html=`<div class="sec"><div class="k">Teknik Durum</div>${kv([["Fiyat (kapanış)",g(h.fiyat)+(h.canli!=null?" · 🌙 "+g(h.canli):"")],["Dönüş Puanı",(h.puan??"—")+"/4"],["EMA21 / EMA50 / SMA200",`${h.ema21||"—"} / ${h.ema50||"—"} / ${h.sma200||"—"}`],["RSI(14)",h.rsi??"—"],["OBV",h.obv_ust?"Giriş ↑":"Çıkış ↓"],["Pusu",h.pusu_yakin?`${h.pusu_yakin} (${pc(h.pusu_mesafe)})`:"—"],["Kartopu",h.kartopu?`${h.kartopu} (${h.kartopu_mesafe}% kaldı)`:"—"]])}</div>`;
+  if(!d) html+=`<div class="sec"><div class="boş">📊 Derin istatistik (${DD?"bu hisse için":"derin.json"}) henüz yok; günde iki kez yenilenir.</div></div>`;
+  else if(d.veri_yok) html+=`<div class="sec"><div class="boş">Derin istatistik VERİ YOK.</div></div>`;
+  else{
+    const v=d.vwap, o=d.opsiyon, hm=d.harmoni, m=d.mc30, w=d.ws12, a=d.adil24;
+    html+=`<div class="sec"><div class="k">Hacim ve Gün İçi</div>${kv([["RVOL (20G)",d.rvol??"—"],["UDVR alıcı/satıcı",d.udvr??"—"],["Emilim mumu",d.emilim&&d.emilim.length?d.emilim.join(", "):"yok"],["VWAP",v?`${g(v.deger)} (${pc(v.uzak)})`:"—"],["Açılış boşluğu",v?pc(v.gap):"—"],["ORB 30 dk",v?`${g(v.orb[0])} – ${g(v.orb[1])}`:"—"]])}</div>`;
+    html+=`<div class="sec"><div class="k">Opsiyon Duvarları ${o?"· vade "+o.vade:""}</div>${o?kv([["Put duvarı (destek)",g(o.put)],["Call duvarı (direnç)",g(o.call)],["Max pain",g(o.max_pain)],["Beklenen hareket (ATM)","±"+(o.hareket??"—")+"%"]]):'<div class="boş">VERİ YOK</div>'}</div>`;
+    html+=`<div class="sec"><div class="k">Harmoni · VPOC · Fibonacci</div>${hm?kv([["MTF Harmoni (15m·1h·1d·1wk)",`${hm.puanlar.map(p=>p==null?"—":p?"↑":"↓").join(" ")} = ${hm.skor}/4`],["VPOC (1Y hacim düğümü)",g(hm.vpoc)],["Fib %50 / %61.8",`${g(hm.fib50)} / ${g(hm.fib618)}`],["Çelik destek",hm.celik.length?hm.celik.join("; "):"yok"]]):'<div class="boş">VERİ YOK</div>'}</div>`;
+    html+=`<div class="sec"><div class="k">📊 Gelecek Rotası</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:4px">30G Monte Carlo (10.000 yol)</div>${m?`<div class="rota"><div><small>%5 dip</small>${g(m.dip)}</div><div><small>medyan</small>${g(m.medyan)}</div><div><small>%95 tavan</small>${g(m.tavan)}</div></div>`:'<div class="boş">VERİ YOK</div>'}
+      <div style="font-size:12px;color:var(--muted);margin:8px 0 4px">12A Wall Street koridoru${w?` · ${w.n||"—"} analist · ${w.tavsiye||""}${w.dagilim?` (${w.dagilim.strong_buy}/${w.dagilim.buy}/${w.dagilim.hold}/${w.dagilim.sell})`:""}`:""}</div>${w?`<div class="rota"><div><small>en düşük</small>${g(w.dusuk)}</div><div><small>ortalama · ${pc(w.potansiyel)}</small>${g(w.ortalama)}</div><div><small>en yüksek</small>${g(w.yuksek)}</div></div>`:'<div class="boş">VERİ YOK</div>'}
+      <div style="font-size:12px;color:var(--muted);margin:8px 0 4px">24A adil değer rotası${a?" · "+a.yontem:""}</div>${a?`<div class="rota"><div><small>muhafazakâr</small>${g(a.muhafazakar)}</div><div><small>baz</small>${g(a.baz)}</div><div><small>boğa</small>${g(a.boga)}</div></div>`:'<div class="boş">VERİ YOK</div>'}
+      <div style="font-size:11.5px;color:var(--muted);margin-top:8px">Rota tahmin değil, olasılık ve konsensüs haritasıdır; alım kararı VIX kilidine tabidir.</div></div>`;
+  }
+  html+=`<div class="sec"><div class="k">Türkçe Haber / Analist Özeti</div>${ozet.length?`<ul>${ozet.map(m=>`<li>${m}</li>`).join("")}</ul>`:""}${hb?(hb.potansiyel!=null?`<div style="font-size:13px;margin-top:6px">Analist hedef ${f2(hb.hedef)} · ${pc(hb.potansiyel)} · ${hb.tavsiye||""}</div>`:"")+`<ul>${hb.basliklar.slice(0,4).map(x=>`<li>${x.etiket} — ${x.baslik}</li>`).join("")}</ul>`:""}${!ozet.length&&!hb?'<div class="boş">Bu hisse için özet yok.</div>':""}</div>`;
+  $("#cekBaslik").textContent=t+(h.kalkan?" 🛡":"")+(h.muaf?" 🏰":""); $("#cekIcerik").innerHTML=html; $("#cekmece").classList.add("on"); $("#cekPerde").classList.add("on");
+}
+function kapatCekmece(){cekAcik=null;$("#cekmece").classList.remove("on");$("#cekPerde").classList.remove("on")}
+$("#cekKapat").onclick=kapatCekmece; $("#cekPerde").onclick=kapatCekmece; document.addEventListener("keydown",e=>{if(e.key==="Escape")kapatCekmece()});
+$("#v-hisse").addEventListener("click",e=>{const tr=e.target.closest("tr.tik");if(tr)acCekmece(tr.dataset.t)});
 let yukleniyor=false;
 function haber(m){const h=$("#yenileHaber");h.textContent=m;h.hidden=false;clearTimeout(haber.t);haber.t=setTimeout(()=>h.hidden=true,4000)}
 async function yukle(elle){
@@ -282,7 +339,8 @@ async function yukle(elle){
   const ac=new AbortController(), zaman=setTimeout(()=>ac.abort(),10000); // 10 sn'de vazgeç, ekranı boş bırakma
   try{const r=await fetch("veri.json?t="+Date.now(),{cache:"no-store",signal:ac.signal});if(!r.ok)throw new Error("HTTP "+r.status);
     const d=await r.json(); if(!d||!Array.isArray(d.hisseler)||!d.hisseler.length)throw new Error("boş veri");
-    const yeni=!D||d.guncelleme!==D.guncelleme; D=d; ciz(); if(elle)haber(yeni?"✓ Yeni veri geldi":"✓ Sunucuda daha yeni veri yok; ekran güncel")}
+    const yeni=!D||d.guncelleme!==D.guncelleme; D=d; ciz(); if(elle)haber(yeni?"✓ Yeni veri geldi":"✓ Sunucuda daha yeni veri yok; ekran güncel");
+    fetch("derin.json?t="+Date.now(),{cache:"no-store"}).then(x=>x.ok?x.json():null).then(x=>{if(x&&x.hisseler){DD=x;if(cekAcik)acCekmece(cekAcik)}}).catch(()=>{})}
   catch(e){const neden=e.name==="AbortError"?"zaman aşımı (bağlantı yavaş)":e.message;
     if(D){$("#altBaslik").textContent=`Yenilenemedi: ${neden} · ekranda ${dkOnce(D.guncelleme)} verisi var`}
     else{$("#altBaslik").textContent="veri.json okunamadı: "+neden;$("#v-ozet").innerHTML=`<div class="boş">⚠️ Veri alınamadı (${neden}). İnternet bağlantısını kontrol edip ⟳ Yenile'ye basın.</div>`}}

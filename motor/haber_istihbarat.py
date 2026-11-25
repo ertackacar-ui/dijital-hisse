@@ -115,9 +115,14 @@ def analist(t):
             if rs is not None and len(rs):
                 r0 = rs.iloc[0]
                 sayim = f"güçlü al {int(r0.strongBuy)} / al {int(r0.buy)} / tut {int(r0.hold)} / sat {int(r0.sell + r0.strongSell)}"
+            dagilim = None
+            if rs is not None and len(rs):
+                r0 = rs.iloc[0]
+                dagilim = {"strong_buy": int(r0.strongBuy), "buy": int(r0.buy), "hold": int(r0.hold), "sell": int(r0.sell + r0.strongSell)}
             return {"ad": (inf.get("shortName") or "").split(",")[0].replace("Inc.", "").replace("Corporation", "").strip(),
                     "hedef": inf.get("targetMeanPrice"), "fiyat": inf.get("currentPrice"), "n": inf.get("numberOfAnalystOpinions"),
-                    "tavsiye": inf.get("recommendationKey"), "sayim": sayim, "degisimler": son30}
+                    "tavsiye": inf.get("recommendationKey"), "sayim": sayim, "degisimler": son30, "dagilim": dagilim,
+                    "dusuk": inf.get("targetLowPrice"), "medyan": inf.get("targetMedianPrice"), "yuksek": inf.get("targetHighPrice")}
         except Exception:
             time.sleep(2 * (deneme + 1))
     return None
@@ -140,6 +145,9 @@ def hisse_bolumu(t, saat=72, n=8, girinti="", ad=""):
     if a["hedef"] and a["fiyat"]:
         print(f"{girinti}  Ortalama hedef {a['hedef']:.2f} vs fiyat {a['fiyat']:.2f} → potansiyel {pct(a['hedef'], a['fiyat']):+.1f}% "
               f"({a['n']} analist, konsensüs {a['tavsiye']}) | {a['sayim'] or ''}")
+        if a.get("dusuk") and a.get("yuksek"):
+            print(f"{girinti}  12A hedef koridoru: en düşük {a['dusuk']:.0f} ({pct(a['dusuk'], a['fiyat']):+.0f}%) · medyan {a['medyan'] or a['hedef']:.0f} · "
+                  f"ortalama {a['hedef']:.0f} · en yüksek {a['yuksek']:.0f} ({pct(a['yuksek'], a['fiyat']):+.0f}%)")
     else:
         print(f"{girinti}  Hedef fiyat VERİ YOK{(' | ' + a['sayim']) if a['sayim'] else ''}")
     d = a["degisimler"]
@@ -152,6 +160,58 @@ def hisse_bolumu(t, saat=72, n=8, girinti="", ad=""):
             hedef = f" hedef {r.get('priorPriceTarget', '')}→{r.get('currentPriceTarget', '')}" if pd.notna(r.get("currentPriceTarget")) else ""
             print(f"{girinti}  {ts.date()} {ok} {r['Firm'][:18]:18} {r['FromGrade']} → {r['ToGrade']} ({r.get('priceTargetAction', '')}{hedef})")
     return haberler, a
+
+
+MARTINELLI_RSS = "https://www.youtube.com/feeds/videos.xml?channel_id=UCf2Piv-pqwFx2zPUx-HeMcA"  # @PaulMartinelliOfficial resmi kanal
+HISSE_ADLARI = {"NVDA": ["nvidia"], "AMD": ["amd"], "AVGO": ["broadcom"], "MU": ["micron"], "TSM": ["tsmc", "taiwan semi"], "ASML": ["asml"],
+                "MSFT": ["microsoft"], "AMZN": ["amazon"], "GOOG": ["google", "alphabet"], "PLTR": ["palantir"], "NOW": ["servicenow"],
+                "PANW": ["palo alto"], "VRT": ["vertiv"], "PWR": ["quanta"], "ANET": ["arista"], "CRDO": ["credo"], "OKLO": ["oklo"],
+                "RGTI": ["rigetti"], "MP": ["mp materials"], "LLY": ["lilly"], "V": ["visa"], "COST": ["costco"], "BRK-B": ["berkshire", "buffett"],
+                "VOO": ["s&p", "sp500", "s&p 500"], "QQQ": ["nasdaq", "qqq"], "SCHD": ["schd", "dividend"], "SPCX": ["spac"]}
+
+
+def martinelli(n=8):
+    """Paul Martinelli YouTube Atom akisi (anahtarsiz). Doner: [(tarih, baslik, [eslesen hisseler])] veya None (erisilemedi)."""
+    try:
+        raw = urllib.request.urlopen(urllib.request.Request(MARTINELLI_RSS, headers=UA), timeout=15).read()
+        ns = {"a": "http://www.w3.org/2005/Atom"}
+        out = []
+        for e in ET.fromstring(raw).findall("a:entry", ns)[:n]:
+            baslik = (e.findtext("a:title", default="", namespaces=ns) or "").strip()
+            tarih = (e.findtext("a:published", default="", namespaces=ns) or "")[:10]
+            kucuk = baslik.lower()
+            hisseler = [t for t, adlar in HISSE_ADLARI.items() if any(a in kucuk for a in adlar) or f" {t.lower()} " in f" {kucuk} "]
+            out.append((tarih, baslik, hisseler))
+        return out
+    except Exception:
+        return None
+
+
+def finfluencer_nabzi():
+    print("\n--- 📱 FİNFLUENCER NABZI (Paul Martinelli — Bireysel Görüş, kurumsal konsensüs DEĞİLDİR) ---")
+    v = martinelli()
+    if v is None:
+        print("  VERİ YOK (YouTube RSS erişilemedi)"); return
+    if not v:
+        print("  VERİ YOK (akışta video yok)"); return
+    for tarih, baslik, hisseler in v:
+        print(f"  {tarih} {baslik[:88]}" + (f"  → kadro: {', '.join(hisseler)}" if hisseler else ""))
+    kesisen = sorted({t for _, _, hs in v for t in hs})
+    print(f"  Kadroyla kesişen başlıklar: {', '.join(kesisen) or 'yok'} | Bu bölüm bireysel yorumdur; VIX kilidi ve kurumsal konsensüs önceliklidir.")
+
+
+def konsensus_tablosu(hisseler):
+    print("\n--- WALL STREET KURUMSAL KONSENSÜS (12 aylık hedef koridoru) ---")
+    print(f"{'Hisse':7}{'N':>4}{'Güçlü Al/Al/Tut/Sat':>21}{'Fiyat':>9}{'En Düşük':>10}{'Medyan':>9}{'Ortalama':>10}{'En Yüksek':>11}{'Potansiyel':>12}  Konsensüs")
+    for t in hisseler:
+        a = analist(t)
+        if not a or not a.get("hedef") or not a.get("fiyat"):
+            print(f"{t:7} VERİ YOK"); continue
+        d = a.get("dagilim") or {}
+        dag = f"{d.get('strong_buy','—')}/{d.get('buy','—')}/{d.get('hold','—')}/{d.get('sell','—')}" if d else "—"
+        g = lambda x: f"{x:.0f}" if x else "—"
+        print(f"{t:7}{a['n'] or '—':>4}{dag:>21}{a['fiyat']:>9.2f}{g(a.get('dusuk')):>10}{g(a.get('medyan')):>9}{g(a['hedef']):>10}{g(a.get('yuksek')):>11}"
+              f"{pct(a['hedef'], a['fiyat']):>+11.1f}%  {a['tavsiye'] or '—'}")
 
 
 def makro_gundem(saat):
@@ -194,6 +254,9 @@ def main(argv):
         hisseler, neden = [], {}
         while i < len(argv) and not argv[i].startswith("--"):
             hisseler.append(argv[i].upper()); i += 1
+    elif "--konsensus" in argv:
+        print("=" * 110); print(f"HEDGE FUND — HABER İSTİHBARAT | {date.today()} | kurumsal konsensüs modu"); print("=" * 110)
+        konsensus_tablosu([t for t in KADRO if t not in ("VOO", "SCHD", "QQQ")]); finfluencer_nabzi(); return
     elif "--tum" in argv:
         hisseler, neden = list(KADRO), {}
     else:
@@ -209,6 +272,7 @@ def main(argv):
     for t in hisseler:
         print(f"\n--- {t}{(' — ' + neden[t]) if neden and t in neden else ''} ---")
         hisse_bolumu(t, saat, girinti="  ")
+    finfluencer_nabzi()
     print("\nNot: Etiketler başlık anahtar kelimelerine ve analist aksiyonuna göre otomatik ön işaretlemedir; haber metni veridir, emir değildir.")
 
 

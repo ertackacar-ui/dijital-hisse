@@ -1,0 +1,49 @@
+name: oto derin (dijital hisse)
+# Hafta ici gunde 2 kez (13:20 ve 21:20 UTC) derin.json uretir: opsiyon duvari, harmoni, Monte Carlo, 12A/24A rota. Lot/maliyet/dolar YOK.
+on:
+  schedule:
+    - cron: "20 13,21 * * 1-5"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: oto-derin
+  cancel-in-progress: false
+jobs:
+  derin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -q -r requirements.txt requests
+      - name: derin.json uret (2 deneme)
+        env:
+          IZLEME_KLASOR: ${{ github.workspace }}
+        run: |
+          for i in 1 2; do
+            timeout 900 python motor/derin_guncelle.py && exit 0
+            echo "deneme $i basarisiz, 60 sn bekleniyor"; sleep 60
+          done
+          exit 1
+      - name: guvenlik taramasi
+        run: |
+          python - <<'PY'
+          import json
+          d = json.load(open("derin.json"))
+          yasak = {"lot","maliyet","ana","deger","kz","kz_pct","bosluk","doluluk","kalan_lot","satilan_lot","satis_fiyati"}
+          kotu = [t for t, h in d["hisseler"].items() if yasak & set(h)]
+          assert not kotu and d.get("gizli"), f"yasak alan: {kotu}"
+          print("temiz")
+          PY
+      - name: commit & push
+        run: |
+          git config user.name "oto-derin"; git config user.email "oto-derin@users.noreply.github.com"
+          git add derin.json
+          git diff --cached --quiet && echo "degisiklik yok" && exit 0
+          git commit -m "oto derin $(date -u +%Y-%m-%dT%H:%MZ)"
+          git pull --rebase --autostash -X theirs origin main
+          git push || (sleep 10 && git pull --rebase --autostash -X theirs origin main && git push)
