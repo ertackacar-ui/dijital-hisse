@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="dijital hisse">
 <title>dijital hisse — Canlı İzleme</title>
-<meta name="dh-surum" content="22">
+<meta name="dh-surum" content="38">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-512.png">
@@ -28,20 +28,22 @@
   html,body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 var(--sans);-webkit-font-smoothing:antialiased}
   button{font:inherit;color:inherit}
   .app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
-  .side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:14px;padding:18px 12px 16px max(12px,env(safe-area-inset-left,0px))}
+  .side{position:sticky;top:0;height:100vh;overflow:auto;background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;gap:10px;padding:16px 12px 14px max(12px,env(safe-area-inset-left,0px))}
   .logo{display:flex;align-items:center;gap:8px;padding:4px 8px;min-height:36px;user-select:none;cursor:pointer;background:none;border:none;text-align:left}
   .logo img{display:none;width:auto;height:26px} .logo .kisa{height:28px}
   .logo .uzun.l{display:var(--dl)} .logo .uzun.d{display:var(--dd)}
   /* masaustu daraltilmis menu (.dar): yalnizca simgeler + dh isareti; tooltip'ler etiketi soyler */
   @media (min-width:861px){
   .app.dar{grid-template-columns:76px 1fr}
-  .app.dar .side .nv span,.app.dar .side .nv em,.app.dar .side .alt,.app.dar .side .rule,.app.dar .logo .uzun{display:none}
+  .app.dar .side .nv span,.app.dar .side .nv em,.app.dar .side .alt,.app.dar .side .rule,.app.dar .side .grup span,.app.dar .side .grup .ok,.app.dar .logo .uzun{display:none} .app.dar .grup{justify-content:center;padding:8px 0}
   .app.dar .logo .kisa.l{display:var(--dl)} .app.dar .logo .kisa.d{display:var(--dd)}
   .app.dar .nv{justify-content:center;padding:10px 0} .app.dar .logo{justify-content:center;padding:4px 0}
   }
   .alt{font-size:11.5px;color:var(--muted);padding:0 8px;margin-top:-10px;letter-spacing:.04em}
-  .nv{display:flex;align-items:center;gap:10px;width:100%;border:none;background:none;border-radius:8px;padding:9px 10px;color:var(--muted);font-weight:500;text-align:left;cursor:pointer}
-  .nv:hover{color:var(--fg)} .nv[aria-current=true]{background:var(--send-soft);color:var(--send)}
+  .nv{display:flex;align-items:center;gap:10px;width:100%;border:none;background:none;border-radius:8px;padding:8px 10px;color:var(--muted);font-weight:500;text-align:left;cursor:pointer}
+  .nv{color:var(--fg)} .nv svg{flex:none;color:var(--cream)} .nv:hover,.nv[aria-current=true]{background:var(--grad);color:#fff} .nv[aria-current=true]{font-weight:600} .nv:hover svg,.nv[aria-current=true] svg{color:#fff} .nv:hover em,.nv[aria-current=true] em{background:rgba(255,255,255,.22);color:inherit}
+  .grup{display:flex;align-items:center;gap:10px;width:100%;border:none;background:none;border-radius:8px;padding:8px 10px;color:var(--fg);font:inherit;font-weight:500;cursor:pointer;text-align:left} .grup svg{flex:none;color:var(--cream)} .grup .ok{margin-left:auto;transition:transform .2s} .grup:hover{background:var(--grad);color:#fff} .grup:hover svg{color:#fff}
+  .app:not(.detayAcik) .grup .ok{transform:rotate(-90deg)} .app:not(.detayAcik) .nv.detay{display:none}
   .nv svg{flex:none} .nv span{flex:1} .nv em{font-style:normal;font-size:12px;background:var(--idle-soft);border-radius:999px;padding:1px 7px;color:var(--muted)}
   .rule{border-top:1px solid var(--line);margin:4px 0}
   .side .sp{flex:1}
@@ -50,17 +52,17 @@
   h1{margin:0;font-size:22px;font-weight:700} .top .sub{color:var(--muted);font-size:13px}
   .chip{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;font-size:12.5px;font-weight:500;background:var(--idle-soft);color:var(--muted);border:1px solid transparent;white-space:nowrap}
   .chip.good{background:var(--good-soft);color:var(--good)} .chip.bad{background:var(--bad-soft);color:var(--bad)} .chip.warn{background:var(--warn-soft);color:var(--warn)} .chip.send{background:var(--send-soft);color:var(--send)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
-  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
   .card .k{font-size:12px;color:var(--muted);font-weight:500;letter-spacing:.02em} .card .v{font-size:24px;font-weight:700;margin-top:4px;font-family:var(--mono)} .card .s{font-size:13px;color:var(--muted);margin-top:4px}
   .card.hero{background:var(--grad);color:#fff;border:none} .card.hero .k,.card.hero .s{color:rgba(255,255,255,.85)}
-  h2{font-size:14px;font-weight:700;margin:22px 0 8px;color:var(--fg)}
+  h2{font-size:14px;font-weight:700;margin:26px 0 10px;color:var(--fg)}
   table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:13.5px}
   th,td{padding:9px 10px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap} th{font-weight:500;color:var(--muted);font-size:12px;background:var(--idle-soft)}
   th:first-child,td:first-child{text-align:left;font-weight:600;font-family:var(--mono)} tr:last-child td{border-bottom:none}
   .twrap{overflow-x:auto;border-radius:14px}
   .up{color:var(--good)} .dn{color:var(--bad)} .mono{font-family:var(--mono)}
-  .lig{margin:14px 0 6px;font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+  .lig{margin:14px 0 6px;font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.02em}
   .list{display:flex;flex-direction:column;gap:8px}
   .row{display:flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;flex-wrap:wrap}
   .row .t{font:600 14px var(--mono);min-width:64px} .row .d{flex:1;font-size:13px;color:var(--muted)} .row .r{font-family:var(--mono);font-weight:600}
@@ -74,13 +76,25 @@
   .gizli .para{filter:blur(7px);user-select:none;pointer-events:none}
   .boş{color:var(--muted);font-size:13px;padding:10px 0}
   .view{display:none} .view.on{display:block}
+  /* sol menu AL/SAT kutusu */
+  .alsatKutu{border:1px solid var(--line);border-radius:12px;padding:8px 9px;background:var(--bg);cursor:pointer;font-size:11.5px;line-height:1.35}
+  .alsatKutu.yok{border-color:var(--good)} .alsatKutu.var{border-color:var(--warn);box-shadow:0 0 0 2px var(--warn-soft)}
+  .alsatKutu .b{font-weight:700;font-size:13px} .alsatKutu .m{color:var(--muted);margin-top:3px} .alsatKutu .ikon{display:none;font-size:18px;text-align:center}
+  @media (min-width:861px){ .app.dar .alsatKutu{padding:6px 0;border:none;background:none} .app.dar .alsatKutu .b,.app.dar .alsatKutu .m{display:none} .app.dar .alsatKutu .ikon{display:block} }
+  @media (max-width:860px){ .app:not(.acik) .alsatKutu{padding:6px 0;border:none;background:none} .app:not(.acik) .alsatKutu .b,.app:not(.acik) .alsatKutu .m{display:none} .app:not(.acik) .alsatKutu .ikon{display:block} }
+  .sideKart{border:1px solid var(--line);border-radius:12px;padding:7px 9px;background:var(--bg);font-size:11.5px;line-height:1.35} .sideKart .k{font-size:11px;color:var(--muted);font-weight:600;margin-bottom:3px} .sideKart .r{display:flex;justify-content:space-between;gap:8px} .sideKart .r b{font-weight:600}
+  @media (min-width:861px){ .app.dar .sideKart{display:none} }
+  @media (max-width:860px){ .app:not(.acik) .sideKart{display:none} }
+  .sart{display:inline-block;width:18px;text-align:center} .ok{color:var(--good)} .no{color:var(--bad)}
   /* AL/SAT vitrini (yalniz yerel / sifreli ayna) */
   .vitrin{border-radius:16px;padding:16px 18px;margin-bottom:14px;border:1px solid var(--line);background:var(--surface)}
   .vitrin.yok{border-color:var(--good);background:linear-gradient(135deg,var(--good-soft),var(--surface))} .vitrin.var{border-color:var(--warn)}
   .vitrin .buyuk{font-size:22px;font-weight:700;line-height:1.25} .vitrin .neden{color:var(--muted);font-size:13.5px;margin-top:4px}
   .vitrin .ust{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}
   .fis{border-radius:12px;padding:12px 14px;margin-top:10px;border:1px solid var(--line);display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:6px 14px;font-size:13.5px}
-  .fis.al{border-color:var(--good);background:var(--good-soft)} .fis.sat{border-color:var(--bad);background:var(--bad-soft)}
+  .fis.al{border-color:var(--good);background:var(--good-soft)} .fis.sat{border-color:var(--bad);background:var(--bad-soft)} .fis.kilit{opacity:.75;border-style:dashed}
+  .ajanDurum{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;background:var(--idle-soft);color:var(--muted)} .ajanDurum.guncel{background:var(--good-soft);color:var(--good)} .ajanDurum.sirada,.ajanDurum.kosuyor{background:var(--warn-soft);color:var(--warn)} .ajanDurum.hata{background:var(--bad-soft);color:var(--bad)}
+  .cikti{white-space:pre-wrap;font:11.5px/1.45 var(--kod);background:var(--idle-soft);border:1px solid var(--line);border-radius:10px;padding:10px;max-height:420px;overflow:auto;margin-top:8px}
   .fis .b{grid-column:1/-1;font-weight:700;font-size:15px} .fis .g{grid-column:1/-1;color:var(--muted);font-size:12.5px} .fis span b{display:block;font-size:11px;color:var(--muted);font-weight:500}
   .katki{display:grid;grid-template-columns:140px 150px 1fr auto;gap:8px;align-items:end;margin-top:10px} .katki label{font-size:11.5px;color:var(--muted);display:block;margin-bottom:3px}
   .katki input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);font:inherit}
@@ -89,16 +103,22 @@
   @media (max-width:860px){ .katki{grid-template-columns:1fr 1fr} .vitrin .buyuk{font-size:18px} }
   /* seviye temasi bandi */
   .bant{display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:14px}
-  .bant .bk{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.04em;margin-right:4px} .bant .chip{cursor:pointer;font-family:var(--mono);font-size:12px}
+  .bant .bk{font-size:12px;font-weight:600;color:var(--muted);margin-right:4px} .bant .chip{cursor:pointer;font-family:var(--mono);font-size:12px}
   .bant .chip.yesil{background:var(--good-soft);color:var(--good);border-color:var(--good)} .bant .chip.kehribar{background:var(--warn-soft);color:var(--warn);border-color:var(--warn)} .bant .chip.kirmizi{background:var(--bad-soft);color:var(--bad);border-color:var(--bad)}
   /* kokpit */
-  .grid.kokpit{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))} .grid.kokpit .card .v{font-size:20px}
+  .grid.kokpit{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))} .grid.kokpit .card .v{font-size:20px}
+  /* HEDGE FUND pozisyon tablosu: tasmasiz, sarmali */
+  .hf table{table-layout:fixed;font-size:12.5px} .hf th,.hf td{white-space:normal;vertical-align:top;padding:9px 8px} .hf td:first-child{font-weight:700} .hf .alt{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+  .hf .kd{display:inline-block;font-size:11px;padding:2px 7px;border-radius:999px;background:var(--idle-soft);color:var(--muted);margin:1px 2px 1px 0;white-space:nowrap} .hf .kd.ok{background:var(--good-soft);color:var(--good)} .hf .kd.alt{background:var(--warn-soft);color:var(--warn)} .hf .kd.yasak{background:var(--bad-soft);color:var(--bad)}
+  .hfKart{display:none;flex-direction:column;gap:8px} .hfKart .row{align-items:flex-start} .hfKart .d{font-size:12.5px;line-height:1.5}
+  @media (max-width:860px){ .hf table{display:none} .hfKart{display:flex} }
+  details.blok{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:4px 16px;margin-top:12px} details.blok summary{cursor:pointer;font-weight:700;font-size:14px;padding:10px 0;list-style:none} details.blok summary::before{content:"▸ ";color:var(--muted)} details.blok[open] summary::before{content:"▾ "}
   /* hisse cekmecesi */
   tr.tik{cursor:pointer} tr.tik:hover td{background:var(--idle-soft)}
   .cek-perde{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:30;display:none} .cek-perde.on{display:block}
   .cekmece{position:fixed;top:0;right:0;bottom:0;width:min(520px,100vw);background:var(--bg);border-left:1px solid var(--line);z-index:31;overflow:auto;padding:16px 18px calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(100%);transition:transform .22s}
   .cekmece.on{transform:none} .cekmece .ust{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px} .cekmece h3{margin:0;font:700 20px var(--mono)}
-  .cekmece .sec{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px} .cekmece .sec .k{font-size:11.5px;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
+  .cekmece .sec{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px} .cekmece .sec .k{font-size:11.5px;color:var(--muted);font-weight:600;letter-spacing:.02em;margin-bottom:6px}
   .cekmece .kv{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:13.5px} .cekmece .kv b{font-family:var(--mono);font-weight:600;text-align:right}
   .cekmece .rota{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;text-align:center;font-family:var(--mono);font-size:13px} .cekmece .rota div{background:var(--idle-soft);border-radius:8px;padding:6px 4px} .cekmece .rota small{display:block;color:var(--muted);font-family:var(--sans);font-size:11px}
   .cekmece ul{margin:4px 0 0 16px;padding:0;font-size:13px} .cekmece li{margin:3px 0}
@@ -114,6 +134,7 @@
   .ag .head{display:flex;align-items:center;gap:8px;flex-wrap:wrap} .ag .ad{font:600 13px var(--mono)} .ag .kat{font-size:11px;color:var(--send);background:var(--send-soft);padding:2px 8px;border-radius:999px}
   .ag .gorev{font-size:13px;margin:4px 0 2px} .ag .zaman{font-size:12px;color:var(--muted)} .ag .zaman b{color:var(--send);font-weight:500}
   .ag .cmd{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px} .ag code{font:500 11px var(--mono);background:var(--idle-soft);border:1px solid var(--line);padding:5px 8px;border-radius:8px;flex:1 1 200px;word-break:break-all}
+  .zilKutu{position:relative} .zilPanel{position:absolute;right:0;top:40px;z-index:30;width:min(340px,calc(100vw - 32px));background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;box-shadow:0 12px 32px rgba(0,0,0,.25)} .zilPanel .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px} .zilPanel .kod{font-family:var(--mono);font-size:15px;font-weight:700;word-break:break-all;padding:8px 10px;border-radius:8px;background:var(--idle-soft);margin:4px 0 8px} .zilPanel p{margin:0 0 8px;font-size:12px;color:var(--muted);line-height:1.45} .zilPanel .btn{width:100%;margin-top:4px}
   .btn{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:8px;padding:7px 12px;cursor:pointer;font-weight:500;white-space:nowrap}
   .btn.primary{background:var(--send);color:var(--send-fg);border-color:var(--send);font-weight:600} .btn.ok{background:var(--good);border-color:var(--good);color:#fff}
   .alarmk{background:var(--surface);border:1px solid var(--bad);border-radius:14px;padding:12px 14px;margin-bottom:14px}
@@ -123,10 +144,10 @@
   @media (max-width:860px){
     .app{grid-template-columns:1fr}
     .side{position:fixed;top:0;bottom:0;left:0;width:60px;height:100%;z-index:15;gap:10px;padding:max(14px,env(safe-area-inset-top,0px)) 6px calc(12px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px));overflow-y:auto;overflow-x:hidden;transition:width .2s}
-    .side .nv span,.side .nv em,.side .alt,.side .rule,.app:not(.acik) .logo .uzun{display:none} .nv{justify-content:center;padding:10px 0} .logo{justify-content:center;padding:4px 0}
+    .side .nv span,.side .nv em,.side .alt,.side .rule,.side .grup span,.side .grup .ok,.app:not(.acik) .logo .uzun{display:none} .grup{justify-content:center;padding:8px 0} .nv{justify-content:center;padding:10px 0} .logo{justify-content:center;padding:4px 0}
     .app:not(.acik) .logo .kisa.l{display:var(--dl)} .app:not(.acik) .logo .kisa.d{display:var(--dd)}
     .app.acik .side{width:min(86vw,300px);box-shadow:0 0 40px rgba(0,0,0,.25);padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:12px}
-    .app.acik .side .nv span,.app.acik .side .nv em,.app.acik .side .alt,.app.acik .side .rule{display:inline} .app.acik .logo .uzun.l{display:var(--dl)} .app.acik .logo .uzun.d{display:var(--dd)} .app.acik .logo .kisa{display:none!important} .app:not(.acik) .logo .uzun{display:none!important} .app.acik .nv{justify-content:flex-start;padding:9px 10px}
+    .app.acik .side .nv span,.app.acik .side .nv em,.app.acik .side .alt,.app.acik .side .rule,.app.acik .side .grup span,.app.acik .side .grup .ok{display:inline} .app.acik .grup{justify-content:flex-start;padding:8px 10px} .app.acik .logo .uzun.l{display:var(--dl)} .app.acik .logo .uzun.d{display:var(--dd)} .app.acik .logo .kisa{display:none!important} .app:not(.acik) .logo .uzun{display:none!important} .app.acik .nv{justify-content:flex-start;padding:9px 10px}
     .app.acik .side .rule{display:block}
     .perde{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:14;display:none} .app.acik .perde{display:block}
     .main{padding:14px 14px 40px 74px} h1{font-size:19px} .card .v{font-size:21px}
@@ -150,31 +171,39 @@
     <button class="logo" id="logoBtn" title="Menüyü Daralt / Genişlet"><img class="uzun l" src="logo-light.png" alt="dijital hisse"><img class="uzun d" src="logo-dark.png" alt="dijital hisse"><img class="kisa l" src="mark-light.png" alt="dh"><img class="kisa d" src="mark-dark.png" alt="dh"></button>
     <div class="alt">Canlı İzleme Merkezi</div>
     <nav>
-      <button class="nv" data-v="ozet" aria-current="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg><span>Genel Bakış</span></button>
-      <button class="nv" data-v="hisse"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-6 4 4 5-7 4 5"/><path d="M3 21h18"/></svg><span>Hisseler</span><em id="nHisse"></em></button>
-      <button class="nv" data-v="pusu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg><span>Pusu ve Kartopu</span></button>
-      <button class="nv" data-v="bilanco"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Bilanço Takvimi</span><em id="nMayin"></em></button>
-      <button class="nv" data-v="haber"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13a2 2 0 0 1 2 2v12H6a2 2 0 0 1-2-2z"/><path d="M19 9h1a1 1 0 0 1 1 1v8a2 2 0 0 1-2 2"/><path d="M8 9h5M8 13h5M8 17h5"/></svg><span>Haber ve Analist</span></button>
-      <button class="nv" data-v="midas" id="nvMidas" hidden><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg><span>Midas Aynası</span><em>yerel</em></button>
-      <button class="nv" data-v="ajan"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span>Ajanlar</span><em>20</em></button>
+      <button class="nv" data-v="alsat" id="nvAlsat" aria-current="true" title="Al / Sat Masası"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg><span>Al / Sat Masası</span><em id="alsatRozet">—</em></button>
+      <button class="nv" data-v="midas" id="nvMidas" title="HEDGE FUND"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 15h2"/></svg><span>HEDGE FUND</span><em id="midasRozet">—</em></button>
+      <button class="nv" data-v="rontgen" id="nvRontgen" title="360° Röntgen"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>360° Röntgen</span></button>
+      <button class="nv" data-v="ajan" title="Ajanlar"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01M9 16h6"/></svg><span>Ajanlar</span><em>20</em></button>
+      <button class="grup" id="detayBtn" title="Detaylar"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h7"/></svg><span>Detaylar</span><span class="ok">▾</span></button>
+      <button class="nv detay" data-v="ozet" title="Piyasa Kokpiti"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg><span>Piyasa Kokpiti</span></button>
+      <button class="nv detay" data-v="hisse" title="Hisse Göstergeleri"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5-6 4 4 5-7 4 5"/><path d="M3 21h18"/></svg><span>Hisse Göstergeleri</span></button>
+      <button class="nv detay" data-v="pusu" title="Pusu ve Kartopu"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg><span>Pusu ve Kartopu</span></button>
+      <button class="nv detay" data-v="bilanco" title="Bilanço Takvimi"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Bilanço Takvimi</span></button>
+      <button class="nv detay" data-v="haber" title="Haber ve Analist"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h13a2 2 0 0 1 2 2v12H6a2 2 0 0 1-2-2z"/><path d="M19 9h1a1 1 0 0 1 1 1v8a2 2 0 0 1-2 2"/><path d="M8 9h5M8 13h5"/></svg><span>Haber ve Analist</span></button>
     </nav>
     <div class="sp"></div>
+    <div class="alsatKutu" id="alsatKutu" hidden></div>
+    <div class="sideKart" id="sideKasa" hidden></div>
+    <div class="sideKart" id="sideDurum" hidden></div>
     <div class="rule"></div>
     <button class="nv" id="gizleBtn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="3"/></svg><span>Tutarları Gizle</span></button>
     <button class="nv" id="temaBtn"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><span>Gece Modu</span></button>
   </aside>
   <div class="perde" id="perde"></div>
   <main class="main">
-    <div class="top"><div><h1 id="baslik">Genel Bakış</h1><div class="sub" id="altBaslik">Veri bekleniyor…</div></div><div style="display:flex;gap:8px;align-items:center"><span id="ustChip"></span><button class="btn" id="yenileBtn" title="Veriyi yeniden çek">⟳ Yenile</button></div></div>
+    <div class="top"><div><h1 id="baslik">Genel Bakış</h1><div class="sub" id="altBaslik">Veri bekleniyor…</div></div><div style="display:flex;gap:8px;align-items:center"><span id="ustChip"></span><span class="zilKutu" id="zilKutu" hidden><button class="btn" id="zilBtn" title="Bildirimler">🔔 Bildirimler</button><div class="zilPanel" id="zilPanel" hidden><div class="k">iPhone ntfy Kanal Kodu</div><div class="kod" id="zilKanal">…</div><p>iPhone'a <b>ntfy</b> uygulamasını kur, <b>+</b> ile bu kodu abone ol. AL / SAT / Kâr Kalkanı fişleri aynı anda Mac'e ve telefona düşer (aynı fiş günde 1 kez).</p><button class="btn" id="zilTest">📱 Telefona Test Bildirimi Gönder</button></div></span><button class="btn" id="yenileBtn" title="Veriyi yeniden çek">⟳ Yenile</button></div></div>
     <div class="chip send" id="yenileHaber" hidden style="margin:-6px 0 10px"></div>
     <div class="bant" id="bant" hidden></div>
-    <section class="view on" id="v-ozet"><div class="boş" id="yukleniyor">⏳ Veri yükleniyor… (10 saniyeyi geçerse bağlantı zayıf demektir; ⟳ Yenile'ye basın)</div></section>
+    <section class="view on" id="v-ozet"><div class="boş" id="yukleniyor">Veri yükleniyor…</div></section>
     <section class="view" id="v-hisse"></section>
     <section class="view" id="v-pusu"></section>
     <section class="view" id="v-bilanco"></section>
     <section class="view" id="v-haber"></section>
     <section class="view" id="v-ajan"></section>
     <section class="view" id="v-midas"></section>
+    <section class="view" id="v-alsat"></section>
+    <section class="view" id="v-rontgen"></section>
   </main>
 </div>
 <div class="cek-perde" id="cekPerde"></div>
@@ -186,7 +215,8 @@ const f2=n=>n==null?"—":n.toLocaleString("tr-TR",{minimumFractionDigits:2,maxi
 const pc=n=>n==null?"—":(n>0?"+":"")+n.toFixed(1)+"%";
 const cls=n=>n==null?"":(n>0?"up":n<0?"dn":"");
 const usd=n=>n==null?"—":"$"+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
-const BASLIK={ozet:"Genel Bakış",hisse:"Hisseler",pusu:"Pusu ve Kartopu",bilanco:"Bilanço Takvimi",haber:"Haber ve Analist",ajan:"Ajanlar",midas:"Midas Portföy Aynası"};
+const BASLIK={ozet:"Piyasa Kokpiti",hisse:"Hisseler",pusu:"Pusu ve Kartopu",bilanco:"Bilanço Takvimi",haber:"Haber ve Analist",ajan:"Ajanlar",midas:"HEDGE FUND",alsat:"Al / Sat Masası",rontgen:"360° Röntgen"};
+const ANA_SAYFALAR=["alsat","midas","rontgen","ajan","ozet","hisse","pusu","bilanco","haber"];
 // Veri kaynagi: internette (github.io) her zaman gizli veri.json; yerel sunucuda lot/K-Z + Midas aynali veri_tam.json (yoksa veri.json)
 const YEREL=!/github\.io$/.test(location.hostname)&&!/[?&]gizli=1/.test(location.search), KAYNAK=YEREL?"veri_tam.json":"veri.json";
 
@@ -197,14 +227,18 @@ function gizleYaz(){const g=ls.get("dh-gizli")==="1";app.classList.toggle("gizli
 $("#gizleBtn").onclick=()=>{ls.set("dh-gizli",ls.get("dh-gizli")==="1"?"0":"1");gizleYaz()}; gizleYaz();
 const mobil=()=>matchMedia("(max-width:860px)").matches;
 if(ls.get("dh-dar")==="1"&&!mobil())app.classList.add("dar");
+if(ls.get("dh-detay")!=="0")app.classList.add("detayAcik");
+$("#detayBtn").onclick=()=>{app.classList.toggle("detayAcik");ls.set("dh-detay",app.classList.contains("detayAcik")?"1":"0")};
 matchMedia("(max-width:860px)").addEventListener("change",e=>{if(e.matches){app.classList.remove("dar")}else{app.classList.remove("acik")}});
 $("#logoBtn").onclick=()=>{if(mobil())app.classList.toggle("acik");else{app.classList.toggle("dar");ls.set("dh-dar",app.classList.contains("dar")?"1":"0")}};
 $("#perde").onclick=()=>app.classList.remove("acik");
 document.querySelectorAll(".nv").forEach(b=>{const t=b.querySelector("span");if(t&&!b.title)b.title=t.textContent});
 document.querySelectorAll(".nv[data-v]").forEach(b=>b.onclick=()=>{goster(b.dataset.v);app.classList.remove("acik")});
-function goster(v){document.querySelectorAll(".nv[data-v]").forEach(b=>b.setAttribute("aria-current",b.dataset.v===v));document.querySelectorAll(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));$("#baslik").textContent=BASLIK[v];ls.set("dh-view",v)}
+function goster(v){if(!ANA_SAYFALAR.includes(v))v="alsat";if(["ozet","hisse","pusu","bilanco","haber"].includes(v)){app.classList.add("detayAcik");ls.set("dh-detay","1")}document.querySelectorAll(".nv[data-v]").forEach(b=>b.setAttribute("aria-current",b.dataset.v===v));document.querySelectorAll(".view").forEach(s=>s.classList.toggle("on",s.id==="v-"+v));$("#baslik").textContent=BASLIK[v];ls.set("dh-view",v);if(typeof vitrinBagla==="function"&&D)vitrinBagla()}
 
-function vixChip(v){const r=v.rejim;return `<span class="chip ${r==="AÇIK"?"good":r==="TAM KİLİT"?"bad":"warn"}">🔒 VIX ${v.deger??"—"} · ${r}</span>`}
+const VIX_AD={"TAM KİLİT":"KORKU · dip avı","KORKU":"KORKU · dip avı","YALNIZ 1. LİG":"TEMKİN","TEMKİN":"TEMKİN","AÇIK":"SAKİN","SAKİN":"SAKİN"}; // VIX alim yasagi degil, mod etiketidir
+const VIX_CLS={"TAM KİLİT":"bad","KORKU":"bad","YALNIZ 1. LİG":"warn","TEMKİN":"warn","AÇIK":"good","SAKİN":"good"};
+function vixChip(v){const r=v.rejim;return `<span class="chip ${VIX_CLS[r]||"warn"}">VIX ${v.deger??"—"} · ${VIX_AD[r]||r}</span>`}
 function dkOnce(iso){const m=Math.round((Date.now()-new Date(iso))/60000);return m<1?"az önce":m<60?m+" dk önce":Math.round(m/60)+" sa önce"}
 
 function cizOzet(){
@@ -213,48 +247,55 @@ function cizOzet(){
   const ustEma=D.hisseler.filter(h=>h.ema21==="ÜST").length, donus=D.hisseler.filter(h=>h.puan>=3).length;
   const canliSatir=h=>h.canli!=null?`${h.t} ${f2(h.canli)} <span class="${cls(h.canli_degisim)}">(${pc(h.canli_degisim)} 🌙)</span>`:`${h.t} ${f2(h.fiyat)}`;
   const hero=T?`<div class="card hero"><div class="k">Toplam Hisse Portföyü</div><div class="v">${pc(T.tum.kz_pct)}</div><div class="s">${D.gizli?"":`<span class="para">${T.tum.deger!=null?usd(T.tum.deger)+" · K/Z "+usd(T.tum.kz):""}</span> `}1. Lig ${pc(T.lig1.kz_pct)} · 2. Lig ${pc(T.lig2.kz_pct)}</div></div>`
-    :`<div class="card hero"><div class="k">Piyasa Nabzı · ${D.seans_etiketi||""}</div><div class="v" style="font-size:19px">${canliSatir(qqq)} · ${canliSatir(voo)}</div><div class="s">Kapanış QQQ ${f2(qqq.fiyat)} (${pc(qqq.d1)}) · VOO ${f2(voo.fiyat)} (${pc(voo.d1)}) · EMA21 üstü ${ustEma}/${D.hisseler.length} · Dönüş 3+/4: ${donus}</div></div>`;
+    :`<div class="card hero"><div class="k">Piyasa Nabzı</div><div class="v" style="font-size:19px">${canliSatir(qqq)} · ${canliSatir(voo)}</div><div class="s">Kapanış QQQ ${f2(qqq.fiyat)} (${pc(qqq.d1)}) · VOO ${f2(voo.fiyat)} (${pc(voo.d1)}) · EMA21 üstü ${ustEma}/${D.hisseler.length} · Dönüş 3+/4: ${donus}</div></div>`;
   const yakin=D.hisseler.filter(h=>h.pusu_mesafe!=null).sort((a,b)=>Math.abs(a.pusu_mesafe)-Math.abs(b.pusu_mesafe)).slice(0,4);
   const mayin=D.bilanco.filter(b=>b.mayin), mm=D.makro_mayin||[], eg=D.vix_egri&&D.vix_egri.yapi!=="VERİ YOK"?D.vix_egri:null;
   const kk=karar();
-  $("#v-ozet").innerHTML=vitrin()+yonKarti(kk)+`
+  $("#v-ozet").innerHTML=yonKarti(kk)+`
   <div class="grid kokpit">
     ${hero}
-    <div class="card"><div class="k">VIX Rejim Kilidi</div><div class="v ${D.vix.rejim==="AÇIK"?"up":D.vix.rejim==="TAM KİLİT"?"dn":""}">${D.vix.deger??"—"}</div><div class="s">${D.vix.rejim}${eg?` · <b class="${eg.yapi.includes("BACKWARDATION")?"dn":"up"}">${eg.yapi}</b> (9D ${eg.vix9d??"—"} · 3M ${eg.vix3m??"—"})`:""}</div></div>
-    <div class="card"><div class="k">10Y Tahvil · DXY</div><div class="v" style="font-size:19px">${D.tnx??"—"}% · ${D.dxy??"—"}</div><div class="s">tahvil faizi · dolar endeksi</div></div>
-    <div class="card"><div class="k">EMA21 Üstü (piyasa genişliği)</div><div class="v ${ustEma>=D.hisseler.length/2?"up":"dn"}">${ustEma}/${D.hisseler.length}</div><div class="s">Dönüş 3+/4: ${donus} hisse</div></div>
-    <div class="card"><div class="k">14 Günlük Mayın Sayacı</div><div class="v ${mayin.length+mm.length?"dn":""}">${mayin.length+mm.length}</div><div class="s">${mayin.length} bilanço · ${mm.length} makro${mm.length?" ("+mm.map(x=>x.ad+" "+x.kalan+"g").join(", ")+")":""}</div></div>
-    <div class="card"><div class="k">Piyasa ve Sektör Para Akışı</div><div class="v" style="font-size:17px;font-family:var(--sans)">${pa.taraf} tarafta</div><div class="s">${pa.rejim}<br>${pa.sektorler.slice(0,3).map(s=>s.etf+" "+pc(s.rs)).join(" · ")}</div></div>
-    <div class="card"><div class="k">Son Güncelleme</div><div class="v" style="font-size:17px;font-family:var(--sans)">${dkOnce(D.guncelleme)}${eski?' <span class="chip warn">Veri Eski</span>':""}</div><div class="s">${new Date(D.guncelleme).toLocaleString("tr-TR")} · ${D.seans_etiketi||(D.seans_acik?"Seans Açık":"Seans Kapalı")} · kesin kapanış ${D.kesin_kapanis}</div></div>
+    <div class="card"><div class="k">VIX Rejimi</div><div class="v ${VIX_CLS[D.vix.rejim]==="good"?"up":VIX_CLS[D.vix.rejim]==="bad"?"dn":""}">${D.vix.deger??"—"}</div><div class="s">${VIX_AD[D.vix.rejim]||D.vix.rejim}${eg?` · <b class="${eg.yapi.includes("BACKWARDATION")?"dn":"up"}">${eg.yapi}</b> (9D ${eg.vix9d??"—"} · 3M ${eg.vix3m??"—"})`:""}</div></div>
+    <div class="card"><div class="k">10Y Tahvil · DXY</div><div class="v" style="font-size:19px">${D.tnx??"—"}% · ${D.dxy??"—"}</div><div class="s">Tahvil Faizi · Dolar Endeksi</div></div>
+    <div class="card"><div class="k">EMA21 Üstü</div><div class="v ${ustEma>=D.hisseler.length/2?"up":"dn"}">${ustEma}/${D.hisseler.length}</div><div class="s">Dönüş 3+/4: ${donus} Hisse</div></div>
+    <div class="card"><div class="k">14 Gün Mayın</div><div class="v ${mayin.length+mm.length?"dn":""}">${mayin.length+mm.length}</div><div class="s">${mayin.length} Bilanço · ${mm.length} Makro${mm.length?" · "+mm.map(x=>x.ad+" "+x.kalan+" gün").join(", "):""}</div></div>
+    <div class="card"><div class="k">Para Akışı</div><div class="v" style="font-size:17px;font-family:var(--sans)">${pa.taraf}</div><div class="s">${pa.rejim}<br>${pa.sektorler.slice(0,3).map(s=>s.etf+" "+pc(s.rs)).join(" · ")}</div></div>
+    <div class="card"><div class="k">Son Güncelleme</div><div class="v" style="font-size:17px;font-family:var(--sans)">${dkOnce(D.guncelleme)}${eski?' <span class="chip warn">Veri Eski</span>':""}</div><div class="s">${new Date(D.guncelleme).toLocaleString("tr-TR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})} · Kesin Kapanış ${D.kesin_kapanis}</div></div>
   </div>
-  <h2>Pusuya En Yakın</h2><div class="list">${yakin.map(h=>`<div class="row"><span class="t">${h.t}</span><span class="d">Pusu ${h.pusu_yakin} · kapanış ${f2(h.fiyat)}${h.canli!=null?" · 🌙 "+f2(h.canli):""} · Dönüş ${h.puan}/4 · RSI ${h.rsi}</span><span class="r ${h.pusu_mesafe<0?"dn":""}">${pc(h.pusu_mesafe)}</span></div>`).join("")}</div>
-  <h2>Bilanço ve Makro Mayınları (14 Gün)</h2><div class="list">${[...mayin.map(b=>`<div class="row"><span class="t">${b.t}</span><span class="d">bilanço ${b.tarih}</span><span class="chip bad">💣 ${b.kalan} gün</span></div>`),...mm.map(x=>`<div class="row"><span class="t">MAKRO</span><span class="d">${x.ad} ${x.tarih}</span><span class="chip warn">🏛 ${x.kalan} gün</span></div>`)].join("")||'<div class="boş">Önümüzdeki 14 günde bilanço veya makro mayın yok.</div>'}</div>`;
-  yonBagla($("#v-ozet")); vitrinBagla();
+  <h2>Pusuya En Yakın</h2><div class="list">${yakin.map(h=>`<div class="row"><span class="t">${h.t}</span><span class="d">Pusu ${h.pusu_yakin} · Kapanış ${f2(h.fiyat)}${h.canli!=null?" · 🌙 "+f2(h.canli):""} · Dönüş ${h.puan}/4 · RSI ${h.rsi}</span><span class="r ${h.pusu_mesafe<0?"dn":""}">${pc(h.pusu_mesafe)}</span></div>`).join("")}</div>
+  <h2>Mayınlar · 14 Gün</h2><div class="list">${[...mayin.map(b=>`<div class="row"><span class="t">${b.t}</span><span class="d">Bilanço ${b.tarih}</span><span class="chip bad">💣 ${b.kalan} gün</span></div>`),...mm.map(x=>`<div class="row"><span class="t">MAKRO</span><span class="d">${x.ad} ${x.tarih}</span><span class="chip warn">🏛 ${x.kalan} gün</span></div>`)].join("")||'<div class="boş">Önümüzdeki 14 günde bilanço veya makro mayın yok.</div>'}</div>`;
+  yonBagla($("#v-ozet"));
 }
 // 🟢🔴 Midas AL/SAT vitrini + 💵 aylik katki defteri (yalniz yerel sunucu / sifreli ayna; github.io gizli kopyasinda yoktur)
 function vitrin(){
   const A=D.alsat, M=D.midas; if(!A||!M)return "";
-  const K=M.kasa, yok=!A.al.length&&!A.sat.length;
-  const fisAl=a=>`<div class="fis al"><div class="b">🟢 MİDAS'TA AL: ${a.t}${a.uyari?` <span class="chip warn">${a.uyari}</span>`:""}</div><span><b>Limit Fiyat</b>${usd(a.limit)}</span><span><b>Alınacak Net Tutar</b>${usd(a.tutar)}</span><span><b>Net Lot</b>${a.lot}</span><span><b>Kaynak</b>${a.kaynak}</span><div class="g">Gerekçe: ${a.gerekce}</div></div>`;
+  const K=M.kasa, CF=A.cark_fis||[], yok=!A.al.length&&!A.sat.length&&!CF.length;
+  const fisAl=a=>`<div class="fis al${a.kilit?" kilit":""}"><div class="b">🟢 MİDAS'TA AL: ${a.t} · ${a.tur||"PUSU AL"}${a.skor!=null?` · Dip Skoru ${a.skor}/4`:""}${a.uyari?` <span class="chip warn">${a.uyari}</span>`:""}</div><span><b>Limit Fiyat</b>${usd(a.limit)}</span><span><b>Alınacak Net Tutar</b>${usd(a.tutar)}</span><span><b>Net Lot</b>${a.lot}</span><span><b>Kaynak</b>${a.kaynak}</span><div class="g">Gerekçe: ${a.gerekce}</div></div>`;
+  const fisCark=c=>c.tur.includes("SAT")?`<div class="fis sat" style="border-width:2px"><div class="b">${c.tur}: ${c.t}</div><span><b>Limit Fiyat</b>${usd(c.limit)}</span><span><b>Satılacak Lot</b>${c.lot}</span><span><b>Geri Alınan Ana Para</b>${usd(c.tutar)}</span><span><b>Bedava Kalan Lot</b>+${c.bedava}</span><div class="g">Gerekçe: ${c.gerekce}</div></div>`
+    :`<div class="fis al" style="border-width:2px"><div class="b">${c.tur}: ${c.t}</div><span><b>Limit Fiyat</b>${usd(c.limit)}</span><span><b>Geri Konacak Nakit</b>${usd(c.tutar)}</span><span><b>Alınacak Lot</b>${c.lot}</span><span><b>Bedava Lot</b>+${c.bedava}</span><div class="g">Gerekçe: ${c.gerekce}</div></div>`;
   const fisSat=x=>`<div class="fis sat"><div class="b">🔴 MİDAS'TA SAT: ${x.t} · ${x.tur}</div><span><b>Limit Fiyat</b>${usd(x.limit)}</span><span><b>Satılacak Net Lot</b>${x.lot}</span><span><b>Tutar</b>${usd(x.tutar)}</span><span><b>Alt Geri Alım Pususu</b>${x.geri_alim??"—"}</span><div class="g">Gerekçe: ${x.gerekce}</div></div>`;
-  const bek=A.bekleyen.map(b=>`<div class="row"><span class="t">${b.t}</span><span class="d">pusu ${b.pusu} · kapanış ${f2(b.kapanis)} · Dönüş ${b.puan}/4 · kilit açılınca ≈ <span class="para">${usd(b.tutar)}</span> / ${b.lot} lot</span><span class="r ${b.mesafe<0?"dn":""}">${pc(b.mesafe)}</span></div>`).join("");
-  const defter=(M.katkilar||[]).slice().reverse().map(k=>`<div><span>${k.tarih} · <span class="para">${usd(k.tutar)}</span> · ${k.not||""}</span>${YEREL?`<button class="btn tehlike" data-sil="${k.id}" style="padding:3px 8px;font-size:12px">Sil</button>`:""}</div>`).join("");
-  return `<div class="vitrin ${yok?"yok":"var"}"><div class="ust"><div><div class="buyuk">${yok?"🛡️ ŞU AN AL-SAT YOK — MİDAS'A DOKUNMA":"⚡ MİDAS FİŞİ HAZIR: "+A.al.length+" alış · "+A.sat.length+" satış"}</div><div class="neden">${A.gerekce} · kesin bar: ${A.kesin}${A.not?" · "+A.not:""}</div></div>
+  const bek=A.bekleyen.map(b=>`<div class="row"><span class="t">${b.t}</span><span class="d">Pusu ${b.pusu} · Kapanış ${f2(b.kapanis)} · Dip ${b.skor??b.puan??"—"}/4 · Onaylı <span class="para">${usd(b.tutar)}</span>${b.oncu!=null?` · Öncü <span class="para">${usd(b.oncu)}</span>`:""}</span><span class="r ${b.mesafe<0?"dn":""}">${pc(b.mesafe)}</span></div>`).join("");
+  return `<div class="vitrin ${yok?"yok":"var"}"><div class="ust"><div><div class="buyuk">${yok?"🛡️ Şu An Al-Sat Yok — Midas'a Dokunma":"⚡ Midas Fişi Hazır: "+A.al.length+" Alış · "+A.sat.length+" Satış"+(CF.length?" · "+CF.length+" Geri Koyma":"")}</div><div class="neden">${A.gerekce}</div></div>
     ${YEREL?`<button class="btn primary" id="yenileCanli">🔄 Şimdi Canlı Yenile</button>`:""}</div>
-    ${A.al.map(fisAl).join("")}${A.sat.map(fisSat).join("")}
-    <h2 style="margin-top:14px">⏳ Pusuda Sıra Bekleyen İlk 5 Aday</h2><div class="list">${bek||'<div class="boş">Aday yok.</div>'}</div></div>
-  <div class="vitrin"><div class="ust"><div><div class="buyuk" style="font-size:17px">💵 Aylık Katkı / Nakit Ekle</div><div class="neden">Toplam kasa <span class="para">${usd(K.toplam_kasa)}</span> · Aktif pusu nakdi <span class="para">${usd(K.aktif_pusu)}</span> · Kriz rezervi <span class="para">${usd(K.kriz_rezervi)}</span> (${K.kriz_kosulu}) · Tekil %${Math.round(K.tavan_oran*100)} tavan <span class="para">${usd(K.tekil_tavan)}</span> · Toplam yatırılan ek katkı <span class="para">${usd(K.ek_katki_toplam)}</span> (hisse K/Z'ye karışmaz)</div></div></div>
-    ${YEREL?`<form class="katki" id="katkiForm"><div><label>Tarih</label><input type="date" id="kTarih" value="${new Date().toISOString().slice(0,10)}"></div><div><label>Yatırılan Tutar ($)</label><input type="number" step="0.01" min="0.01" id="kTutar" placeholder="2700" required></div><div><label>Not</label><input type="text" id="kNot" placeholder="Kasım Aylık Katkı"></div><button class="btn primary" type="submit">➕ Kasaya Ekle</button></form>`:'<div class="boş">Katkı ekleme yalnızca bilgisayardaki yerel ekranda yapılır.</div>'}
-    <div class="defter">${defter||'<div class="boş" style="padding:4px 0">Henüz ek katkı yok; baz nakit korunuyor.</div>'}</div><div id="katkiHaber" class="boş"></div></div>`;
+    ${CF.map(fisCark).join("")}${A.al.map(fisAl).join("")}${A.sat.map(fisSat).join("")}
+    <h2 style="margin-top:14px">Sırada Bekleyen 5 Aday</h2><div class="list">${bek||'<div class="boş">Aday yok</div>'}</div></div>
+  `;
+}
+function katkiBlok(){
+  const M=D.midas; if(!M)return ""; const K=M.kasa;
+  const defter=(M.katkilar||[]).slice().reverse().map(k=>`<div><span>${k.tarih} · <span class="para">${usd(k.tutar)}</span> · ${k.not||""}</span>${YEREL?`<button class="btn tehlike" data-sil="${k.id}" style="padding:3px 8px;font-size:12px">Sil</button>`:""}</div>`).join("");
+  return `<div class="vitrin"><div class="ust"><div><div class="buyuk" style="font-size:17px">💵 Aylık Katkı</div><div class="neden" style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px"><span class="chip">Toplam Kasa <span class="para">${usd(K.toplam_kasa)}</span></span><span class="chip good">Aktif Pusu <span class="para">${usd(K.aktif_pusu)}</span></span><span class="chip bad">Kriz Rezervi <span class="para">${usd(K.kriz_rezervi)}</span></span><span class="chip">Tekil Tavan <span class="para">${usd(K.tekil_tavan)}</span></span><span class="chip send">Ek Katkı <span class="para">${usd(K.ek_katki_toplam)}</span></span></div></div></div>
+    ${YEREL?`<form class="katki" id="katkiForm"><div><label>Tarih</label><input type="date" id="kTarih" value="${new Date().toISOString().slice(0,10)}"></div><div><label>Tutar ($)</label><input type="number" step="0.01" min="0.01" id="kTutar" placeholder="2700" required></div><div><label>Not</label><input type="text" id="kNot" placeholder="Kasım Aylık Katkı"></div><button class="btn primary" type="submit">➕ Kasaya Ekle</button></form>`:'<div class="boş">Katkı ekleme yalnızca bilgisayardaki yerel ekranda yapılır.</div>'}
+    <div class="defter">${defter}</div><div id="katkiHaber" class="boş"></div></div>`;
 }
 async function api(yol,secenek){const r=await fetch(yol,{headers:{"Content-Type":"application/json"},...secenek});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.hata||("HTTP "+r.status));return j}
 function vitrinBagla(){
+  const on=document.querySelector(".view.on")||document, $=sel=>on.querySelector(sel);
   const y=$("#yenileCanli"); if(y)y.onclick=async()=>{y.disabled=true;y.textContent="🔄 Canlı fiyat çekiliyor…";try{await api("/api/yenile",{method:"POST"});for(let i=0;i<60;i++){await new Promise(r=>setTimeout(r,3000));const d=await api("/api/durum");if(!d.yenileniyor){if(d.hata)throw new Error(d.hata);break}}await yukle(true)}catch(e){haber("Yenilenemedi: "+e.message)}finally{const b=$("#yenileCanli");if(b){b.disabled=false;b.textContent="🔄 Şimdi Canlı Yenile"}}};
   const f=$("#katkiForm"); if(f)f.onsubmit=async e=>{e.preventDefault();const h=$("#katkiHaber");try{const j=await api("/api/katki",{method:"POST",body:JSON.stringify({tarih:$("#kTarih").value,tutar:$("#kTutar").value,not:$("#kNot").value})});h.textContent=`✓ Eklendi: ${usd(j.eklendi.tutar)} · toplam ek katkı ${usd(j.toplam_katki)}`;await yukle()}catch(err){h.textContent="Eklenemedi: "+err.message}};
-  document.querySelectorAll("[data-sil]").forEach(b=>b.onclick=async()=>{if(!confirm("Bu katkı kaydı silinsin mi?"))return;try{await api("/api/katki/"+b.dataset.sil,{method:"DELETE"});await yukle()}catch(err){$("#katkiHaber").textContent="Silinemedi: "+err.message}});
+  on.querySelectorAll("[data-sil]").forEach(b=>b.onclick=async()=>{if(!confirm("Bu katkı kaydı silinsin mi?"))return;try{await api("/api/katki/"+b.dataset.sil,{method:"DELETE"});await yukle()}catch(err){$("#katkiHaber").textContent="Silinemedi: "+err.message}});
 }
 function cizHisse(){
-  const ligAd={1:"1. Lig — Kaleler",2:"2. Lig — Büyüme",3:"3. Lig — İzleme"};
+  const ligAd={1:"1. Lig · Kaleler",2:"2. Lig · Büyüme",3:"3. Lig · İzleme"};
   let h="";
   for(const L of [1,2,3]){
     const rows=D.hisseler.filter(x=>x.lig===L);
@@ -263,7 +304,7 @@ function cizHisse(){
       `<tr class="tik" data-t="${x.t}" title="📊 Derin istatistik ve gelecek rotası"><td>${x.t}${x.kalkan?" 🛡":""}${x.muaf?" 🏰":""}</td><td class="mono">${f2(x.canli!=null?x.canli:x.fiyat)}</td><td class="${cls(x.canli!=null?x.canli_degisim:x.d1)}">${pc(x.canli!=null?x.canli_degisim:x.d1)}</td><td class="mono" style="font-size:11px;opacity:.75">${f2(x.fiyat)} <span class="${cls(x.d1)}">${pc(x.d1)}</span></td>${D.gizli?"":`<td class="${cls(x.kz_pct)}">${x.kz_pct!=null?pc(x.kz_pct):"—"}</td>`}${D.gizli?"":`<td class="para mono">${x.deger!=null?usd(x.deger):"—"}</td>`}<td class="${x.ema21==="ÜST"?"up":"dn"}">${x.ema21}</td><td>${x.rsi}</td><td class="${x.obv_ust?"up":"dn"}">${x.obv_ust?"Giriş ↑":"Çıkış ↓"}</td><td>${x.puan}/4</td></tr>`).join("")+`</tbody></table></div>`;
   }
   $("#v-hisse").innerHTML=h+`<div class="boş">🛡 kalkan icra edildi · 🏰 kale muafiyeti · 🌙 Canlı = seans öncesi/sonrası son işlem (göstergeler kesin günlük bardan) · OBV = kurumsal para yönü · Dönüş = 4 şartlı teyit puanı</div>`;
-  $("#nHisse").textContent=D.hisseler.length;
+  (($("#nHisse")||{}).textContent=D.hisseler.length);
 }
 function cizPusu(){
   const p=D.hisseler.filter(h=>h.pusu_mesafe!=null).sort((a,b)=>Math.abs(a.pusu_mesafe)-Math.abs(b.pusu_mesafe));
@@ -276,7 +317,7 @@ function cizPusu(){
 function cizBilanco(){
   $("#v-bilanco").innerHTML=`<div class="list">${D.bilanco.map(b=>b.veri_yok?`<div class="row"><span class="t">${b.t}</span><span class="d">Veri Yok</span></div>`:
   `<div class="row"><span class="t">${b.t}</span><span class="d">${b.tarih} · ${b.lig}. Lig</span>${b.mayin?`<span class="chip bad">💣 ${b.kalan} gün · Yakın Mayın</span>`:`<span class="chip">${b.kalan} gün</span>`}</div>`).join("")}</div><div class="boş">ETF'ler (VOO, SCHD, QQQ) bilanço açıklamaz. Tarihler Yahoo Finance kaynaklıdır.</div>`;
-  $("#nMayin").textContent=D.bilanco.filter(b=>b.mayin).length||"";
+  (($("#nMayin")||{}).textContent=D.bilanco.filter(b=>b.mayin).length||"");
 }
 function haberSatir(h){const c=h.etiket.startsWith("🔴")?"bad":h.etiket.startsWith("🟢")?"good":"";return `<div class="nw ${c}"><span class="z">${h.z?new Date(h.z).toLocaleString("tr-TR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}):"—"}</span><div>${h.baslik}<div class="src">${h.etiket} · ${h.kaynak}</div></div></div>`}
 function cizHaber(){
@@ -335,11 +376,14 @@ function cizAjan(){
   <li>ABD açılışı öncesi (öğleden sonra): <b>10</b> haber turu.</li><li>Seans açıkken: <b>1</b> anlık bakış; TradingView alarmı gelirse hisseyi yaz, <b>9</b> röntgen.</li>
   <li>Bir hisse pusuya %5'ten yaklaştı: <b>4</b> olasılık. Yeni aday arıyorsun: <b>7</b>. Ayda bir: <b>8</b>. VIX 22.50'yi aştı: <b>3</b>.</li>
   <li>Seans içi güç: <b>16</b> VWAP. Opsiyon duvarı: <b>11</b>. Resmi bildirim: <b>17</b>. Nereye gidiyor: <b>13</b> (--rota). Sistem sağlığı: <b>20</b>.</li></ul>
-  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"><span class="chip bad">🔒 VIX ≥ 22.50 TAM KİLİT</span><span class="chip warn">20–22.50 YALNIZ 1. LİG</span><span class="chip good">&lt; 20 AÇIK</span><span class="chip">🎯 Tekil tavan $3,100 · &gt;%85 dolu → alım kısıtlı</span></div>
-  <div class="boş" style="padding:6px 0 0">Her ajan için üst kural; alım kararı bu rejime tabidir. Tüm komutlar sırayla: <code>.venv/bin/python .claude/scripts/orkestra.py gunluk|haftalik|hepsi</code></div></div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"><span class="chip bad">VIX ≥ 25 KORKU · panik çözülürse dip avı</span><span class="chip warn">20–25 TEMKİN · 2/4 dip teyidi</span><span class="chip good">&lt; 20 SAKİN · 1/4 yeter</span><span class="chip">🎯 Tekil tavan $3,100 · &gt;%85 dolu → alım kısıtlı</span></div>
+  <div class="boş" style="padding:6px 0 0">VIX alım yasağı değildir; yalnızca aranan dip teyidini belirler (AL/SAT Masası). Tüm komutlar sırayla: <code>.venv/bin/python .claude/scripts/orkestra.py gunluk|haftalik|hepsi</code></div></div>
   <div class="alarmk"><div class="k">🔔 Alarm Çaldı · Hisse Yaz ve Kopyala</div><input id="alarmIn" placeholder="MU AVGO" spellcheck="false" autocomplete="off"><div class="cmd" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="btn primary" id="alarmBtn">📋 Röntgen Komutunu Kopyala</button><span class="kopya" id="kopyaA">✓ Kopyalandı! Mesaj kutusuna yapıştır</span><code id="alarmCmd" style="font:500 11px var(--mono);background:var(--idle-soft);border:1px solid var(--line);padding:5px 8px;border-radius:8px;flex:1 1 200px;word-break:break-all"></code></div></div>
-  <div class="list">${AJANLAR.map((a,i)=>`<div class="ag${onerilen.has(i)?" oner":""}"><div class="num">${String(i+1).padStart(2,"0")}</div><div><div class="head"><span class="ad">${a[0]}</span><span class="kat">${a[1]}</span>${onerilen.has(i)?'<span class="simdi">👉 ŞİMDİ</span>':""}</div><div class="gorev">${a[2]}</div><div class="zaman">Ne zaman: <b>${a[3]}</b></div><div class="cmd"><code>${PY+a[4]}</code><button class="btn" data-cmd="${PY+a[4]}">📋 Komutu Kopyala</button></div></div></div>`).join("")}</div>
-  <div class="boş">Komutlar Claude Code'daki HEDGE FUND oturumunda çalışır: butona bas, komutu mesaj kutusuna yapıştır, Enter.</div>`;
+  ${YEREL?`<div class="kural" id="vardiyaOzet">Vardiya durumu yükleniyor…</div>`:""}
+  <div class="list">${AJANLAR.map((a,i)=>{const sc=a[4].split(" ")[0];return `<div class="ag${onerilen.has(i)?" oner":""}" data-sc="${sc}"><div class="num">${String(i+1).padStart(2,"0")}</div><div><div class="head"><span class="ad">${a[0]}</span><span class="kat">${a[1]}</span><span class="ajanDurum" data-durum="${sc}">—</span>${onerilen.has(i)?'<span class="simdi">👉 ŞİMDİ</span>':""}</div><div class="gorev">${a[2]}</div><div class="zaman">Ne zaman: <b>${a[3]}</b> <span data-son="${sc}"></span></div><div class="cmd"><code>${PY+a[4]}</code><button class="btn" data-cmd="${PY+a[4]}">📋 Kopyala</button>${YEREL?`<button class="btn" data-calistir="${a[4]}">▶ Çalıştır</button><button class="btn" data-cikti="${sc}">📄 Çıktı</button>`:""}</div><div class="cikti" data-ciktikutu="${sc}" hidden></div></div></div>`}).join("")}</div>
+  <div class="boş">Komutlar Claude Code oturumunda çalışır: kopyala, mesaj kutusuna yapıştır, Enter.</div>
+  `;
+  yonBagla(v); vitrinBagla(); if(YEREL)vardiyaYukle();
   v.querySelectorAll("button[data-cmd]").forEach(b=>b.onclick=e=>kopyala(e.target,b.dataset.cmd));
   const inp=v.querySelector("#alarmIn"),out=v.querySelector("#alarmCmd");
   const alarmCmd=()=>{const syms=inp.value.toUpperCase().replace(/^\s*ALARM\s*:?/,"").match(/[A-Z]{1,5}(?:-B)?/g)||[];const c=PY+"alarm_okuyucu.py --hisse "+(syms.join(" ")||"…");out.textContent=c;return c};
@@ -347,14 +391,73 @@ function cizAjan(){
   v.querySelector("#alarmBtn").onclick=e=>kopyala(e.target,alarmCmd(),v.querySelector("#kopyaA"));
   yonBagla(v);
 }
-cizAjan(); setInterval(cizAjan,60000);
+setInterval(()=>{if(D)cizAjan()},60000);
 function ciz(){
   $("#gizleBtn").hidden=!!D.gizli;
   document.querySelectorAll(".para").forEach(e=>{if(D.gizli)e.remove()});
-  $("#altBaslik").textContent=`${D.hisseler.length} hisse · ${D.seans_acik?"Seans Açık":"Seans Kapalı"} · veri ${new Date(D.guncelleme).toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})} (${dkOnce(D.guncelleme)})`;
+  $("#altBaslik").textContent=`${D.hisseler.length} Hisse · ${D.seans_etiketi||(D.seans_acik?"Seans Açık":"Seans Kapalı")} · ${new Date(D.guncelleme).toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})}`;
   $("#ustChip").innerHTML=vixChip(D.vix);
-  $("#nvMidas").hidden=false; $("#nvMidas em").textContent=D.midas?"yerel":"🔒";
-  cizBant();cizOzet();cizHisse();cizPusu();cizBilanco();cizHaber();cizMidas();
+  $("#nvMidas").hidden=false; $("#nvMidas em").textContent=D.midas?"Yerel":"🔒";
+  cizSideKart();
+  cizBant();cizOzet();cizHisse();cizPusu();cizBilanco();cizHaber();cizMidas();cizAlsat();cizRontgen();cizAjan();
+}
+// 20 ajan vardiya durumu (yerel sunucu /api/vardiya)
+const VARDIYA_AD={V1:"Vardiya 1 · Seans İçi 12 dk",V2:"Vardiya 2 · Açılış · Kapanış · Pusu %3",V3:"Vardiya 3 · Her 6 Saat",V4:"Vardiya 4 · Günde 1",V4s:"Vardiya 4 · Saatlik"};
+async function vardiyaYukle(){
+  const v=$("#v-ajan"); let VD; try{VD=await api("/api/vardiya")}catch(e){const o=v.querySelector("#vardiyaOzet");if(o)o.textContent="Vardiya bilgisi alınamadı: "+e.message;return}
+  const o=v.querySelector("#vardiyaOzet"); if(o){const g=VD.ajanlar.filter(a=>a.durum==="guncel").length;o.innerHTML=`<b>Vardiya Sistemi</b> · ${VD.seans.etiket} (NY) · ${g}/${VD.ajanlar.length} ajan güncel · ${VD.kosan?"koşuyor: "+VD.kosan:"boşta"} · kuyruk ${VD.kuyruk.length}<br><span style="color:var(--muted);font-size:12px">${Object.entries(VARDIYA_AD).map(([k,ad])=>ad).join(" · ")}</span>`}
+  VD.ajanlar.forEach(a=>{const d=v.querySelector(`[data-durum="${a.script}"]`), s=v.querySelector(`[data-son="${a.script}"]`); if(!d)return;
+    const et=a.durum==="kosuyor"?"⏳ Koşuyor":a.durum==="sirada"?"⏳ Sırada":a.durum==="guncel"?(a.ok===false?"⚠ Hata":"🟢 Güncel"):"⏳ Bekliyor";
+    d.textContent=`${VARDIYA_AD[a.vardiya]||a.vardiya} · ${et}`; d.className="ajanDurum "+(a.ok===false?"hata":a.durum); if(s)s.textContent=a.son?"· son "+new Date(a.son).toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})+(a.sure?" ("+a.sure+" sn)":""):""});
+  v.querySelectorAll("[data-calistir]").forEach(b=>b.onclick=async()=>{b.disabled=true;try{await api("/api/vardiya/calistir",{method:"POST",body:JSON.stringify({script:b.dataset.calistir})});b.textContent="⏳ Sırada";setTimeout(vardiyaYukle,2000)}catch(e){b.textContent="Hata";}});
+  v.querySelectorAll("[data-cikti]").forEach(b=>b.onclick=async()=>{const k=v.querySelector(`[data-ciktikutu="${b.dataset.cikti}"]`);if(!k.hidden){k.hidden=true;return}try{const j=await api("/api/vardiya/cikti?script="+b.dataset.cikti);k.textContent=j.metin;k.hidden=false}catch(e){k.textContent="Çıktı yok (henüz koşmadı)";k.hidden=false}});
+}
+// Sol menu alt kartlari: Kasa (yalniz yerel ayna) ve Durum
+function cizSideKart(){
+  const kk=$("#sideKasa"), dd=$("#sideDurum"), M=D.midas, eg=D.vix_egri;
+  if(M){const K=M.kasa; kk.hidden=false; kk.innerHTML=`<div class="k">Kasa</div><div class="r"><span>Toplam</span><b class="para">${usd(K.toplam_kasa)}</b></div><div class="r"><span>Aktif Pusu</span><b class="para">${usd(K.aktif_pusu)}</b></div><div class="r"><span>Kriz Rezervi</span><b class="para">${usd(K.kriz_rezervi)}</b></div><div class="r"><span>Hisse K/Z</span><b class="${cls(M.toplam.kz)}">${pc(M.toplam.kz_pct)}</b></div>`}
+  else kk.hidden=true;
+  const mayin=D.bilanco.filter(b=>b.mayin).length+(D.makro_mayin||[]).length;
+  dd.hidden=false; dd.innerHTML=`<div class="k">Durum</div><div class="r"><span>Seans</span><b>${D.seans_etiketi||"—"}</b></div><div class="r"><span>Veri</span><b>${new Date(D.guncelleme).toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})}</b></div><div class="r"><span>VIX</span><b>${D.vix.deger??"—"} · ${(VIX_AD[D.vix.rejim]||D.vix.rejim).split(" ·")[0]}</b></div>${eg&&eg.yapi!=="VERİ YOK"?`<div class="r"><span>Vade Eğrisi</span><b>${eg.yapi==="CONTANGO"?"Contango":eg.yapi==="TAM BACKWARDATION"?"Backwardation":"Kısmi Backwardation"}</b></div>`:""}<div class="r"><span>Mayın 14 Gün</span><b>${mayin}</b></div>`;
+}
+// Sol menu kutusu + detayli AL/SAT masasi (yalniz D.alsat varken: yerel sunucu veya cozulmus sifreli ayna)
+function cizAlsat(){
+  const A=D.alsat, k=$("#alsatKutu"), nv=$("#nvAlsat"), v=$("#v-alsat");
+  if(!A){k.hidden=true;nv.hidden=true;v.innerHTML="";if(ls.get("dh-view")==="alsat")goster("ozet");return}
+  const yok=!A.al.length&&!A.sat.length&&!(A.cark_fis||[]).length, enYakin=(A.bekleyen||[])[0], izin=A.izin_ligler||[];
+  nv.hidden=false; $("#alsatRozet").textContent=yok?"Yok":`${A.al.length+(A.cark_fis||[]).length} Al · ${A.sat.length} Sat`;
+  k.hidden=false; k.className="alsatKutu "+(yok?"yok":"var");
+  k.innerHTML=`<div class="ikon" title="AL / SAT">${yok?"🛡️":"⚡"}</div><div class="b">${yok?"🛡️ Al-Sat Yok":"⚡ "+A.al.length+" Al · "+A.sat.length+" Sat"}</div><div class="m">VIX ${(A.vix&&A.vix.vix)??"—"}${A.vix&&A.vix.panik_cozuluyor?" · Panik Çözülüyor":""}${enYakin?`<br>Sırada ${enYakin.t} ${enYakin.pusu} (${pc(enYakin.mesafe)}) · Dip ${enYakin.skor??"—"}/4`:""}</div>`;
+  k.onclick=()=>{goster("alsat");app.classList.remove("acik")};
+  const T=A.tarama||[], S=A.sat_izleme||[], N=A.nakit_plani||{}, Kz=A.kriz, M=D.midas, VX=A.vix||{}, C=A.cark||[], PK=A.paketler||[], AI=A.ai||null;
+  const sart=o=>`<span class="sart ${o?"ok":"no"}">${o?"✓":"✗"}</span>`;
+  v.innerHTML=vitrin()+`
+  <div class="grid kokpit">
+    <div class="card"><div class="k">VIX Modu</div><div class="v" style="font-size:17px">${VX.vix??"—"} ${VX.panik_cozuluyor?'<span class="chip good">Panik Çözülüyor</span>':""}</div><div class="s">5G Tepesi ${VX.tepe5??"—"} · Gevşeme %${VX.gevseme??"—"}</div></div>
+    <div class="card"><div class="k">Kriz Rezervi · VOO ${Kz?Kz.esik:573}</div><div class="v ${Kz&&Kz.aktif?"dn":""}" style="font-size:17px">${Kz?(Kz.aktif?(Kz.skor>=1?"Devrede":"Dip Bekleniyor"):"Beklemede"):"—"}</div><div class="s">${Kz?`VOO ${f2(Kz.kapanis)} · Eşiğe ${pc(Kz.mesafe)}`:"Veri Yok"}</div></div>
+    <div class="card"><div class="k">Nakit Planı</div><div class="v" style="font-size:17px"><span class="para">${usd(N.kalan)}</span></div><div class="s">Fişler <span class="para">${usd(N.fis_toplami)}</span> · Tavan <span class="para">${usd(N.tavan)}</span></div></div>
+    ${AI?`<div class="card" style="${AI.dolu?"border-color:var(--bad)":""}"><div class="k">AI ve Çip Yoğunlaşması</div><div class="v ${AI.dolu?"dn":AI.pct>=AI.tavan*0.85?"":"up"}" style="font-size:19px">%${AI.pct} / %${AI.tavan}</div><div class="s">${AI.dolu?"Tavan Dolu — Nakit 1. Lig Defansiflere":`Boşluk <span class="para">${usd(AI.bosluk_usd)}</span>`} · ${AI.uyeler.slice(0,4).map(u=>u.t+" %"+u.pct).join(" · ")}</div></div>`:""}
+    <div class="card"><div class="k">Tarama Özeti</div><div class="v" style="font-size:17px">${T.filter(x=>x.hazir).length} Fiş · ${T.filter(x=>x.bolgede).length} Bölgede</div><div class="s">Dip ≥ 2/4: ${T.filter(x=>x.skor>=2).length} Hisse${T.filter(x=>x.skor===4).length?" · 4/4: "+T.filter(x=>x.skor===4).map(x=>x.t).join(", "):""}</div></div>
+  </div>
+  <h2>Kalkan ve Bedava Lot Çarkı</h2>
+  <div class="grid kokpit">
+    <div class="card hero"><div class="k">Kilitli Kalkan Nakdi</div><div class="v"><span class="para">${usd(N.kilitli_kalkan)}</span></div><div class="s">${C.length} Kalkan</div></div>
+    ${C.map(c=>`<div class="card" style="${c.fis?"border-color:var(--good)":""}"><div class="k">${c.t} · ${c.satilan_lot} Lot @ ${usd(c.satis_fiyati)}</div><div class="v" style="font-size:17px">Hedef ${c.hedef} → +${c.hedef_bedava} Lot</div><div class="s">Nakit <span class="para">${usd(c.net_nakit)}</span> · Şimdi ${f2(c.kapanis)} (${pc(c.mesafe)}) · Dip ${c.skor}/4 ${c.fis?'<span class="chip good">Fiş Hazır</span>':c.hedefte?'<span class="chip warn">Dip Bekleniyor</span>':""}</div></div>`).join("")}
+  </div>
+  <h2>Taktik Paketler</h2>
+  <div class="grid kokpit">${PK.length?PK.map(k=>`<div class="card" style="${k.fis?"border-color:var(--bad)":""}"><div class="k">${k.t} · ${k.tarih} · ${k.lot} Lot @ ${usd(k.alis)}</div><div class="v" style="font-size:17px">Hedef ${f2(k.hedef)} (${pc(k.mesafe)})</div><div class="s">Yatırılan <span class="para">${usd(k.tutar)}</span> · Şimdi ${f2(k.kapanis)} (${pc(k.getiri_pct)}) · Hedefte +${k.bedava_lot} Lot Bedava ${k.fis?'<span class="chip bad">Sat Fişi Hazır</span>':""}</div></div>`).join(""):'<div class="card"><div class="k">Taktik Paket</div><div class="s">Henüz yok</div></div>'}</div>
+  <h2>Dip Dönüş Taraması</h2>
+  <div class="twrap"><table><thead><tr><th>Hisse</th><th>Lig</th><th>Kapanış</th><th>Pusu</th><th>Mesafe</th><th>Bölge</th><th>Dip</th><th title="RSI dip kancası">RSI</th><th title="Emilim / çekiç mumu + RVOL">Mum</th><th title="OBV 3 bar ↑ veya VIX gevşemesi">OBV/VIX</th><th title="VPOC / Fib / put duvarı ±3%">Destek</th><th title="Hissenin kendi grafiğinde alıcı izi: RSI kancası / mum+RVOL / kendi OBV">Canlı Alıcı</th><th>RVOL</th><th>Onaylı / Öncü</th><th>Bilanço</th><th>Durum</th></tr></thead><tbody>
+  ${T.map(x=>`<tr class="tik" data-t="${x.t}" style="${x.hazir?"background:var(--good-soft)":x.yasak?"opacity:.6":""}"><td>${x.t}${x.yasak?" 🔒":""}${x.ai?" 🧠":""}</td><td>${x.lig}</td><td class="mono">${f2(x.kapanis)}</td><td class="mono">${x.pusu??"—"}</td><td class="${x.mesafe!=null&&x.mesafe<0?"dn":""}">${x.mesafe!=null?pc(x.mesafe):"—"}</td><td>${x.altinda?'<span class="chip good">Altında</span>':x.bolgede?'<span class="chip warn">Bölgede</span>':"—"}</td><td><b>${x.skor}/4</b></td>
+    <td title="${x.detay.rsi}">${sart(x.kriter.rsi)}</td><td title="${x.detay.mum}">${sart(x.kriter.mum)}</td><td title="${x.detay.obv}">${sart(x.kriter.obv)}</td><td title="${x.detay.destek}">${sart(x.kriter.destek)}</td><td>${sart(x.canli)}</td><td>${x.rvol}</td><td class="mono"><span class="para">${usd(x.mermi)}</span> / <span class="para">${usd(x.oncu)}</span></td><td>${x.bilanco!=null?(x.bilanco<=5?'<span class="chip bad">'+x.bilanco+' Gün</span>':x.bilanco+" Gün"):"—"}</td>
+    <td style="white-space:normal;text-align:left;font-size:12px;color:var(--muted);min-width:220px">${x.fis?'<b class="ok">'+x.fis+'</b>':x.eksik.join(" · ")}</td></tr>`).join("")}
+  </tbody></table></div>
+  <h2>Satış İzleme</h2>
+  <div class="twrap"><table><thead><tr><th>Hisse</th><th>Kapanış</th><th>Maliyet</th><th>K/Z $</th><th>K/Z %</th><th>EMA21</th><th>EMA21'e</th><th>OBV</th><th>Kartopu</th><th>Kartopuya</th><th>%35 Lot</th><th>Tutar</th><th>Geri Koyma</th><th>Durum</th></tr></thead><tbody>
+  ${S.map(x=>`<tr class="tik" data-t="${x.t}"><td>${x.t}</td><td class="mono">${f2(x.kapanis)}</td><td class="mono"><span class="para">${usd(x.maliyet)}</span></td><td class="${cls(x.kz)} mono"><span class="para">${usd(x.kz)}</span></td><td class="${cls(x.kz_pct)}">${pc(x.kz_pct)}</td><td class="mono">${f2(x.ema21)}</td><td class="${x.ema21_mesafe<0?"dn":"up"}">${pc(x.ema21_mesafe)}</td><td class="${x.obv_asagi?"dn":"up"}">${x.obv_asagi?"↓":"↑"}</td><td class="mono">${x.kartopu??"—"}</td><td>${x.kartopu_mesafe!=null?x.kartopu_mesafe.toFixed(1)+"% kaldı":"—"}</td><td class="mono">${x.kalkan_lot}</td><td class="mono"><span class="para">${usd(x.kalkan_tutar)}</span></td><td class="mono">${x.geri_koyma??"—"}</td><td style="white-space:normal;text-align:left;font-size:12px;color:var(--muted)">${x.koruma?x.koruma[0].toUpperCase()+x.koruma.slice(1):(x.kalkan_sarti?(x.ema21_mesafe<0?(x.obv_asagi?'<b class="no">Kalkan Fişi</b>':'EMA21 Altı · OBV ↑'):'Kâr Eşiği Tamam'):'Kâr Eşiği Altında')}</td></tr>`).join("")}
+  </tbody></table></div>
+  <div class="boş">Fişler emir değildir; Midas'ta sen girersin.</div>`;
+  vitrinBagla(); v.querySelectorAll("tr.tik").forEach(tr=>tr.onclick=()=>acCekmece(tr.dataset.t));
 }
 // 💼 Midas Portfoy Aynasi: yalnizca yerel veri_tam.json'da gelir; github.io kopyasinda bu alan yoktur, sekme gizlenir
 // Internette: veri_tam.enc (AES-GCM) yalnizca bu cihazda girilen sifreyle cozulur; sifre cihazda kalir (localStorage), sunucuya gitmez
@@ -376,28 +479,67 @@ function cizMidas(){
   if(!M){
     const kayitli=ls.get("dh-ayna");
     if(kayitli&&!cizMidas.denendi){cizMidas.denendi=true;aynaAc(kayitli)}
-    v.innerHTML=`<div class="card" style="max-width:420px"><div class="k">🔒 Midas Portföy Aynası kilitli</div><div class="s" style="margin:6px 0 10px">Ayna verisi bu siteye şifreli gelir; yalnızca şifreyi bilen cihazda açılır. Şifre bu cihazda saklanır, bir daha sorulmaz.</div>
-      <form id="aynaForm" style="display:flex;gap:8px;flex-wrap:wrap"><input id="aynaSifre" type="password" placeholder="Ayna şifresi" autocomplete="current-password" style="flex:1 1 160px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);font:inherit"><button class="btn" type="submit">Aç</button></form>
+    v.innerHTML=`<div class="card" style="max-width:420px"><div class="k">🔒 HEDGE FUND kilitli</div><div class="s" style="margin:6px 0 10px">Veri bu siteye şifreli gelir; yalnızca şifreyi bilen cihazda açılır.</div>
+      <form id="aynaForm" style="display:flex;gap:8px;flex-wrap:wrap"><input id="aynaSifre" type="password" placeholder="Şifre" autocomplete="current-password" style="flex:1 1 160px;padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);font:inherit"><button class="btn" type="submit">Aç</button></form>
       <div id="aynaHata" class="boş" style="color:var(--bad)"></div></div>`;
     $("#aynaForm").onsubmit=e=>{e.preventDefault();aynaAc($("#aynaSifre").value.trim())};
     return;
   }
   const K=M.kasa,T=M.toplam, pr=x=>`<span class="para">${x}</span>`;
-  v.innerHTML=`<div class="kural">🔒 ${M.sifreli_guncelleme?"Şifreli ayna: siteye kilitli gelir, yalnızca bu cihazda çözülür.":"Yerel ayna (veri_tam.json)."} Lot, bakiye ve K/Z düz metin olarak hiçbir zaman yayınlanmaz.</div>
+  const kd=p=>{ if(p.yasak)return '<span class="kd yasak">🔒 Yasak</span>'; const f=p.canli??p.kapanis; const out=[];
+    for(const k of ["K1","K2","K3"]){const lv=p.kademe&&p.kademe[k]; if(lv==null)continue; const alindi=(p.kademe.alindi||[]).includes(k); out.push(alindi?`<span class="kd ok">${k} ✅</span>`:`<span class="kd ${f<=lv?"alt":""}">${k} ${lv}</span>`)}
+    return out.join("")||"—" };
+  const hedef=p=>{ const h=[]; if(p.paket&&p.paket.length)h.push("🎯 "+p.paket.map(x=>f2(x.hedef)).join(", ")); if(p.kartopu)h.push("▲ "+p.kartopu+" ("+p.kartopu_mesafe.toFixed(0)+"%)"); if(p.kalkan)h.push("🛡 geri alım "+p.kalkan.geri_alim); if(p.muaf)h.push("🏰 kale"); return h.join("<br>")||"—" };
+  v.innerHTML=`
   <div class="grid kokpit">
-    <div class="card hero"><div class="k">Toplam Kasa (hisse + nakit)</div><div class="v">${pr(usd(K.toplam_kasa))}</div><div class="s">hisse ${pr(usd(K.hisse_degeri))} · nakit ${pr(usd(K.toplam_nakit))} (%${K.nakit_orani}) · katkı sonrası ${pr(usd(K.toplam_kasa_katki_sonrasi))}</div></div>
-    <div class="card"><div class="k">🛡 Kriz Rezervi</div><div class="v" style="font-size:19px">${pr(usd(K.kriz_rezervi))}</div><div class="s">${K.kriz_kosulu}</div></div>
-    <div class="card"><div class="k">🎯 Aktif Pusu Nakdi</div><div class="v" style="font-size:19px">${pr(usd(K.aktif_pusu))}</div><div class="s">+ yakında ${pr(usd(K.yakin_katki))} · tekil tavan ${usd(K.tekil_tavan)}</div></div>
-    <div class="card"><div class="k">Hisse Net K/Z</div><div class="v ${cls(T.kz)}" style="font-size:19px">${pr(usd(T.kz))} (${pc(T.kz_pct)})</div><div class="s">${T.pozisyon} pozisyon · maliyet ${pr(usd(T.ana))}${M.uyarilar.length?" · ⚠ "+M.uyarilar.join(", "):""}</div></div>
+    <div class="card hero"><div class="k">Toplam Kasa</div><div class="v">${pr(usd(K.toplam_kasa))}</div><div class="s">Hisse ${pr(usd(K.hisse_degeri))} · Nakit ${pr(usd(K.toplam_nakit))} (%${K.nakit_orani})</div></div>
+    <div class="card"><div class="k">Aktif Pusu Nakdi</div><div class="v" style="font-size:19px">${pr(usd(K.aktif_pusu))}</div><div class="s">Tekil Tavan ${usd(K.tekil_tavan)}</div></div>
+    <div class="card"><div class="k">Kriz Rezervi</div><div class="v" style="font-size:19px">${pr(usd(K.kriz_rezervi))}</div><div class="s">Yalnız VOO 573 Altı</div></div>
+    <div class="card"><div class="k">Hisse Net K/Z</div><div class="v ${cls(T.kz)}" style="font-size:19px">${pr(usd(T.kz))} (${pc(T.kz_pct)})</div><div class="s">${T.pozisyon} Pozisyon${M.uyarilar.length?" · ⚠ "+M.uyarilar.join(", "):""}</div></div>
   </div>
-  <h2>Pozisyonlar</h2><div class="twrap"><table><thead><tr><th>Hisse</th><th>Lot</th><th>Maliyet</th><th>Güncel</th><th>Değer</th><th>K/Z $</th><th>K/Z %</th><th>Tavan %</th><th>Boşluk</th><th>Pusu</th><th>Kartopu</th><th>Durum</th></tr></thead><tbody>
-  ${M.pozisyonlar.map(p=>`<tr class="tik" data-t="${p.t}"><td>${p.t}${p.muaf?" 🏰":""}${p.kalkan?" 🛡":""}</td><td class="mono">${p.lot}</td><td class="mono">${pr(usd(p.maliyet))}</td><td class="mono">${f2(p.canli??p.kapanis)}${p.canli!=null?" 🌙":""}</td><td class="mono">${pr(usd(p.deger))}</td><td class="${cls(p.kz)} mono">${pr(usd(p.kz))}</td><td class="${cls(p.kz_pct)}">${pc(p.kz_pct)}</td>
-    <td><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end">${p.doluluk.toFixed(0)}%<span class="bar" style="flex:none;width:56px"><i style="width:${Math.min(100,p.doluluk)}%"></i></span></div></td><td class="mono">${pr(usd(p.bosluk))}</td>
-    <td>${p.pusu?`${p.pusu} <span class="${p.pusu_mesafe<0?"dn":""}">(${pc(p.pusu_mesafe)})</span>`:"—"}</td><td>${p.kartopu?`${p.kartopu} (${p.kartopu_mesafe.toFixed(1)}% kaldı)`:"—"}</td>
-    <td style="white-space:normal;text-align:left;min-width:160px">${p.kalkan?`🛡 ${p.kalkan.satilan_lot} lot @ ${p.kalkan.satis_fiyati} satıldı (${p.kalkan.tarih}) → geri alım ${p.kalkan.geri_alim}`:p.muaf?"kale muafiyeti":""}</td></tr>`).join("")}
-  </tbody></table></div>
-  <div class="boş">Ayna ${dkOnce(M.guncelleme)} üretildi · ${M.seans_etiketi}. ${M.sifreli_guncelleme?'Şifreli kopya her yerel yayında (30 dk) yenilenir. <button class="btn" id="aynaUnut" style="padding:3px 8px;font-size:12px">Şifreyi bu cihazdan sil</button>':'Yerel sunucu 15 dakikada bir yeniler; elle: <code>.venv/bin/python .claude/scripts/izleme_guncelle.py --tam</code>'}</div>`;
+  <h2>Pozisyonlar</h2><div class="hf"><table><colgroup><col style="width:9%"><col style="width:13%"><col style="width:11%"><col style="width:15%"><col style="width:11%"><col style="width:24%"><col style="width:17%"></colgroup><thead><tr><th style="text-align:left">Hisse</th><th>Lot / Maliyet</th><th>Güncel</th><th>Değer & K/Z</th><th>Tavan %</th><th style="text-align:left">K1 – K2 – K3</th><th style="text-align:left">Hedef</th></tr></thead><tbody>
+  ${M.pozisyonlar.map(p=>`<tr class="tik" data-t="${p.t}"><td>${p.t}${p.muaf?" 🏰":""}${p.kalkan?" 🛡":""}</td><td class="mono">${p.lot}<span class="alt">${pr(usd(p.maliyet))}</span></td><td class="mono">${f2(p.canli??p.kapanis)}${p.canli!=null?" 🌙":""}</td><td class="mono">${pr(usd(p.deger))}<span class="alt ${cls(p.kz)}">${pr(usd(p.kz))} · ${pc(p.kz_pct)}</span></td>
+    <td><div style="display:flex;align-items:center;gap:6px;justify-content:flex-end">${p.doluluk.toFixed(0)}%<span class="bar" style="flex:none;width:44px"><i style="width:${Math.min(100,p.doluluk)}%"></i></span></div></td><td style="text-align:left">${kd(p)}</td><td style="text-align:left;font-size:11.5px;color:var(--muted)">${hedef(p)}</td></tr>`).join("")}
+  </tbody></table>
+  <div class="hfKart">${M.pozisyonlar.map(p=>`<div class="row tik" data-t="${p.t}"><span class="t">${p.t}${p.muaf?" 🏰":""}${p.kalkan?" 🛡":""}</span><span class="d">${p.lot} Lot @ ${pr(usd(p.maliyet))} · Güncel ${f2(p.canli??p.kapanis)}${p.canli!=null?" 🌙":""}<br>Değer ${pr(usd(p.deger))} · <span class="${cls(p.kz)}">${pr(usd(p.kz))} (${pc(p.kz_pct)})</span> · Tavan %${p.doluluk.toFixed(0)}<br>${kd(p)}${hedef(p)!=="—"?"<br>"+hedef(p).replace("<br>"," · "):""}</span></div>`).join("")}</div></div>
+  ${katkiBlok()}
+  <h2>İşlem Özeti</h2><div class="list">${(D.alsat&&D.alsat.paketler&&D.alsat.paketler.length)?D.alsat.paketler.map(k=>`<div class="row"><span class="t">${k.t}</span><span class="d">${k.tarih} · ${k.lot} Lot @ ${usd(k.alis)} · Yatırılan <span class="para">${usd(k.tutar)}</span> · Hedef ${f2(k.hedef)} (${pc(k.mesafe)})</span><span class="r ${cls(k.getiri_pct)}">${pc(k.getiri_pct)}</span></div>`).join(""):'<div class="boş">Taze kademe işlemi yok</div>'}</div>
+  <div class="boş">Ayna ${dkOnce(M.guncelleme)}${M.sifreli_guncelleme?' · <button class="btn" id="aynaUnut" style="padding:3px 8px;font-size:12px">Şifreyi Bu Cihazdan Sil</button>':''}</div>`;
   const u=$("#aynaUnut"); if(u)u.onclick=()=>{ls.set("dh-ayna","");delete D.midas;cizMidas.denendi=true;cizMidas()};
+  v.querySelectorAll(".tik").forEach(tr=>tr.onclick=()=>acCekmece(tr.dataset.t)); vitrinBagla();
+  $("#midasRozet").textContent=pc(T.kz_pct);
+}
+// 🧭 360° Rontgen: dagilim, AI zirhi, korelasyon, 3 senaryo, mayin tarlasi (yalniz yerel / cozulmus ayna)
+function cizRontgen(){
+  const v=$("#v-rontgen"), R=D.rontgen, nv=$("#nvRontgen");
+  if(!R){nv.hidden=true;v.innerHTML="";if(ls.get("dh-view")==="rontgen")goster("alsat");return}
+  nv.hidden=false; const dg=R.dagilim, ko=R.korelasyon, st=R.stres, pr=x=>`<span class="para">${x}</span>`;
+  const lig=k=>dg.lig[k];
+  v.innerHTML=`
+  <h2 style="margin-top:0">Varlık ve Lig Dağılımı</h2>
+  <div class="grid kokpit">
+    <div class="card hero"><div class="k">Toplam Portföy</div><div class="v">${pr(usd(dg.toplam))}</div><div class="s">Nakit ${pr(usd(dg.nakit))} (%${dg.nakit_pct}) · Hisse ${pr(usd(dg.hisse))} (%${dg.hisse_pct})</div></div>
+    <div class="card"><div class="k">1. Lig · Kaleler</div><div class="v" style="font-size:19px">${pr(usd(lig("1").usd))}</div><div class="s">%${lig("1").pct} portföy · %${lig("1").hisse_ici_pct} hisse içi</div></div>
+    <div class="card"><div class="k">2. Lig · Büyüme</div><div class="v" style="font-size:19px">${pr(usd(lig("2").usd))}</div><div class="s">%${lig("2").pct} portföy · %${lig("2").hisse_ici_pct} hisse içi</div></div>
+    <div class="card"><div class="k">3. Lig · İzleme</div><div class="v" style="font-size:19px">${pr(usd(lig("3").usd))}</div><div class="s">%${lig("3").pct} portföy</div></div>
+    <div class="card" style="${dg.ai.pct>=dg.ai.tavan?"border-color:var(--bad)":""}"><div class="k">AI ve Çip Yoğunlaşması</div><div class="v ${dg.ai.pct>=dg.ai.tavan?"dn":"up"}" style="font-size:19px">%${dg.ai.pct} / %${dg.ai.tavan}</div><div class="s">${pr(usd(dg.ai.usd))} · Hisse sepeti içinde %${dg.ai.hisse_ici_pct}<span class="bar" style="margin-top:6px"><i style="width:${Math.min(100,dg.ai.pct/dg.ai.tavan*100)}%"></i></span></div></div>
+  </div>
+  <h2>Korelasyon Kümeleri · 1 Yıl · ≥ ${ko.esik}</h2>
+  <div class="grid kokpit">
+    ${ko.kumeler.length?ko.kumeler.map((k,i)=>`<div class="card"><div class="k">Küme ${i+1} · ${k.length} Hisse</div><div class="v" style="font-size:16px;font-family:var(--sans)">${k.join(" · ")}</div><div class="s">Birlikte hareket eder; aynı anda eklemek yoğunlaşmayı artırır</div></div>`).join(""):'<div class="card"><div class="k">Küme</div><div class="s">Eşik üstü çift yok</div></div>'}
+    <div class="card"><div class="k">En Yüksek Çiftler</div><div class="s">${ko.ciftler.slice(0,8).map(c=>`${c.a}–${c.b} <b>${c.kor}</b>`).join("<br>")||"—"}</div></div>
+  </div>
+  <h2>3 Senaryo Stres Testi</h2>
+  <div class="grid kokpit">
+    <div class="card" style="border-color:var(--bad)"><div class="k">A · ${st.A.ad}</div><div class="v dn" style="font-size:19px">${pr("−"+usd(st.A.kayip_usd))}</div><div class="s">Portföyün %${st.A.kayip_pct_portfoy}'i · Hisse ${pr(usd(st.A.sonra_hisse))} olur</div></div>
+    <div class="card" style="border-color:var(--warn)"><div class="k">B · ${st.B.ad}</div><div class="v" style="font-size:19px">${pr("±"+usd(st.B.etki_usd))}</div><div class="s">${st.B.hisseler.map(h=>`${h.t} ${h.ort_pct!=null?"±%"+h.ort_pct:"—"}${h.pozisyon&&h.etki_usd!=null?" ("+pr(usd(h.etki_usd))+")":h.pozisyon?"":" · pozisyon yok"}`).join(" · ")}</div></div>
+    <div class="card" style="border-color:var(--good)"><div class="k">C · ${st.C.ad}</div><div class="v up" style="font-size:19px">${pr("+"+usd(st.C.kazanc_usd))}</div><div class="s">Taktik paket hasadı ${pr("+"+usd(st.C.paket_kazanc_usd))}: ${st.C.paketler.map(p=>`${p.t} ${f2(p.hedef)} (+${p.bedava_lot} lot bedava)`).join(" · ")||"paket yok"}</div></div>
+  </div>
+  <h2>Bilanço Mayın Tarlası · 45 Gün</h2>
+  <div class="twrap"><table><thead><tr><th style="text-align:left">Hisse</th><th>Tarih</th><th>Kalan</th><th>Ort. Hareket</th><th>Maks</th><th>Yukarı / Aşağı</th><th>Risk</th></tr></thead><tbody>
+  ${R.mayin.length?R.mayin.map(m=>`<tr class="tik" data-t="${m.t}"><td style="text-align:left">${m.t}</td><td>${m.tarih}</td><td>${m.kalan<=7?'<span class="chip bad">'+m.kalan+' Gün</span>':m.kalan+" Gün"}</td><td>${m.ort_pct!=null?"±%"+m.ort_pct:"—"}</td><td>${m.maks_pct!=null?"%"+m.maks_pct:"—"}</td><td>${m.yukari!=null?m.yukari+" / "+m.asagi:"—"}</td><td>${m.risk}</td></tr>`).join(""):'<tr><td colspan="7" class="boş">45 gün içinde bilanço yok</td></tr>'}
+  </tbody></table></div>
+  <div class="boş">Röntgen ${R.tarih} · son 8 bilançonun ertesi gün hareketi</div>`;
   v.querySelectorAll("tr.tik").forEach(tr=>tr.onclick=()=>acCekmece(tr.dataset.t));
 }
 // 🔔 Seviye temasi bandi: pusu altinda (yesil), +%2 menzilde (kehribar), kartopuya %3 yakin (kirmizi)
@@ -405,10 +547,10 @@ function cizBant(){
   const b=$("#bant"), H=D.hisseler.filter(h=>!h.veri_yok);
   const alt=H.filter(h=>h.pusu_mesafe!=null&&h.pusu_mesafe<0), yakin=H.filter(h=>h.pusu_mesafe!=null&&h.pusu_mesafe>=0&&h.pusu_mesafe<=2), kar=H.filter(h=>h.kartopu_mesafe!=null&&h.kartopu_mesafe<=3);
   const cip=(h,c,tx)=>`<span class="chip ${c}" data-cek="${h.t}" title="Çekmeceyi aç">${h.t} ${tx}</span>`, m=mobil();
-  const parca=[...alt.map(h=>cip(h,"yesil",m?`${f2(h.canli??h.fiyat)} ▼ pusu ${h.pusu_yakin}`:`${f2(h.canli??h.fiyat)} · pusu ${h.pusu_yakin} altında (${pc(h.pusu_mesafe)})`)),
-    ...yakin.map(h=>cip(h,"kehribar",m?`${f2(h.canli??h.fiyat)} ≈ pusu ${h.pusu_yakin}`:`${f2(h.canli??h.fiyat)} · pusu ${h.pusu_yakin} (${pc(h.pusu_mesafe)})`)),
-    ...kar.map(h=>cip(h,"kirmizi",m?`${f2(h.canli??h.fiyat)} ▲ kartopu ${h.kartopu}`:`${f2(h.canli??h.fiyat)} · kartopu ${h.kartopu} (${h.kartopu_mesafe<=0?"AŞILDI":h.kartopu_mesafe.toFixed(1)+"% kaldı"})`))];
-  b.hidden=false; b.innerHTML=`<span class="bk">🔔 SEVİYE TEMASI</span>`+(parca.join("")||`<span class="boş" style="padding:0">Pusu altında, +%2 menzilde veya kartopuya %3 yakın hisse yok.</span>`);
+  const parca=[...alt.map(h=>cip(h,"yesil",m?`${f2(h.canli??h.fiyat)} ▼ pusu ${h.pusu_yakin}`:`${f2(h.canli??h.fiyat)} ▼ Pusu ${h.pusu_yakin} (${pc(h.pusu_mesafe)})`)),
+    ...yakin.map(h=>cip(h,"kehribar",m?`${f2(h.canli??h.fiyat)} ≈ pusu ${h.pusu_yakin}`:`${f2(h.canli??h.fiyat)} ≈ Pusu ${h.pusu_yakin} (${pc(h.pusu_mesafe)})`)),
+    ...kar.map(h=>cip(h,"kirmizi",m?`${f2(h.canli??h.fiyat)} ▲ kartopu ${h.kartopu}`:`${f2(h.canli??h.fiyat)} ▲ Kartopu ${h.kartopu} (${h.kartopu_mesafe<=0?"Aşıldı":h.kartopu_mesafe.toFixed(1)+"% kaldı"})`))];
+  b.hidden=false; b.innerHTML=`<span class="bk">Seviye Teması</span>`+(parca.join("")||`<span class="boş" style="padding:0">Temas yok</span>`);
   b.querySelectorAll("[data-cek]").forEach(e=>e.onclick=()=>acCekmece(e.dataset.cek));
 }
 // 📊 Derin istatistik & gelecek rotasi cekmecesi (derin.json + veri.json + ozet_tr)
@@ -453,7 +595,11 @@ async function yukle(elle){
   finally{clearTimeout(zaman); yukleniyor=false; b.disabled=false; b.textContent="⟳ Yenile"}
 }
 $("#yenileBtn").onclick=()=>yukle(true);
-goster(ls.get("dh-view")||"ozet"); yukle(); setInterval(yukle,60000);
+if(YEREL){const k=$("#zilKutu"),z=$("#zilBtn"),p=$("#zilPanel"),t=$("#zilTest");k.hidden=false;
+  z.onclick=async()=>{p.hidden=!p.hidden;if(!p.hidden){try{const r=await api("/api/bildirim/kanal");$("#zilKanal").textContent=r.kanal}catch(e){$("#zilKanal").textContent="Kanal alınamadı: "+e.message}}};
+  document.addEventListener("click",e=>{if(!k.contains(e.target))p.hidden=true});
+  t.onclick=async()=>{t.disabled=true;t.textContent="⏳ Gönderiliyor…";try{const r=await api("/api/bildirim-test",{method:"POST"});haber(`🔔 Test gönderildi · Mac ${r.mac?"✓":"✗"} · iPhone ntfy ${r.ntfy?"✓":"✗"}`)}catch(e){haber("Bildirim gönderilemedi: "+e.message)}finally{t.disabled=false;t.textContent="📱 Telefona Test Bildirimi Gönder"}}}
+goster(ANA_SAYFALAR.includes(ls.get("dh-view"))?ls.get("dh-view"):"alsat"); yukle(); setInterval(yukle,60000);
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)yukle()}); // telefonda uygulamaya dönünce hemen yenile
 if("serviceWorker" in navigator){
   navigator.serviceWorker.register("sw.js").then(r=>r.update()).catch(()=>{});

@@ -45,20 +45,8 @@ def canli_fiyat(t):
 
 
 def seans_etiketi():
-    """NY saatine gore: Seans Oncesi / Seans Ici / Seans Sonrasi / Kapali."""
-    from datetime import datetime as _dt
-    from zoneinfo import ZoneInfo
-    ny = _dt.now(ZoneInfo("America/New_York"))
-    dk = ny.hour * 60 + ny.minute
-    if ny.weekday() >= 5:
-        return "Kapalı (hafta sonu)"
-    if 240 <= dk < 570:
-        return "Seans Öncesi"
-    if 570 <= dk < 960:
-        return "Seans İçi"
-    if 960 <= dk < 1200:
-        return "Seans Sonrası"
-    return "Kapalı"
+    from piyasa_saati import durum
+    return durum()["etiket"]
 
 
 def lig(t):
@@ -168,14 +156,18 @@ def topla(tam=False):
     if tam:
         from alsat_motoru import uret as alsat_uret
         from midas_ayna import uret
+        from rontgen import uret as rontgen_uret
         midas = uret(veri, {h["t"]: (h["canli"], None) for h in hisseler if h.get("canli")})
         alsat = alsat_uret(veri, midas, bilanco, vix, acik) if midas else None
+        rontgen = rontgen_uret(veri, midas, bilanco) if midas else None
+    else:
+        rontgen = None
     return {
-        "guncelleme": datetime.now(timezone.utc).isoformat(), "midas": midas, "alsat": alsat,
+        "guncelleme": datetime.now(timezone.utc).isoformat(), "midas": midas, "alsat": alsat, "rontgen": rontgen,
         "vix_egri": {"vix9d": round(v9, 2) if v9 is not None else None, "vix3m": round(v3, 2) if v3 is not None else None, "yapi": egri},
         "makro_mayin": makro_mayin, "seans_acik": acik, "seans_etiketi": seans_etiketi(), "kesin_kapanis": str(ref.index[-2 if acik else -1].date()),
         "vix": {"deger": round(vix, 2) if vix is not None else None, "metin": vix_rejimi(vix) if vix is not None else "VERİ YOK",
-                "rejim": "TAM KİLİT" if vix is None or vix >= 22.5 else ("YALNIZ 1. LİG" if vix >= 20 else "AÇIK")},
+                "rejim": "KORKU" if vix is None or vix >= 22.5 else ("TEMKİN" if vix >= 20 else "SAKİN")},
         "tnx": round(veri["^TNX"]["Close"].iloc[-1], 2) if "^TNX" in veri else None,
         "dxy": round(veri["DX-Y.NYB"]["Close"].iloc[-1], 2) if "DX-Y.NYB" in veri else None,
         "para_akisi": {"rejim": rejim_para, "taraf": taraf, "fark": round(fark, 1), "sektorler": sektorler},
@@ -190,7 +182,7 @@ def gizle(d):
         for k in ("lot", "maliyet", "ana", "deger", "kz", "kz_pct", "bosluk", "doluluk"):
             h.pop(k, None)
     d["toplam"] = None
-    d.pop("midas", None); d.pop("alsat", None)
+    d.pop("midas", None); d.pop("alsat", None); d.pop("rontgen", None)
     d["gizli"] = True
     return d
 
@@ -255,7 +247,7 @@ if __name__ == "__main__":
             if d.get(k) is None: hata.append(f"{k} yok")
         if d.get("gizli"):
             yasak = {"lot", "maliyet", "ana", "deger", "kz", "kz_pct", "bosluk", "doluluk"}
-            if any(yasak & set(h) for h in d["hisseler"]) or d.get("toplam") is not None or d.get("midas") is not None or d.get("alsat") is not None: hata.append("gizli modda yasak alan var")
+            if any(yasak & set(h) for h in d["hisseler"]) or d.get("toplam") is not None or d.get("midas") is not None or d.get("alsat") is not None or d.get("rontgen") is not None: hata.append("gizli modda yasak alan var")
         if hata:
             sys.exit("veri.json YAZILMADI (eski dosya korundu): " + "; ".join(hata))
         # Atomik yazim: once gecici dosya, JSON geri okunur, sonra tek adimda yerine konur

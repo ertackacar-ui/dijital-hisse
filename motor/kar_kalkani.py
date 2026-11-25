@@ -21,10 +21,9 @@ KRITIK_PUSU = ["QQQ", "VOO", "MU", "TSM", "ASML", "NOW", "AVGO", "AMZN", "PLTR"]
 
 
 def seans_acik_mi(son_bar_tarihi):
-    ny = datetime.now(ZoneInfo("America/New_York"))
-    hafta_ici = ny.weekday() < 5
-    saat = ny.hour * 60 + ny.minute
-    return hafta_ici and 570 <= saat < 960 and son_bar_tarihi == ny.date()
+    """NYSE gercek saati (tatil/yarim gun dahil) ve son barin bugune ait olmasi."""
+    from piyasa_saati import acik_mi, ny_simdi
+    return acik_mi() and son_bar_tarihi == ny_simdi().date()
 
 
 def veri_cek(tickers=None, period="1y"):
@@ -86,9 +85,9 @@ def kz(t, fiyat):
 
 def vix_rejimi(vix):
     if vix >= 22.5:
-        return f"VIX {vix:.2f} → TAM KİLİT (alım yok)"
+        return f"VIX {vix:.2f} → KORKU / DİP DÖNÜŞ AVI (alım yalnız dip teyidiyle)"
     if vix >= 20:
-        return f"VIX {vix:.2f} → YALNIZ 1. LİG alımı"
+        return f"VIX {vix:.2f} → TEMKİN (2/4 dip teyidi)"
     return f"VIX {vix:.2f} → AÇIK"
 
 
