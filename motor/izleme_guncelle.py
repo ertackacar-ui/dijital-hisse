@@ -205,6 +205,22 @@ if __name__ == "__main__":
         if "--tam" not in sys.argv:  # varsayilan: sifir dolar/lot/maliyet
             d = gizle(d)
         KLASOR.mkdir(exist_ok=True)
-        (KLASOR / "veri.json").write_text(json.dumps(d, ensure_ascii=False, indent=1))
+        # Sema dogrulama: eksik/bozuk veri eski dosyayi ezmesin
+        hata = []
+        if len(d.get("hisseler") or []) != len(KADRO): hata.append(f"hisse sayısı {len(d.get('hisseler') or [])} != {len(KADRO)}")
+        if sum(1 for h in d["hisseler"] if not h.get("veri_yok")) < len(KADRO) * 0.8: hata.append("hisselerin %20'sinden fazlası VERİ YOK")
+        if d["vix"].get("deger") is None: hata.append("VIX yok")
+        for k in ("guncelleme", "para_akisi", "bilanco", "haber"):
+            if d.get(k) is None: hata.append(f"{k} yok")
+        if d.get("gizli"):
+            yasak = {"lot", "maliyet", "ana", "deger", "kz", "kz_pct", "bosluk", "doluluk"}
+            if any(yasak & set(h) for h in d["hisseler"]) or d.get("toplam") is not None: hata.append("gizli modda yasak alan var")
+        if hata:
+            sys.exit("veri.json YAZILMADI (eski dosya korundu): " + "; ".join(hata))
+        # Atomik yazim: once gecici dosya, JSON geri okunur, sonra tek adimda yerine konur
+        gecici = KLASOR / "veri.json.tmp"
+        gecici.write_text(json.dumps(d, ensure_ascii=False, indent=1))
+        json.loads(gecici.read_text())
+        os.replace(gecici, KLASOR / "veri.json")
         print(f"veri.json yazıldı: {len(d['hisseler'])} hisse, {len(d['bilanco'])} bilanço, {len(d['haber']['hisse'])} hisse haberi"
               f"{' (GİZLİ: dolar tutarları yok)' if d.get('gizli') else ''} | VIX {d['vix']['deger']} {d['vix']['rejim']}")
