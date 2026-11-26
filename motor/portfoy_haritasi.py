@@ -79,7 +79,7 @@ def kalkan_ozeti(veri):
 def yol_haritasi(veri, poz):
     vix = veri["^VIX"]["Close"].iloc[-1] if "^VIX" in veri else None
     rejim = vix_rejimi(vix) if vix is not None else "VIX: VERİ YOK"
-    kilit = "TAM" if vix is None or vix >= 22.5 else ("LIG1" if vix >= 20 else "ACIK")
+    # VIX kilit degil (25 Kasim 2026): izin dip teyidine baglidir; tutar ve fis Al/Sat Masasi'nda kesilir
     print("\n--- STRATEJİK YOL HARİTASI ---")
     print("Rejim:", rejim)
 
@@ -105,17 +105,15 @@ def yol_haritasi(veri, poz):
     for t, lvl, m in sorted(b, key=lambda x: abs(x[2]))[:5]:
         g, p = gos[t], poz.get(t)
         bosluk = f"boşluk ${p['bosluk']:,.0f}" if p else f"pozisyon yok, boşluk ${TAVAN:,.0f}"
-        if kilit == "TAM":
-            izin = "VIX KİLİT → alım yok, hazırlık"
-        elif kilit == "LIG1" and t not in LIG_1:
-            izin = "VIX → 2. Lig kilitli"
+        if g["puan"] >= 2:
+            izin = f"dip teyidi {g['puan']}/4 → Al/Sat Masası fişine bak"
         else:
-            izin = "alım penceresi açık"
+            izin = f"teyit yok ({g['puan']}/4) → seviye izlenir, alım yok"
         if p and p["doluluk"] > TAVAN_UYARI:
             izin += " | TAVANA YAKIN"
         neden = f"pusu {lvl} mesafe {m:+.1f}% | Dönüş {g['puan']}/4 | RSI {g['rsi']:.1f} | OBV {'ÜST' if g['obv_ust'] else 'ALT'}"
         print(f"  {t:6} {neden} | {bosluk} | {izin}")
-    print("Not: Dönüş 0/4 = teyit yok, seviye izlenir; 3/4+ = teyit güçleniyor. Nakit bakiyesi bilinmiyor, alım tutarı yazılmaz.")
+    print("Not: Dönüş 0/4 = teyit yok, seviye izlenir; 3/4+ = teyit güçleniyor. Alım tutarı ve kademe mermisi Al/Sat Masası'nda; VIX kilit değildir, yalnız rejimi belirler.")
 
 
 if __name__ == "__main__":

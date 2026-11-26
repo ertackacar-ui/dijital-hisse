@@ -20,6 +20,12 @@ NY = ZoneInfo("America/New_York")
 
 
 def bes_dk(t):
+    try:
+        from veri_onbellegi import seans_ici
+        d = seans_ici(t, period="5d", interval="5m", prepost=True)
+        return d.tz_convert(NY) if d is not None and len(d) else None
+    except ImportError:
+        pass
     for deneme in range(3):
         try:
             d = yf.Ticker(t).history(period="5d", interval="5m", prepost=True, auto_adjust=False, timeout=20)

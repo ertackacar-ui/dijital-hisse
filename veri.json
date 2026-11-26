@@ -1,5 +1,5 @@
 {
- "guncelleme": "2026-11-25T22:09:34.601162+00:00",
+ "guncelleme": "2026-11-26T10:59:36.818791+00:00",
  "vix_egri": {
   "vix9d": 29.61,
   "vix3m": 26.29,
@@ -13,15 +13,15 @@
   }
  ],
  "seans_acik": false,
- "seans_etiketi": "Seans Sonrası",
+ "seans_etiketi": "Kapalı (Şükran Günü)",
  "kesin_kapanis": "2026-11-25",
  "vix": {
-  "deger": 28.29,
-  "metin": "VIX 28.29 → KORKU / DİP DÖNÜŞ AVI (alım yalnız dip teyidiyle)",
+  "deger": 27.06,
+  "metin": "VIX 27.06 → KORKU / DİP DÖNÜŞ AVI (alım yalnız dip teyidiyle)",
   "rejim": "KORKU"
  },
  "tnx": 4.85,
- "dxy": 103.7,
+ "dxy": 103.74,
  "para_akisi": {
   "rejim": "RİSK-KAPALI / TAHVİL-DOLAR BASKISI",
   "taraf": "DEFANSİF",
@@ -106,9 +106,9 @@
    "lig": 1,
    "fiyat": 658.87,
    "d1": -0.28,
-   "canli": 658.54,
-   "canli_zaman": "2026-11-25T22:05:55+00:00",
-   "canli_degisim": -0.05,
+   "canli": 662.21,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 0.51,
    "d5": -1.85,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -134,9 +134,9 @@
    "lig": 1,
    "fiyat": 35.29,
    "d1": 1.15,
-   "canli": 35.31,
-   "canli_zaman": "2026-11-25T22:05:00+00:00",
-   "canli_degisim": 0.06,
+   "canli": 35.44,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 0.43,
    "d5": 1.7,
    "ema21": "ÜST",
    "ema50": "ÜST",
@@ -161,9 +161,9 @@
    "lig": 1,
    "fiyat": 579.32,
    "d1": 0.37,
-   "canli": 579.32,
-   "canli_zaman": "2026-11-25T21:50:00+00:00",
-   "canli_degisim": -0.0,
+   "canli": 580.0,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 0.12,
    "d5": 0.82,
    "ema21": "ÜST",
    "ema50": "ÜST",
@@ -189,9 +189,9 @@
    "lig": 1,
    "fiyat": 1392.22,
    "d1": -1.09,
-   "canli": 1392.24,
-   "canli_zaman": "2026-11-25T22:02:24+00:00",
-   "canli_degisim": 0.0,
+   "canli": 1395.44,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 0.23,
    "d5": 0.68,
    "ema21": "ÜST",
    "ema50": "ÜST",
@@ -217,9 +217,9 @@
    "lig": 1,
    "fiyat": 424.39,
    "d1": 1.83,
-   "canli": 424.98,
-   "canli_zaman": "2026-11-25T22:03:17+00:00",
-   "canli_degisim": 0.14,
+   "canli": 425.18,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 0.19,
    "d5": 2.21,
    "ema21": "ÜST",
    "ema50": "ÜST",
@@ -245,9 +245,9 @@
    "lig": 1,
    "fiyat": 489.93,
    "d1": -1.25,
-   "canli": 490.0,
-   "canli_zaman": "2026-11-25T22:00:00+00:00",
-   "canli_degisim": 0.01,
+   "canli": 492.15,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 0.45,
    "d5": -3.61,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -270,9 +270,9 @@
    "lig": 1,
    "fiyat": 244.43,
    "d1": -3.12,
-   "canli": 244.88,
-   "canli_zaman": "2026-11-25T22:05:00+00:00",
-   "canli_degisim": 0.19,
+   "canli": 246.77,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 0.96,
    "d5": -8.71,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -298,9 +298,9 @@
    "lig": 1,
    "fiyat": 270.98,
    "d1": -2.02,
-   "canli": 270.48,
-   "canli_zaman": "2026-11-25T22:05:00+00:00",
-   "canli_degisim": -0.19,
+   "canli": 272.8,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 0.67,
    "d5": -2.94,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -326,9 +326,9 @@
    "lig": 1,
    "fiyat": 1086.81,
    "d1": -0.45,
-   "canli": 1088.76,
-   "canli_zaman": "2026-11-25T21:55:51+00:00",
-   "canli_degisim": 0.18,
+   "canli": 1088.06,
+   "canli_zaman": "2026-11-26T00:25:00+00:00",
+   "canli_degisim": 0.12,
    "d5": -0.89,
    "ema21": "ÜST",
    "ema50": "ÜST",
@@ -353,9 +353,9 @@
    "lig": 2,
    "fiyat": 633.93,
    "d1": -0.65,
-   "canli": 631.65,
-   "canli_zaman": "2026-11-25T22:05:00+00:00",
-   "canli_degisim": -0.36,
+   "canli": 636.62,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 0.42,
    "d5": -3.88,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -380,9 +380,9 @@
    "lig": 2,
    "fiyat": 149.3,
    "d1": -3.91,
-   "canli": 148.73,
-   "canli_zaman": "2026-11-25T22:05:00+00:00",
-   "canli_degisim": -0.38,
+   "canli": 151.22,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 1.29,
    "d5": -1.1,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -407,9 +407,9 @@
    "lig": 2,
    "fiyat": 300.86,
    "d1": -0.07,
-   "canli": 299.7,
-   "canli_zaman": "2026-11-25T22:06:33+00:00",
-   "canli_degisim": -0.39,
+   "canli": 304.0,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 1.04,
    "d5": -15.02,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -435,9 +435,9 @@
    "lig": 2,
    "fiyat": 173.37,
    "d1": -0.26,
-   "canli": 173.22,
-   "canli_zaman": "2026-11-25T22:04:55+00:00",
-   "canli_degisim": -0.09,
+   "canli": 176.75,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 1.95,
    "d5": -10.85,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -460,9 +460,9 @@
    "lig": 2,
    "fiyat": 1303.08,
    "d1": -2.47,
-   "canli": 1300.0,
-   "canli_zaman": "2026-11-25T22:05:50+00:00",
-   "canli_degisim": -0.24,
+   "canli": 1318.0,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 1.14,
    "d5": -6.61,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -488,9 +488,9 @@
    "lig": 2,
    "fiyat": 601.25,
    "d1": -4.53,
-   "canli": 599.83,
-   "canli_zaman": "2026-11-25T22:05:00+00:00",
-   "canli_degisim": -0.24,
+   "canli": 615.26,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 2.33,
    "d5": -14.75,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -515,9 +515,9 @@
    "lig": 2,
    "fiyat": 406.03,
    "d1": -1.75,
-   "canli": 405.08,
-   "canli_zaman": "2026-11-25T22:05:00+00:00",
-   "canli_degisim": -0.23,
+   "canli": 413.81,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 1.92,
    "d5": -23.41,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -542,9 +542,9 @@
    "lig": 2,
    "fiyat": 342.34,
    "d1": -1.96,
-   "canli": 341.92,
-   "canli_zaman": "2026-11-25T22:00:00+00:00",
-   "canli_degisim": -0.12,
+   "canli": 347.2,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 1.42,
    "d5": -5.59,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -570,9 +570,9 @@
    "lig": 2,
    "fiyat": 163.99,
    "d1": -2.71,
-   "canli": 164.0,
-   "canli_zaman": "2026-11-25T21:59:41+00:00",
-   "canli_degisim": 0.01,
+   "canli": 167.0,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 1.84,
    "d5": -15.44,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -597,9 +597,9 @@
    "lig": 2,
    "fiyat": 356.14,
    "d1": 0.89,
-   "canli": 336.71,
-   "canli_zaman": "2026-11-25T22:05:00+00:00",
-   "canli_degisim": -5.46,
+   "canli": 342.87,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": -3.73,
    "d5": 4.77,
    "ema21": "ÜST",
    "ema50": "ÜST",
@@ -622,9 +622,9 @@
    "lig": 2,
    "fiyat": 92.16,
    "d1": 0.46,
-   "canli": 92.35,
-   "canli_zaman": "2026-11-25T22:04:20+00:00",
-   "canli_degisim": 0.21,
+   "canli": 92.52,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 0.39,
    "d5": 1.73,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -649,9 +649,9 @@
    "lig": 2,
    "fiyat": 565.47,
    "d1": -4.1,
-   "canli": 565.01,
-   "canli_zaman": "2026-11-25T21:50:00+00:00",
-   "canli_degisim": -0.08,
+   "canli": 565.47,
+   "canli_zaman": "2026-11-25T23:40:00+00:00",
+   "canli_degisim": 0.0,
    "d5": -6.16,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -674,9 +674,9 @@
    "lig": 2,
    "fiyat": 163.59,
    "d1": 1.5,
-   "canli": 162.64,
-   "canli_zaman": "2026-11-25T22:08:01+00:00",
-   "canli_degisim": -0.58,
+   "canli": 165.7,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 1.29,
    "d5": 4.42,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -701,9 +701,9 @@
    "lig": 3,
    "fiyat": 19.47,
    "d1": 1.41,
-   "canli": 19.6,
-   "canli_zaman": "2026-11-25T22:05:00+00:00",
-   "canli_degisim": 0.67,
+   "canli": 19.88,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 2.11,
    "d5": -10.69,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -726,9 +726,9 @@
    "lig": 3,
    "fiyat": 7.85,
    "d1": 3.43,
-   "canli": 7.84,
-   "canli_zaman": "2026-11-25T22:05:00+00:00",
-   "canli_degisim": -0.13,
+   "canli": 8.01,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 2.09,
    "d5": -5.76,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -751,9 +751,9 @@
    "lig": 3,
    "fiyat": 127.44,
    "d1": 1.3,
-   "canli": 127.36,
-   "canli_zaman": "2026-11-25T22:05:00+00:00",
-   "canli_degisim": -0.06,
+   "canli": 128.96,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 1.19,
    "d5": -11.19,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -776,9 +776,9 @@
    "lig": 3,
    "fiyat": 35.3,
    "d1": -1.7,
-   "canli": 35.34,
-   "canli_zaman": "2026-11-25T21:53:34+00:00",
-   "canli_degisim": 0.11,
+   "canli": 35.9,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 1.7,
    "d5": -1.81,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -801,9 +801,9 @@
    "lig": 3,
    "fiyat": 106.79,
    "d1": 0.31,
-   "canli": 106.08,
-   "canli_zaman": "2026-11-25T22:00:02+00:00",
-   "canli_degisim": -0.67,
+   "canli": 109.07,
+   "canli_zaman": "2026-11-26T00:55:00+00:00",
+   "canli_degisim": 2.13,
    "d5": -13.13,
    "ema21": "ALT",
    "ema50": "ALT",
@@ -996,6 +996,30 @@
  "haber": {
   "makro": [
    {
+    "z": "2026-11-26T02:58:25+00:00",
+    "etiket": "⚪ BİLGİ/NÖTR",
+    "baslik": "Michael Burry Says His Portfolio Was Discussed 'About the Time the Market Reversed Off Its Lows': He Is 'Temporarily Almost Entirely Long'",
+    "kaynak": "Benzinga"
+   },
+   {
+    "z": "2026-11-26T00:09:50+00:00",
+    "etiket": "⚪ BİLGİ/NÖTR",
+    "baslik": "S&P 500, Nasdaq End Lower But Dow Rebounds As Traders Rotate Out Of AI — NVDA, SPCX, PANW  In Focus",
+    "kaynak": "Stocktwits"
+   },
+   {
+    "z": "2026-11-25T22:18:15+00:00",
+    "etiket": "🔴 OLUMSUZ / RİSK",
+    "baslik": "The Average Stock Shrugged Off the Tech Slide. History Is Split",
+    "kaynak": "Trefis"
+   },
+   {
+    "z": "2026-11-25T22:14:48+00:00",
+    "etiket": "🔴 OLUMSUZ / RİSK",
+    "baslik": "How Much of Your Portfolio Should Be in Bitcoin After a 50% Drop?",
+    "kaynak": "24/7 Wall St."
+   },
+   {
     "z": "2026-11-25T21:25:08+00:00",
     "etiket": "🔴 OLUMSUZ / RİSK",
     "baslik": "Feeling Safe After a Decade of Gains, He Keeps 80% of His $1.4 Million 401(k) in Stocks at 64. Like a Thanksgiving Turkey, He Won’t See It Coming: a 25% Drop Would Cost Him $280,000 Months Before He Retires",
@@ -1030,64 +1054,40 @@
     "etiket": "⚪ BİLGİ/NÖTR",
     "baslik": "1 Surprisingly Powerful ETF for Investors Who Only Have $200 to Start",
     "kaynak": "Motley Fool"
-   },
-   {
-    "z": "2026-11-25T16:27:50+00:00",
-    "etiket": "🟢 POZİTİF KATALİZÖR",
-    "baslik": "JPMorgan Says the Biggest Risk to Stocks in 2027 Is the Fed",
-    "kaynak": "24/7 Wall St."
-   },
-   {
-    "z": "2026-11-25T15:45:17+00:00",
-    "etiket": "🔴 OLUMSUZ / RİSK",
-    "baslik": "What Happens to a $900,000 401(k) by the End of 2027? $1,062,300 in Wall Street’s Best Case, $824,900 in Its Worst",
-    "kaynak": "24/7 Wall St."
-   },
-   {
-    "z": "2026-11-25T15:11:02+00:00",
-    "etiket": "⚪ BİLGİ/NÖTR",
-    "baslik": "Tech Stocks Are on a Roller Coaster. What History Says Happens Next.",
-    "kaynak": "Barrons.com"
-   },
-   {
-    "z": "2026-11-25T15:08:40+00:00",
-    "etiket": "🔴 OLUMSUZ / RİSK",
-    "baslik": "Does RSP Hold Up Better Than SPY In Sell-Offs?",
-    "kaynak": "Trefis"
    }
   ],
   "hisse": {
    "AMZN": {
     "basliklar": [
      {
-      "z": "2026-11-25T22:00:00+00:00",
+      "z": "2026-11-26T10:20:00+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "Amazon India e-commerce exports hit $27bn, eyes $80bn by 2030",
+      "kaynak": "Retail Insight Network"
+     },
+     {
+      "z": "2026-11-26T09:40:08+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "Black Friday’s New Reality: Why Shoppers Are Stocking Up Instead of Splurging",
+      "kaynak": " TheStreet"
+     },
+     {
+      "z": "2026-11-26T08:59:12+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "Musk Confirms He Pushed Trump to Bring Back Jensen Huang. The White House Had Anthropic in Mind",
+      "kaynak": "TIKR"
+     },
+     {
+      "z": "2026-11-26T02:03:25+00:00",
       "etiket": "🟢 POZİTİF KATALİZÖR",
-      "baslik": "SpaceX is now on the clock to launch 1,000,000 satellites — 60x what exists in space today. Amazon calls it impossible",
-      "kaynak": "Moneywise"
+      "baslik": "Washington Calls It a Goldilocks Economy. On a $2,071 Social Security Check, She Calls It the Annoyance Economy: Prices Up 3.7%, and Her Real Raise Is Just 3.3%",
+      "kaynak": "24/7 Wall St."
      },
      {
-      "z": "2026-11-25T21:25:00+00:00",
-      "etiket": "⚪ BİLGİ/NÖTR",
-      "baslik": "Federal Court Rules in Favor of CPSC in Landmark E-Commerce Product Safety Case",
-      "kaynak": "RSS"
-     },
-     {
-      "z": "2026-11-25T21:16:00+00:00",
+      "z": "2026-11-26T01:00:00+00:00",
       "etiket": "🔴 OLUMSUZ / RİSK",
-      "baslik": "These 5 Tech Stocks are Sidestepping the AI Downturn",
-      "kaynak": "Barrons.com"
-     },
-     {
-      "z": "2026-11-25T21:00:00+00:00",
-      "etiket": "⚪ BİLGİ/NÖTR",
-      "baslik": "Jensen Huang's return, neocloud risk, and a holiday retail rally",
-      "kaynak": "Yahoo Finance Video"
-     },
-     {
-      "z": "2026-11-25T20:56:44+00:00",
-      "etiket": "⚪ BİLGİ/NÖTR",
-      "baslik": "FCC approves SpaceX plan to put AI data centers in space",
-      "kaynak": "TechCrunch"
+      "baslik": "Apple Stock Defies AI Selloff: Is It the Market's Safe Haven?",
+      "kaynak": "BeInCrypto"
      }
     ],
     "hedef": 326.34033,
@@ -1097,71 +1097,71 @@
    "ASML": {
     "basliklar": [
      {
+      "z": "2026-11-26T08:35:00+00:00",
+      "etiket": "🟢 POZİTİF KATALİZÖR",
+      "baslik": "European Indexes Open Sharply Higher After U.S. Recovery",
+      "kaynak": "The Wall Street Journal"
+     },
+     {
+      "z": "2026-11-26T08:28:50+00:00",
+      "etiket": "🔴 OLUMSUZ / RİSK",
+      "baslik": "ASML Sinks 7% in a Week: Dutch Lawmaker Warns the MATCH Act Is “Disastrous for ASML.” Time to Buy?",
+      "kaynak": "TIKR"
+     },
+     {
+      "z": "2026-11-26T00:49:24+00:00",
+      "etiket": "🟢 POZİTİF KATALİZÖR",
+      "baslik": "ASML (ASML) Can’t Meet Demand. Is That a Strength or Risk?",
+      "kaynak": "Insider Monkey"
+     },
+     {
+      "z": "2026-11-25T23:42:34+00:00",
+      "etiket": "🟢 POZİTİF KATALİZÖR",
+      "baslik": "Why My Analysis Points to Nearly 40% Semiconductor Equipment Growth in 2026",
+      "kaynak": "24/7 Wall St."
+     },
+     {
       "z": "2026-11-25T20:47:00+00:00",
       "etiket": "🔴 OLUMSUZ / RİSK",
       "baslik": "Chips and iPhones Are Safe From New Tariffs. Here’s What Isn’t.",
       "kaynak": "Barrons.com"
-     },
-     {
-      "z": "2026-11-25T20:15:00+00:00",
-      "etiket": "🔴 OLUMSUZ / RİSK",
-      "baslik": "ASML Holding (ENXTAM:ASML) Faces Dutch Pushback On New US China Chip Curbs",
-      "kaynak": "Simply Wall St."
-     },
-     {
-      "z": "2026-11-25T20:09:44+00:00",
-      "etiket": "🔴 OLUMSUZ / RİSK",
-      "baslik": "Applied Materials Falls 6% Despite UBS’s $575 Target as China Chip Curbs Hit Equipment Stocks; Lam Research Drops 7%, KLA Edges Lower",
-      "kaynak": "24/7 Wall St."
-     },
-     {
-      "z": "2026-11-25T18:26:42+00:00",
-      "etiket": "⚪ BİLGİ/NÖTR",
-      "baslik": "Forget ASML: Tokyo Electron Has More China Sales at Stake in the MATCH Act",
-      "kaynak": "TIKR"
-     },
-     {
-      "z": "2026-11-25T17:17:45+00:00",
-      "etiket": "🔴 OLUMSUZ / RİSK",
-      "baslik": "ASML Stocks Drop 6.1% as Dutch Lawmakers Fight US Chip Curb Bill",
-      "kaynak": "GuruFocus.com"
      }
     ],
-    "hedef": 2112.8762,
+    "hedef": 2112.4124,
     "tavsiye": "strong_buy",
     "potansiyel": 62.1
    },
    "AVGO": {
     "basliklar": [
      {
-      "z": "2026-11-25T21:51:01+00:00",
+      "z": "2026-11-26T10:09:24+00:00",
       "etiket": "🟢 POZİTİF KATALİZÖR",
-      "baslik": "Not Micron. Not Broadcom. This Is My Top Oversold Artificial Intelligence (AI) Stock to Buy in December",
+      "baslik": "3 AI Infrastructure Stocks With Revenue Growth Up To 168%",
+      "kaynak": "Simply Wall St."
+     },
+     {
+      "z": "2026-11-26T08:30:34+00:00",
+      "etiket": "🔴 OLUMSUZ / RİSK",
+      "baslik": "Broadcom Sinks 15% in a Week to a 52-Week Low as Google Reportedly Cuts TPU Orders. Is the Selling Overdone?",
+      "kaynak": "TIKR"
+     },
+     {
+      "z": "2026-11-26T02:12:15+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "Why Retail Investors Are Watching AMD and AI Infrastructure Stocks After SpaceX Satellite News",
+      "kaynak": "Simply Wall St."
+     },
+     {
+      "z": "2026-11-26T01:03:02+00:00",
+      "etiket": "🟢 POZİTİF KATALİZÖR",
+      "baslik": "Broadcom Stock Hasn't Traded This Low Since July 2025. I Think It's a Buy.",
       "kaynak": "Motley Fool"
      },
      {
-      "z": "2026-11-25T21:13:32+00:00",
-      "etiket": "🔴 OLUMSUZ / RİSK",
-      "baslik": "Why Is Credo Stock Going Up?",
-      "kaynak": "Trefis"
-     },
-     {
-      "z": "2026-11-25T21:07:42+00:00",
-      "etiket": "⚪ BİLGİ/NÖTR",
-      "baslik": "AI spending leads the biggest market risks heading into 2027",
-      "kaynak": "Investing.com"
-     },
-     {
-      "z": "2026-11-25T20:23:30+00:00",
-      "etiket": "🔴 OLUMSUZ / RİSK",
-      "baslik": "What Sent Qualcomm Stock Higher?",
-      "kaynak": "Trefis"
-     },
-     {
-      "z": "2026-11-25T19:07:03+00:00",
-      "etiket": "🔴 OLUMSUZ / RİSK",
-      "baslik": "Why Did Nvidia Stock Jump So Much?",
-      "kaynak": "Trefis"
+      "z": "2026-11-26T00:46:10+00:00",
+      "etiket": "🟢 POZİTİF KATALİZÖR",
+      "baslik": "5 Best Strong Buy Growth Stocks to Buy for 2027",
+      "kaynak": "Insider Monkey"
      }
     ],
     "hedef": 523.28064,
@@ -1245,34 +1245,34 @@
    "GOOG": {
     "basliklar": [
      {
-      "z": "2026-11-25T21:16:00+00:00",
-      "etiket": "🔴 OLUMSUZ / RİSK",
-      "baslik": "These 5 Tech Stocks are Sidestepping the AI Downturn",
-      "kaynak": "Barrons.com"
+      "z": "2026-11-26T08:59:12+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "Musk Confirms He Pushed Trump to Bring Back Jensen Huang. The White House Had Anthropic in Mind",
+      "kaynak": "TIKR"
      },
      {
-      "z": "2026-11-25T20:53:02+00:00",
-      "etiket": "🟢 POZİTİF KATALİZÖR",
-      "baslik": "Anthropic’s Chip Choices Could Change the Nvidia Story. Here’s How.",
+      "z": "2026-11-26T08:30:34+00:00",
+      "etiket": "🔴 OLUMSUZ / RİSK",
+      "baslik": "Broadcom Sinks 15% in a Week to a 52-Week Low as Google Reportedly Cuts TPU Orders. Is the Selling Overdone?",
+      "kaynak": "TIKR"
+     },
+     {
+      "z": "2026-11-26T05:20:02+00:00",
+      "etiket": "⚪ BİLGİ/NÖTR",
+      "baslik": "2 Ways Anthropic's IPO Pays Off for Alphabet Investors",
       "kaynak": "Motley Fool"
      },
      {
-      "z": "2026-11-25T20:49:09+00:00",
-      "etiket": "🟢 POZİTİF KATALİZÖR",
-      "baslik": "Megadeals Defy Selloff, Head Toward Record",
-      "kaynak": "Bloomberg"
-     },
-     {
-      "z": "2026-11-25T20:32:10+00:00",
-      "etiket": "🔴 OLUMSUZ / RİSK",
-      "baslik": "SpaceX stock price crashes on concerns over compute demand",
-      "kaynak": "Blockspace"
-     },
-     {
-      "z": "2026-11-25T20:00:07+00:00",
+      "z": "2026-11-26T02:38:47+00:00",
       "etiket": "⚪ BİLGİ/NÖTR",
-      "baslik": "Is the AI Correction Over? Why Ram Ahluwalia Thinks the AI Trade Has Hit Bottom",
-      "kaynak": "Unchained"
+      "baslik": "SpaceX gets approval for 1 million data center satellites",
+      "kaynak": "LA Times"
+     },
+     {
+      "z": "2026-11-26T01:00:00+00:00",
+      "etiket": "🔴 OLUMSUZ / RİSK",
+      "baslik": "Apple Stock Defies AI Selloff: Is It the Market's Safe Haven?",
+      "kaynak": "BeInCrypto"
      }
     ],
     "hedef": 389.0,

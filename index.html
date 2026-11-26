@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="dijital hisse">
 <title>dijital hisse — Canlı İzleme</title>
-<meta name="dh-surum" content="38">
+<meta name="dh-surum" content="41">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icon-512.png">
@@ -94,7 +94,7 @@
   .fis{border-radius:12px;padding:12px 14px;margin-top:10px;border:1px solid var(--line);display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:6px 14px;font-size:13.5px}
   .fis.al{border-color:var(--good);background:var(--good-soft)} .fis.sat{border-color:var(--bad);background:var(--bad-soft)} .fis.kilit{opacity:.75;border-style:dashed}
   .ajanDurum{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;background:var(--idle-soft);color:var(--muted)} .ajanDurum.guncel{background:var(--good-soft);color:var(--good)} .ajanDurum.sirada,.ajanDurum.kosuyor{background:var(--warn-soft);color:var(--warn)} .ajanDurum.hata{background:var(--bad-soft);color:var(--bad)}
-  .cikti{white-space:pre-wrap;font:11.5px/1.45 var(--kod);background:var(--idle-soft);border:1px solid var(--line);border-radius:10px;padding:10px;max-height:420px;overflow:auto;margin-top:8px}
+  .cikti{white-space:pre-wrap;word-break:break-word;font:11.5px/1.45 var(--kod);background:var(--idle-soft);border:1px solid var(--line);border-radius:10px;padding:10px;max-width:100%;max-height:320px;overflow:auto;margin-top:8px} .ag,.ag>div{min-width:0} .ajanDurum.tetiklendi{background:var(--send-soft);color:var(--send)}
   .fis .b{grid-column:1/-1;font-weight:700;font-size:15px} .fis .g{grid-column:1/-1;color:var(--muted);font-size:12.5px} .fis span b{display:block;font-size:11px;color:var(--muted);font-weight:500}
   .katki{display:grid;grid-template-columns:140px 150px 1fr auto;gap:8px;align-items:end;margin-top:10px} .katki label{font-size:11.5px;color:var(--muted);display:block;margin-bottom:3px}
   .katki input{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);font:inherit}
@@ -218,7 +218,7 @@ const usd=n=>n==null?"—":"$"+n.toLocaleString("en-US",{minimumFractionDigits:2
 const BASLIK={ozet:"Piyasa Kokpiti",hisse:"Hisseler",pusu:"Pusu ve Kartopu",bilanco:"Bilanço Takvimi",haber:"Haber ve Analist",ajan:"Ajanlar",midas:"HEDGE FUND",alsat:"Al / Sat Masası",rontgen:"360° Röntgen"};
 const ANA_SAYFALAR=["alsat","midas","rontgen","ajan","ozet","hisse","pusu","bilanco","haber"];
 // Veri kaynagi: internette (github.io) her zaman gizli veri.json; yerel sunucuda lot/K-Z + Midas aynali veri_tam.json (yoksa veri.json)
-const YEREL=!/github\.io$/.test(location.hostname)&&!/[?&]gizli=1/.test(location.search), KAYNAK=YEREL?"veri_tam.json":"veri.json";
+const YEREL=!/github\.io$/.test(location.hostname)&&!/[?&]gizli=1/.test(location.search), KAYNAK=YEREL?"veri_tam.json":"veri.json"; let SD=null;
 
 // Tema, gizleme, menü
 document.documentElement.setAttribute("data-theme",ls.get("dh-tema")||"dark");
@@ -380,7 +380,7 @@ function cizAjan(){
   <div class="boş" style="padding:6px 0 0">VIX alım yasağı değildir; yalnızca aranan dip teyidini belirler (AL/SAT Masası). Tüm komutlar sırayla: <code>.venv/bin/python .claude/scripts/orkestra.py gunluk|haftalik|hepsi</code></div></div>
   <div class="alarmk"><div class="k">🔔 Alarm Çaldı · Hisse Yaz ve Kopyala</div><input id="alarmIn" placeholder="MU AVGO" spellcheck="false" autocomplete="off"><div class="cmd" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="btn primary" id="alarmBtn">📋 Röntgen Komutunu Kopyala</button><span class="kopya" id="kopyaA">✓ Kopyalandı! Mesaj kutusuna yapıştır</span><code id="alarmCmd" style="font:500 11px var(--mono);background:var(--idle-soft);border:1px solid var(--line);padding:5px 8px;border-radius:8px;flex:1 1 200px;word-break:break-all"></code></div></div>
   ${YEREL?`<div class="kural" id="vardiyaOzet">Vardiya durumu yükleniyor…</div>`:""}
-  <div class="list">${AJANLAR.map((a,i)=>{const sc=a[4].split(" ")[0];return `<div class="ag${onerilen.has(i)?" oner":""}" data-sc="${sc}"><div class="num">${String(i+1).padStart(2,"0")}</div><div><div class="head"><span class="ad">${a[0]}</span><span class="kat">${a[1]}</span><span class="ajanDurum" data-durum="${sc}">—</span>${onerilen.has(i)?'<span class="simdi">👉 ŞİMDİ</span>':""}</div><div class="gorev">${a[2]}</div><div class="zaman">Ne zaman: <b>${a[3]}</b> <span data-son="${sc}"></span></div><div class="cmd"><code>${PY+a[4]}</code><button class="btn" data-cmd="${PY+a[4]}">📋 Kopyala</button>${YEREL?`<button class="btn" data-calistir="${a[4]}">▶ Çalıştır</button><button class="btn" data-cikti="${sc}">📄 Çıktı</button>`:""}</div><div class="cikti" data-ciktikutu="${sc}" hidden></div></div></div>`}).join("")}</div>
+  <div class="list">${AJANLAR.map((a,i)=>{const sc=a[4].split(" ")[0];return `<div class="ag${onerilen.has(i)?" oner":""}" data-sc="${sc}"><div class="num">${String(i+1).padStart(2,"0")}</div><div><div class="head"><span class="ad">${a[0]}</span><span class="kat">${a[1]}</span><span class="ajanDurum" data-durum="${sc}">—</span>${onerilen.has(i)?'<span class="simdi">👉 ŞİMDİ</span>':""}</div><div class="gorev">${a[2]}</div><div class="zaman">Ne zaman: <b>${a[3]}</b> <span data-son="${sc}"></span></div><div class="cmd">${YEREL?`<button class="btn" data-calistir="${a[4]}">▶ Çalıştır</button><button class="btn" data-cikti="${sc}">📄 Çıktı</button>`:`<code>${PY+a[4]}</code>`}</div><div class="cikti" data-ciktikutu="${sc}" hidden></div></div></div>`}).join("")}</div>
   <div class="boş">Komutlar Claude Code oturumunda çalışır: kopyala, mesaj kutusuna yapıştır, Enter.</div>
   `;
   yonBagla(v); vitrinBagla(); if(YEREL)vardiyaYukle();
@@ -402,23 +402,24 @@ function ciz(){
   cizBant();cizOzet();cizHisse();cizPusu();cizBilanco();cizHaber();cizMidas();cizAlsat();cizRontgen();cizAjan();
 }
 // 20 ajan vardiya durumu (yerel sunucu /api/vardiya)
-const VARDIYA_AD={V1:"Vardiya 1 · Seans İçi 12 dk",V2:"Vardiya 2 · Açılış · Kapanış · Pusu %3",V3:"Vardiya 3 · Her 6 Saat",V4:"Vardiya 4 · Günde 1",V4s:"Vardiya 4 · Saatlik"};
+const VARDIYA_AD={V1:"Vardiya 1 · Seans İçi 12 dk",V2:"Vardiya 2 · Açılış · Kapanış · ⚡ Uyandırma",V3:"Vardiya 3 · Her 6 Saat",V4:"Vardiya 4 · Günde 1",V4s:"Vardiya 4 · Saatlik"};
 async function vardiyaYukle(){
   const v=$("#v-ajan"); let VD; try{VD=await api("/api/vardiya")}catch(e){const o=v.querySelector("#vardiyaOzet");if(o)o.textContent="Vardiya bilgisi alınamadı: "+e.message;return}
-  const o=v.querySelector("#vardiyaOzet"); if(o){const g=VD.ajanlar.filter(a=>a.durum==="guncel").length;o.innerHTML=`<b>Vardiya Sistemi</b> · ${VD.seans.etiket} (NY) · ${g}/${VD.ajanlar.length} ajan güncel · ${VD.kosan?"koşuyor: "+VD.kosan:"boşta"} · kuyruk ${VD.kuyruk.length}<br><span style="color:var(--muted);font-size:12px">${Object.entries(VARDIYA_AD).map(([k,ad])=>ad).join(" · ")}</span>`}
+  const o=v.querySelector("#vardiyaOzet"); if(o){const g=VD.ajanlar.filter(a=>a.durum==="guncel").length;o.innerHTML=`<b>Vardiya Sistemi</b> · ${VD.seans.etiket} (NY) · ${g}/${VD.ajanlar.length} ajan güncel · ${VD.kosan?"koşuyor: "+VD.kosan:"boşta"} · kuyruk ${VD.kuyruk.length}<br><span style="color:var(--muted);font-size:12px">${Object.entries(VARDIYA_AD).map(([k,ad])=>ad).join(" · ")}${VD.nobetci&&VD.nobetci.son?" · Nöbetçi "+new Date(VD.nobetci.son).toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})+(VD.nobetci.ok===false?" ⚠":" ✓"):""}${VD.onbellek?" · Önbellek "+VD.onbellek.taze+"/"+VD.onbellek.dosya+" taze":""}${VD.uyananlar&&VD.uyananlar.length?"<br>⚡ Bugün uyandırılan: "+VD.uyananlar.map(u=>u[0]+" ("+u[1]+")").join(", "):""}</span>`}
   VD.ajanlar.forEach(a=>{const d=v.querySelector(`[data-durum="${a.script}"]`), s=v.querySelector(`[data-son="${a.script}"]`); if(!d)return;
-    const et=a.durum==="kosuyor"?"⏳ Koşuyor":a.durum==="sirada"?"⏳ Sırada":a.durum==="guncel"?(a.ok===false?"⚠ Hata":"🟢 Güncel"):"⏳ Bekliyor";
+    const et=a.durum==="kosuyor"?"⏳ Koşuyor":a.durum==="sirada"?"⏳ Sırada":a.durum==="tetiklendi"?(a.ok===false?"⚠ Hata":"⚡ Tetiklendi"):a.durum==="guncel"?(a.ok===false?"⚠ Hata":"🟢 Güncel"):"⏳ Bekliyor";
     d.textContent=`${VARDIYA_AD[a.vardiya]||a.vardiya} · ${et}`; d.className="ajanDurum "+(a.ok===false?"hata":a.durum); if(s)s.textContent=a.son?"· son "+new Date(a.son).toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})+(a.sure?" ("+a.sure+" sn)":""):""});
   v.querySelectorAll("[data-calistir]").forEach(b=>b.onclick=async()=>{b.disabled=true;try{await api("/api/vardiya/calistir",{method:"POST",body:JSON.stringify({script:b.dataset.calistir})});b.textContent="⏳ Sırada";setTimeout(vardiyaYukle,2000)}catch(e){b.textContent="Hata";}});
   v.querySelectorAll("[data-cikti]").forEach(b=>b.onclick=async()=>{const k=v.querySelector(`[data-ciktikutu="${b.dataset.cikti}"]`);if(!k.hidden){k.hidden=true;return}try{const j=await api("/api/vardiya/cikti?script="+b.dataset.cikti);k.textContent=j.metin;k.hidden=false}catch(e){k.textContent="Çıktı yok (henüz koşmadı)";k.hidden=false}});
 }
 // Sol menu alt kartlari: Kasa (yalniz yerel ayna) ve Durum
 function cizSideKart(){
+  if(YEREL&&!SD&&!cizSideKart.istendi){cizSideKart.istendi=true;api("/api/durum").then(d=>{SD=d;cizSideKart()}).catch(()=>{})}
   const kk=$("#sideKasa"), dd=$("#sideDurum"), M=D.midas, eg=D.vix_egri;
   if(M){const K=M.kasa; kk.hidden=false; kk.innerHTML=`<div class="k">Kasa</div><div class="r"><span>Toplam</span><b class="para">${usd(K.toplam_kasa)}</b></div><div class="r"><span>Aktif Pusu</span><b class="para">${usd(K.aktif_pusu)}</b></div><div class="r"><span>Kriz Rezervi</span><b class="para">${usd(K.kriz_rezervi)}</b></div><div class="r"><span>Hisse K/Z</span><b class="${cls(M.toplam.kz)}">${pc(M.toplam.kz_pct)}</b></div>`}
   else kk.hidden=true;
   const mayin=D.bilanco.filter(b=>b.mayin).length+(D.makro_mayin||[]).length;
-  dd.hidden=false; dd.innerHTML=`<div class="k">Durum</div><div class="r"><span>Seans</span><b>${D.seans_etiketi||"—"}</b></div><div class="r"><span>Veri</span><b>${new Date(D.guncelleme).toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})}</b></div><div class="r"><span>VIX</span><b>${D.vix.deger??"—"} · ${(VIX_AD[D.vix.rejim]||D.vix.rejim).split(" ·")[0]}</b></div>${eg&&eg.yapi!=="VERİ YOK"?`<div class="r"><span>Vade Eğrisi</span><b>${eg.yapi==="CONTANGO"?"Contango":eg.yapi==="TAM BACKWARDATION"?"Backwardation":"Kısmi Backwardation"}</b></div>`:""}<div class="r"><span>Mayın 14 Gün</span><b>${mayin}</b></div>`;
+  dd.hidden=false; dd.innerHTML=`<div class="k">Durum</div><div class="r"><span>Seans</span><b>${D.seans_etiketi||"—"}</b></div><div class="r"><span>Veri</span><b>${new Date(D.guncelleme).toLocaleTimeString("tr-TR",{hour:"2-digit",minute:"2-digit"})}</b></div><div class="r"><span>VIX</span><b>${D.vix.deger??"—"} · ${(VIX_AD[D.vix.rejim]||D.vix.rejim).split(" ·")[0]}</b></div>${eg&&eg.yapi!=="VERİ YOK"?`<div class="r"><span>Vade Eğrisi</span><b>${eg.yapi==="CONTANGO"?"Contango":eg.yapi==="TAM BACKWARDATION"?"Backwardation":"Kısmi Backwardation"}</b></div>`:""}<div class="r"><span>Mayın 14 Gün</span><b>${mayin}</b></div>${SD&&SD.tailscale?`<div class="r"><span>Her Yerden</span><b style="font-family:var(--mono);font-size:11px">http://${SD.tailscale.ad||SD.tailscale.ip}:8765</b></div>`:SD&&SD.ag_adresi?`<div class="r"><span>Aynı Ağ</span><b style="font-family:var(--mono);font-size:11px">http://${SD.ag_adresi}:8765</b></div>`:""}`;
 }
 // Sol menu kutusu + detayli AL/SAT masasi (yalniz D.alsat varken: yerel sunucu veya cozulmus sifreli ayna)
 function cizAlsat(){
@@ -515,7 +516,8 @@ function cizRontgen(){
   if(!R){nv.hidden=true;v.innerHTML="";if(ls.get("dh-view")==="rontgen")goster("alsat");return}
   nv.hidden=false; const dg=R.dagilim, ko=R.korelasyon, st=R.stres, pr=x=>`<span class="para">${x}</span>`;
   const lig=k=>dg.lig[k];
-  v.innerHTML=`
+  const ka=R.karne, karne=ka?`<h2 style="margin-top:0">⚖️ Hakem & Karar Karnesi</h2><div class="grid kokpit" style="margin-bottom:14px"><div class="card"><div class="k">Toplam Karar</div><div class="v">${ka.toplam}</div><div class="s">bugün ${ka.bugun.onay} onay · ${ka.bugun.veto} veto</div></div><div class="card"><div class="k">Onay</div><div class="v" style="color:var(--good)">${ka.onay}</div><div class="s">Hakem Puanı ≥ 50, veto yok</div></div><div class="card"><div class="k">Veto</div><div class="v" style="color:var(--bad)">${ka.veto}</div><div class="s">${ka.veto_nedenleri.slice(0,3).map(n=>n[0]+" ×"+n[1]).join(" · ")||"henüz veto yok"}</div></div></div>${ka.son.length?`<div class="list" style="margin-bottom:14px">${ka.son.map(k=>`<div class="row"><span class="t">${k.t}</span><span class="d">${k.zaman.slice(5,16).replace("T"," ")} · ${k.yon} ${k.karar==="ONAY"?"✅ ONAY":"⛔ VETO"} · Hakem ${k.puan}/100 · ${k.tur}${k.veto&&k.veto.length?"<br>"+k.veto.join(" · "):""}</span></div>`).join("")}</div>`:`<p class="sub" style="margin:0 0 14px">Henüz kayıtlı karar yok; ilk AL/SAT adayı doğunca Hakem puanı ve veto burada listelenir.</p>`}`:"";
+  v.innerHTML=`${karne}
   <h2 style="margin-top:0">Varlık ve Lig Dağılımı</h2>
   <div class="grid kokpit">
     <div class="card hero"><div class="k">Toplam Portföy</div><div class="v">${pr(usd(dg.toplam))}</div><div class="s">Nakit ${pr(usd(dg.nakit))} (%${dg.nakit_pct}) · Hisse ${pr(usd(dg.hisse))} (%${dg.hisse_pct})</div></div>

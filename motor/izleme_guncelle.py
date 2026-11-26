@@ -33,6 +33,13 @@ PORT = 8765
 def canli_fiyat(t):
     """Seans oncesi/sonrasi dahil son 5 dk bari (prepost=True). Doner: (fiyat, utc zaman) veya (None, None)."""
     import yfinance as yf
+    try:
+        from veri_onbellegi import seans_ici
+        d = seans_ici(t, period="1d", interval="5m", prepost=True)
+        if d is not None and len(d):
+            return float(d["Close"].iloc[-1]), d.index[-1].tz_convert("UTC")
+    except ImportError:
+        pass
     for deneme in range(3):
         try:
             d = yf.Ticker(t).history(period="1d", interval="5m", prepost=True)
@@ -160,6 +167,12 @@ def topla(tam=False):
         midas = uret(veri, {h["t"]: (h["canli"], None) for h in hisseler if h.get("canli")})
         alsat = alsat_uret(veri, midas, bilanco, vix, acik) if midas else None
         rontgen = rontgen_uret(veri, midas, bilanco) if midas else None
+        if rontgen is not None:
+            try:
+                from karar_karnesi import ozet as karne_ozet
+                rontgen["karne"] = karne_ozet()
+            except Exception:
+                rontgen["karne"] = None
     else:
         rontgen = None
     return {

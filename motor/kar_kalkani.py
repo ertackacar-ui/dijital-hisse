@@ -28,6 +28,11 @@ def seans_acik_mi(son_bar_tarihi):
 
 def veri_cek(tickers=None, period="1y"):
     # shortcut: toplu yf.download oran siniriyla rastgele hisse dusuruyor; tek tek + 5 deneme
+    try:
+        from veri_onbellegi import gunluk
+        return gunluk(tickers or list(KADRO) + MAKRO, period)
+    except ImportError:
+        pass
     out = {}
     for t in tickers or list(KADRO) + MAKRO:
         for deneme in range(5):
